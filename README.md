@@ -52,4 +52,4 @@ docker run -e REDIS_SERVER=some-redis -e REDIS_PORT=6379 -e ACCESS_KEY=imagerie 
 http://localhost:5000/api/
 http://localhost:5001/api/
 
-![alt text](https://github.com/opendedup/imagerie/raw/master/githubui/screenshotapi.png "Logo Title Text 1")
+![alt text](https://github.com/suttlevision/svbackend/raw/master/githubui/screenshotapi.png "Logo Title Text 1")

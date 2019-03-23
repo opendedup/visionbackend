@@ -114,23 +114,23 @@ WORKDIR "/imagerie"
 
 
 #Compile object detection models
-RUN git clone https://github.com/opendedup/models.git
-WORKDIR "/imagerie/models/research/"
+RUN git clone https://github.com/suttlevision/models.git
+WORKDIR "/svbackend/models/research/"
 RUN /usr/local/bin/protoc object_detection/protos/*.proto --python_out=.
 WORKDIR "/imagerie"
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
 cd cocoapi/PythonAPI && \
 make && \
-cp -r pycocotools /imagerie/models/research/
+cp -r pycocotools /svbackend/models/research/
 
-COPY webserver/flaskr /imagerie/webapp
+COPY webserver/flaskr /svbackend/webapp
 ENV FLASK_APP=webapp
 ENV FLASK_ENV=development
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=/imagerie/webapp/:/imagerie/models/research/:/imagerie/models/research/slim/
+ENV PYTHONPATH=/svbackend/webapp/:/svbackend/models/research/:/svbackend/models/research/slim/
 
 EXPOSE 5000
 
-WORKDIR "/imagerie/webapp"
+WORKDIR "/svbackend/webapp"
 CMD ["flask","run","--host=0.0.0.0"]

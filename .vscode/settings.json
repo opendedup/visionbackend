@@ -1,15 +1,15 @@
 {
     "python.pythonPath": "env/bin/python",
     "python.autoComplete.extraPaths": [
-        "/home/sam/git/imagerie/models/research/slim",
-        "/home/sam/git/imagerie/models/research"
+        "/home/sam/git/svbackend/models/research/slim",
+        "/home/sam/git/svbackend/models/research"
 
     ],
     "files.watcherExclude": {
         "**/env/*/**":true
     },
     "env": {
-        "PYTHONPATH": "/home/sam/git/imagerie/models/research/slim:/home/sam/git/imagerie/models/research:/home/sam/git/imagerie/webserver/flaskr:/home/sam/git/imagerie/tfpipeline"
+        "PYTHONPATH": "/home/sam/git/svbackend/models/research/slim:/home/sam/git/svbackend/models/research:/home/sam/git/svbackend/webserver/flaskr:/home/sam/git/svbackend/tfpipeline"
     },
     "docker.defaultRegistryPath": "gcr.io/shwingo-222722",
     "python.linting.pylintEnabled": true

@@ -4,13 +4,13 @@ MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 
 
 WORKDIR "/imagerie"
-COPY dockerimages/runscripts/prep_worker.sh /imagerie/prep_worker.sh
-RUN ["chmod", "+x", "/imagerie/prep_worker.sh"]
+COPY dockerimages/runscripts/prep_worker.sh /svbackend/prep_worker.sh
+RUN ["chmod", "+x", "/svbackend/prep_worker.sh"]
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=/imagerie/tfpipeline:/imagerie/models/research/:/imagerie/models/research/slim
+ENV PYTHONPATH=/svbackend/tfpipeline:/svbackend/models/research/:/svbackend/models/research/slim
 
-COPY tfpipeline /imagerie/tfpipeline
+COPY tfpipeline /svbackend/tfpipeline
 
 WORKDIR "/imagerie"
 CMD ["./prep_worker.sh"]

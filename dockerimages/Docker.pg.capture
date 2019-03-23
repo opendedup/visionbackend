@@ -36,7 +36,7 @@ ENV FLASK_APP=webapp
 ENV FLASK_ENV=development
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=/imagerie/webapp/:/imagerie/models/research/:/imagerie/models/research/slim/
+ENV PYTHONPATH=/svbackend/webapp/:/svbackend/models/research/:/svbackend/models/research/slim/
 ENV SPINNAKER=true
 EXPOSE 5000
 

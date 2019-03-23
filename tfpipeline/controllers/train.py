@@ -103,7 +103,7 @@ def updateFile(job):
 
 
 def updateFileML(job):
-    fl = '/imagerie/tfpipeline/tmodels/'+job.model+'.config'
+    fl = '/svbackend/tfpipeline/tmodels/'+job.model+'.config'
     with open(fl, 'r') as file:
         filedata = file.read()
     filedata = filedata.replace('@NUM_CLASS', str(len(job.categories)))
@@ -149,7 +149,7 @@ def upload_model(job):
         if 'Contents' in resp and len(resp['Contents']) > 0:
             logger.error("model exists in bucket " + key)
             return
-    local_directory = '/imagerie/tfpipeline/tmodels/'+job.model+'/'
+    local_directory = '/svbackend/tfpipeline/tmodels/'+job.model+'/'
     # enumerate local files recursively
     for root, dirs, files in os.walk(local_directory):
 
@@ -182,7 +182,7 @@ def upload_packages(job):
         if 'Contents' in resp and len(resp['Contents']) > 0:
             logger.debug("packages exists in bucket " + key)
             return
-    local_directory = '/imagerie/mlpackages/'
+    local_directory = '/svbackend/mlpackages/'
     # enumerate local files recursively
     for root, dirs, files in os.walk(local_directory):
 

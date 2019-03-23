@@ -131,7 +131,7 @@ WORKDIR "/imagerie"
 
 WORKDIR "/imagerie"
 #Compile object detection models
-RUN git clone https://github.com/opendedup/models.git && \
+RUN git clone https://github.com/suttlevision/models.git && \
 	cd models/research/ && \
 	protoc object_detection/protos/*.proto --python_out=.
 
@@ -139,7 +139,7 @@ WORKDIR "/imagerie"
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
 cd cocoapi/PythonAPI && \
 make -j4 && \
-cp -r pycocotools /imagerie/models/research/
+cp -r pycocotools /svbackend/models/research/
 
 
 
