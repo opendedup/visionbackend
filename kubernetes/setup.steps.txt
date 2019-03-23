@@ -1,25 +1,25 @@
-gcloud config set project shwingo-222722
+gcloud config set project $GCP_PROJECT
 gcloud config set compute/zone us-central1-a
-docker build -t gcr.io/shwingo-222722/base -t gcr.io/shwingo-222722/base:$(git rev-parse --short HEAD)  -f dockerimages/Docker.base .
-docker push gcr.io/shwingo-222722/base
-docker build -t gcr.io/shwingo-222722/pipeline-api -t gcr.io/shwingo-222722/pipeline-api:$(git rev-parse --short HEAD)  -f dockerimages/Docker.pipeline.api .
-docker push gcr.io/shwingo-222722/pipeline-api
-docker build -t gcr.io/shwingo-222722/train -t gcr.io/shwingo-222722/train:$(git rev-parse --short HEAD)  -f dockerimages/Docker.train.worker .
-docker push gcr.io/shwingo-222722/train
-docker build -t gcr.io/shwingo-222722/prep -t gcr.io/shwingo-222722/prep:$(git rev-parse --short HEAD)  -f dockerimages/Docker.prep.worker .
-docker push gcr.io/shwingo-222722/prep
-docker build  -t gcr.io/shwingo-222722/capture -t gcr.io/shwingo-222722/capture:$(git rev-parse --short HEAD)  -f dockerimages/Docker.capture .
-docker push gcr.io/shwingo-222722/capture
-docker build -t gcr.io/shwingo-222722/capture:latest-pointgrey -t gcr.io/shwingo-222722/capture:$(git rev-parse --short HEAD)-pointgrey  -f dockerimages/Docker.pg.capture .
-docker push gcr.io/shwingo-222722/capture:latest-pointgrey
+docker build -t gcr.io/$GCP_PROJECT/base -t gcr.io/$GCP_PROJECT/base:$(git rev-parse --short HEAD)  -f dockerimages/Docker.base .
+docker push gcr.io/$GCP_PROJECT/base
+docker build -t gcr.io/$GCP_PROJECT/pipeline-api -t gcr.io/$GCP_PROJECT/pipeline-api:$(git rev-parse --short HEAD)  -f dockerimages/Docker.pipeline.api .
+docker push gcr.io/$GCP_PROJECT/pipeline-api
+docker build -t gcr.io/$GCP_PROJECT/train -t gcr.io/$GCP_PROJECT/train:$(git rev-parse --short HEAD)  -f dockerimages/Docker.train.worker .
+docker push gcr.io/$GCP_PROJECT/train
+docker build -t gcr.io/$GCP_PROJECT/prep -t gcr.io/$GCP_PROJECT/prep:$(git rev-parse --short HEAD)  -f dockerimages/Docker.prep.worker .
+docker push gcr.io/$GCP_PROJECT/prep
+docker build  -t gcr.io/$GCP_PROJECT/capture -t gcr.io/$GCP_PROJECT/capture:$(git rev-parse --short HEAD)  -f dockerimages/Docker.capture .
+docker push gcr.io/$GCP_PROJECT/capture
+docker build -t gcr.io/$GCP_PROJECT/capture:latest-pointgrey -t gcr.io/$GCP_PROJECT/capture:$(git rev-parse --short HEAD)-pointgrey  -f dockerimages/Docker.pg.capture .
+docker push gcr.io/$GCP_PROJECT/capture:latest-pointgrey
 gcloud auth configure-docker
 gcloud container clusters get-credentials standard-cluster-1
 kubectl get namespaces
 kubectl create -f https://k8s.io/examples/admin/namespace-dev.json
 kubectl create -f https://k8s.io/examples/admin/namespace-prod.json
 kubectl config view
-kubectl config set-context dev --namespace=development --cluster=gke_shwingo-222722_us-central1-a_standard-cluster-1 --user=gke_shwingo-222722_us-central1-a_standard-cluster-1
-kubectl config set-context prod --namespace=production --cluster=gke_shwingo-222722_us-central1-a_standard-cluster-1 --user=gke_shwingo-222722_us-central1-a_standard-cluster-1
+kubectl config set-context dev --namespace=development --cluster=gke_$GCP_PROJECT_us-central1-a_standard-cluster-1 --user=gke_$GCP_PROJECT_us-central1-a_standard-cluster-1
+kubectl config set-context prod --namespace=production --cluster=gke_$GCP_PROJECT_us-central1-a_standard-cluster-1 --user=gke_$GCP_PROJECT_us-central1-a_standard-cluster-1
 kubectl config use-context prod
 kubectl get deployment
 kubectl get pods
@@ -37,4 +37,4 @@ kubectl apply -f kubernetes/prep.yaml
 kubectl delete -f kubernetes/train.yaml
 kubectl apply -f kubernetes/train.yaml
 
-kubectl set image deployment/tag-ui tag-ui=gcr.io/shwingo-222722/tag-ui:0.4 --record
+kubectl set image deployment/tag-ui tag-ui=gcr.io/$GCP_PROJECT/tag-ui:0.4 --record

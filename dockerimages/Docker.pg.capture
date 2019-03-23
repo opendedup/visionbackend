@@ -1,4 +1,4 @@
-FROM gcr.io/shwingo-222722/capture
+FROM gcr.io/$GCP_PROJECT/capture
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 

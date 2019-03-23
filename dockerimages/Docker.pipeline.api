@@ -1,4 +1,4 @@
-FROM gcr.io/shwingo-222722/base
+FROM gcr.io/$GCP_PROJECT/base
 
 COPY tfpipeline /svbackend/tfpipeline
 COPY webserver/flaskr/utils/storage.py /svbackend/tfpipeline/utils/

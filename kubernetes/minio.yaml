@@ -20,7 +20,7 @@ spec:
         args:
         - gateway
         - gcs
-        - shwingo-222722
+        - $GCP_PROJECT
         env:
         # Minio access key and secret key
         - name: MINIO_CACHE_DRIVES

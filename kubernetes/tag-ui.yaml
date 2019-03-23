@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: tag-ui
-        image: gcr.io/shwingo-222722/tag-ui
+        image: gcr.io/$GCP_PROJECT/tag-ui
         env:
         # s3 BUCKET TO CONNECT TO
         - name: S3_BUCKET

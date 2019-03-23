@@ -1,4 +1,4 @@
-FROM gcr.io/shwingo-222722/base:latest
+FROM gcr.io/$GCP_PROJECT/base:latest
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 
@@ -46,9 +46,9 @@ ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 COPY tfpipeline /svbackend/tfpipeline
 #Copy webserver for tests
 COPY webserver /svbackend/webserver
-#COPY shwingo-222722-2285d752bd23.json /svbackend/
+#COPY $GCP_PROJECT-2285d752bd23.json /svbackend/
 #RUN gcloud auth activate-service-account --key-file /svbackend/imagerie-209214-23885678398b.json
-RUN gcloud config set project shwingo-222722
+RUN gcloud config set project $GCP_PROJECT
 
 WORKDIR /svbackend/tfpipeline/tmodels/
 RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_v2_coco_2018_01_28.tar.gz && \

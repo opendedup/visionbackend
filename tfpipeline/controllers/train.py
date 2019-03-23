@@ -261,7 +261,7 @@ def start_ml_engine(job):
                                'runtimeVersion': '1.12',
                                'pythonVersion': '3.5'}
     job_spec = {'jobId': job.ml_job_id, 'trainingInput': training_inputs}
-    project_id = 'projects/{}'.format('shwingo-222722')
+    project_id = 'projects/{}'.format('$GCP_PROJECT')
     cloudml = discovery.build('ml', 'v1')
     request = cloudml.projects().jobs().create(body=job_spec,
                                                parent=project_id)

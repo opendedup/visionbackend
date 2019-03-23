@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: prep
-        image: gcr.io/shwingo-222722/prep
+        image: gcr.io/$GCP_PROJECT/prep
         env:
         - name: REDIS_URL
           value: "redis://redis-service:6379"

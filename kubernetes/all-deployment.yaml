@@ -28,7 +28,7 @@ spec:
         args:
         - gateway
         - gcs
-        - shwingo-222722
+        - $GCP_PROJECT
         env:
         # Minio access key and secret key
         - name: MINIO_CACHE_DRIVES
@@ -114,7 +114,7 @@ spec:
     spec:
       containers:
       - name: pipeline-api
-        image: gcr.io/shwingo-222722/pipeline-api
+        image: gcr.io/$GCP_PROJECT/pipeline-api
         env:
         # Minio access key and secret key
         - name: REDIS_SERVER
@@ -148,7 +148,7 @@ spec:
     spec:
       containers:
       - name: tag-ui
-        image: gcr.io/shwingo-222722/imagerie-ui
+        image: gcr.io/$GCP_PROJECT/imagerie-ui
         ports:
         - containerPort: 3000
 ---
@@ -178,7 +178,7 @@ spec:
     spec:
       containers:
       - name: prep
-        image: gcr.io/shwingo-222722/prep
+        image: gcr.io/$GCP_PROJECT/prep
         env:
         - name: REDIS_URL
           value: "redis://redis-service:6379"
@@ -196,7 +196,7 @@ spec:
     spec:
       containers:
       - name: train
-        image: gcr.io/shwingo-222722/train
+        image: gcr.io/$GCP_PROJECT/train
         env:
         - name: REDIS_URL
           value: "redis://redis-service:6379"

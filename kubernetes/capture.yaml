@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: capture
-        image: gcr.io/shwingo-222722/capture:latest
+        image: gcr.io/$GCP_PROJECT/capture:latest
         env:
         - name: ACCESS_KEY
           valueFrom:
