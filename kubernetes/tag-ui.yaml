@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tag-ui
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tag-ui
+    spec:
+      containers:
+      - name: tag-ui
+        image: gcr.io/shwingo-222722/tag-ui
+        env:
+        # s3 BUCKET TO CONNECT TO
+        - name: S3_BUCKET
+          value: "imagerie1"
+        # S3 ACCESS and SECRET_KEY
+        - name: S3_KEY
+          value: "imagerie"
+        - name: S3_SECRET
+          value: "imagerie"
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tag-ui-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: tag-ui

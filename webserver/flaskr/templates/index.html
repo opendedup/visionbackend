@@ -1,0 +1,25 @@
+<html>
+
+<head>
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="static/style.css">
+  <!------ Include the above in your HEAD tag ---------->
+  <title>Video Streaming Demonstration</title>
+</head>
+<body>
+<script>
+$(document).ready(function(){
+    var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('camera')) {
+      console.log(urlParams.get('camera'));
+      $("#camera").attr("src","/api/camera/stream/"+urlParams.get('camera'));
+    }
+})
+</script>
+  <img src="/api/camera/stream/0" id="camera">
+</body>
+
+</html>

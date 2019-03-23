@@ -1,0 +1,335 @@
+Library version: 1.19.0.22
+Number of cameras detected: 1
+Running example for camera 0...
+
+*** PRINTING TRANSPORT LAYER DEVICE NODEMAP *** 
+
+Root
+    DeviceInformation
+        DeviceID: 18575341
+        Device Serial Number: 18575341
+        Device Vendor Name  : FLIR
+        Device Model Name: Blackfly S BFS-U3-31S4C
+        Device Type: U3V
+        Device Display Name: FLIR
+        Device Access Status: ReadWrite
+        Device Version: 1803.0.250.0
+        Device Driver Version: none : 0.0.0.0
+        Device User ID: 
+        Device Is Updater Mode: False
+        DeviceInstanceId: 011B6FED
+        Device Current Speed: SuperSpeed
+        GUI XML Source: Device
+        GUI XML Path: Input.xml
+        GenICam XML Source: Device
+        GenICam XML Path: 
+        Device Is In U3V Protocol: True
+
+    DeviceControl
+        Device Endianess Mechanism: Standard
+
+
+*** PRINTING TL STREAM NODEMAP ***
+
+Root
+    StreamInformation
+        Stream ID  : 0
+        Stream Type: U3V
+        Total Buffer Count: 0
+
+    BufferHandlingControl
+        Manual Stream Buffer Count: 10
+        Resulting Stream Buffer Count: 10
+        Stream Buffer Count Max: 528
+        Stream Buffer Count Mode: Auto
+        StreamDefaultBufferCount: 10
+        StreamDefaultBufferCountMax: 528
+        StreamDefaultBufferCountMode: Auto
+        Stream Buffer Handling Mode: OldestFirst
+        CRC Check Enable: False
+        Stream Block Transfer Size: 0
+
+    StreamDiagnostics
+        Failed Buffer Count: 0
+        Buffer Underrun Count: 0
+
+
+*** PRINTING GENICAM NODEMAP ***
+
+Root
+    AcquisitionControl
+        Acquisition Mode: Continuous
+        Acquisition Frame Count: 2
+        Acquisition Burst Frame Count: 1
+        Exposure Mode: Timed
+        Exposure Time: 1005.0
+        Exposure Auto: Continuous
+        Acquisition Frame Rate: 55.69846544043896
+        Resulting Frame Rate: 55.69847779401945
+        Acquisition Frame Rate Enable: False
+        Acquisition Line Rate: 87558.00709219858
+        Trigger Selector: FrameStart
+        Trigger Mode: Off
+        Trigger Source: Software
+        Trigger Overlap: Off
+        Trigger Delay: 24.0
+        Sensor Shutter Mode: Global
+
+    AnalogControl
+        Gain Selector: All
+        Gain: 0.0
+        Gain Auto: Continuous
+        Black Level Selector: All
+        Black Level: 0.0
+        Black Level Clamping Enable: True
+        Balance Ratio Selector: Red
+        Balance Ratio: 1.0986328125
+        Balance White Auto: Continuous
+        Gamma: 0.800048828125
+        Gamma Enable: True
+
+    ImageFormatControl
+        Sensor Width: 2064
+        Sensor Height: 1544
+        Width Max: 2048
+        Height Max: 1536
+        Width: 2048
+        Height: 1536
+        Offset X: 0
+        Offset Y: 0
+        Pixel Format: BayerRG8
+        Pixel Size: Bpp8
+        Pixel Color Filter: BayerRG
+        Pixel Dynamic Range Min: 0
+        Pixel Dynamic Range Max: 255
+        ISP Enable: False
+        Binning Selector: All
+        Binning Horizontal Mode: Sum
+        Binning Vertical Mode: Sum
+        Binning Horizontal: 1
+        Binning Vertical: 1
+        Decimation Selector: All
+        Decimation Horizontal Mode: Discard
+        Decimation Vertical Mode: Discard
+        Decimation Horizontal: 1
+        Decimation Vertical: 1
+        Reverse X: False
+        Reverse Y: False
+        Test Pattern Generator Selector: Sensor
+        Test Pattern: Off
+        ADC Bit Depth: Bit12
+
+    DeviceControl
+        Device Scan Type: Areascan
+        Device Vendor Name: FLIR
+        Device Model Name: Blackfly S BFS-U3-31S4C
+        Sensor Description: Sony IMX265 (1/1.8" Color CMOS)
+        Device Manufacturer Info: Mar 27 2018 03:33:05
+        Device Version: 1803.0.250.0
+        Device Firmware Version: 1803.0.250.0
+        Device Serial Number: 18575341
+        Device ID: 18575341
+        Device User ID: 
+        Device TL Type: USB3Vision
+        Device Gen CP Version Major: 1
+        Device Gen CP Version Minor: 0
+        Device Max Throughput: 175217123
+        Device Link Speed: 500000000
+        Device Link Throughput Limit: 380000000
+        Device Link Bandwidth Reserve: 0.0
+        Device Link Current Throughput: 175217162
+        Device Indicator Mode: Active
+        Device Temperature Selector: Sensor
+        Device Temperature: 23.0
+        Timestamp Latch Value: 0
+        Timestamp Increment: 1000
+        Device Power Supply Selector: External
+        Power Supply Voltage: 5.417724609375
+        Power Supply Current: 0.433349609375
+        Device Uptime: 63
+        Link Uptime: 60
+        Enumeration Count: 1
+        Max Device Reset Time: 30000
+
+    TransportLayerControl
+        Payload Size: 3145728
+        TLParamsLocked: 0
+        USB3Vision
+            Max Response Time: 200
+            Message Channel: 0
+            Access Privilege: 0
+            U3V Version Major: 1
+            U3V Version Minor: 0
+            U3V Capability: 0
+            U3V SIRM Available: True
+            U3V EIRM Available: True
+            U3V IIDC2 Available: False
+            Max Command Transfer Length: 1024
+            Max Ack Transfer Length: 1024
+            Number of Stream Channels: 1
+            Current Speed: SuperSpeed
+
+        Link Error Count: 0
+        Link Recovery Count: 0
+
+    SequencerControl
+        Sequencer Mode: Off
+        Sequencer Configuration Mode: Off
+        Sequencer Configuration Valid: No
+        Sequencer Configuration Reset: Resets the sequencer configuration ...
+        Sequencer Feature Selector: ExposureTime
+        Sequencer Feature Enable: True
+        Sequencer Set Start: 0
+        Sequencer Set Selector: 0
+        Sequencer Set Valid: No
+        Sequencer Set Save: Saves the current device configurat...
+        Sequencer Set Load: Loads currently selected sequencer ...
+        Sequencer Path Selector: 0
+        Sequencer Trigger Source: Off
+
+    ColorTransformationControl
+        RGB Transform Light Source: General
+
+    AutoAlgorithmControl
+        ROI Selector: Awb
+        ROI Enable: False
+        White Balance Auto Profile: Indoor
+        White Balance Auto Lower Limit: 0.5
+        White Balance Auto Upper Limit: 4.0
+        White Balance Auto Damping: 0.25
+        Target Grey Value Auto: Continuous
+        Lighting Mode: Normal
+        Metering Mode: Average
+        Exposure Time Lower Limit: 100.0
+        Exposure Time Upper Limit: 15000.0
+        Gain Lower Limit: 0.0
+        Gain Upper Limit: 18.000065071923338
+        Target Grey Value Lower Limit: 3.9100684261974585
+        Target Grey Value Upper Limit: 93.841642228739
+        EV Compensation: 0.0
+        Auto Exposure Damping: 0.5
+        Auto Exposure Control Priority: Gain
+
+    FlatFieldCorrectionControl
+        FfcUserTableControl
+
+
+    DefectivePixelCorrection
+        Defect Correct Static Enable: True
+        Defect Correction Mode: Average
+        Defect Table Pixel Count: 20
+        Defect Table Index: 0
+        Defect X Coordinate: 6
+        Defect Y Coordinate: 1237
+        Defect Table Apply: Applies the current defect table, s...
+        Defect Table Factory Restore: Restores the factory default eeprom...
+
+    UserSetControl
+        User Set Selector: Default
+        User Set Load: Loads the User Set specified by Use...
+        User Set Save: Saves the User Set specified by Use...
+        User Set Default: Default
+        User Set Feature Selector: AasRoiEnableAe
+        User Set Feature Enable: True
+
+    ChunkDataControl
+        Chunk Mode Active: False
+        Chunk Selector: FrameID
+        Chunk Enable: False
+        Chunk Gain Selector: All
+        Chunk Black Level Selector: All
+
+    LUTControl
+        LUT Selector: LUT1
+        LUT Enable: False
+        LUT Index: 0
+        LUT Value: 0
+
+    EventControl
+        Event Selector: Error
+        Event Notification: Off
+        EventExposureEndData
+            Event Exposure End: 40003
+
+        EventErrorData
+            Event Error: 40000
+
+        EventSerialPortReceiveData
+            Event Serial Port Receive: 40005
+
+        EventTestData
+            Event Test: 20479
+
+
+    CounterAndTimerControl
+        Counter Selector: Counter0
+        Counter Event Source: MHzTick
+        Counter Duration: 1
+        Counter Value: 1
+        Counter Trigger Source: ExposureStart
+        Counter Trigger Activation: RisingEdge
+        Counter Status: CounterTriggerWait
+        Counter Delay: 0
+
+    TestControl
+        Test Pending Ack: 0
+        Test 0001: 0
+        GUI XML Manifest Address: 4026535968
+
+    LogicBlockControl
+        Logic Block Selector: LogicBlock0
+        Logic Block LUT Selector: Value
+        Logic Block LUT Input Selector: Input0
+        Logic Block LUT Input Source: Zero
+        Logic Block LUT Input Activation: LevelHigh
+        Logic Block LUT Output Value All: 255
+        Logic Block LUT Row Index: 0
+        Logic Block LUT Output Value: True
+
+    DigitalIOControl
+        Line Selector: Line0
+        Line Mode: Input
+        Line Inverter: False
+        Line Status: False
+        Line Status All: 12
+        Input filter Selector: Deglitch
+        Line Filter Width: 0.0
+        Line Source: Off
+        Line Format: OptoCoupled
+        User Output Selector: UserOutput0
+        User Output Value: False
+        User Output Value All: 0
+
+    SerialPortControl
+        Serial Port Selector: SerialPort0
+        Serial Port Source: Off
+        Serial Port Baud Rate: Baud57600
+        Serial Port Data Bits: 8
+        Serial Port Stop Bits: Bits1
+        Serial Port Parity: None
+        Transmit Queue Max Character Count: 4096
+        Transmit Queue Current Character Count: 0
+        Receive Queue Max Character Count: 4096
+        Receive Queue Current Character Count: 0
+        Receive Framing Error Count: 0
+        Receive Parity Error Count: 0
+
+    FileAccessControl
+        File Selector: UserSetDefault
+        File Operation Selector: Open
+        File Open Mode: Read
+        File Access Offset: 0
+        File Access Length: 1
+        File Operation Status: Success
+        File Operation Result: 0
+        File Size: 1376
+
+    TransferControl
+        Transfer Control Mode: Basic
+        Transfer Queue Max Block Count: 17
+        Transfer Queue Current Block Count: 0
+        Transfer Queue Overflow Count: 0
+
+
+Camera 0 example complete... 
+

@@ -1,0 +1,132 @@
+FROM tensorflow/tensorflow:1.9.0-devel-gpu-py3
+
+MAINTAINER Sam Silverberg sam.silverberg@gmail.com
+
+ENV TZ=America/Los_Angeles
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Install some dependencies
+RUN apt update && apt upgrade -y && apt install -y \
+		bc \
+		build-essential \
+		cmake \
+		curl \
+		g++ \
+		gfortran \
+		git \
+		libffi-dev \
+		libfreetype6-dev \
+		libhdf5-dev \
+		libjpeg-dev \
+		liblcms2-dev \
+		libopenblas-dev \
+		liblapack-dev \
+		libssl-dev \
+		libtiff5-dev \
+		libwebp-dev \
+		libzmq3-dev \
+		nano \
+		pkg-config \
+		software-properties-common \
+		unzip \
+		vim \
+		wget \
+		zlib1g-dev \
+		qt5-default \
+		libvtk6-dev \
+		zlib1g-dev \
+		libjpeg-dev \
+		libwebp-dev \
+		libpng-dev \
+		libtiff5-dev \
+		libopenexr-dev \
+		libgdal-dev \
+		libdc1394-22-dev \
+		libavcodec-dev \
+		libavformat-dev \
+
+		libswscale-dev \
+		libtheora-dev \
+		libvorbis-dev \
+		libxvidcore-dev \
+		libx264-dev \
+		yasm \
+		libopencore-amrnb-dev \
+		libopencore-amrwb-dev \
+		libv4l-dev \
+		libxine2-dev \
+		libtbb-dev \
+		libeigen3-dev \
+		python3-dev \
+		python3-tk \
+		python3-numpy \
+		ant \
+		default-jdk \
+		doxygen \
+		libzbar0 \
+		&& \
+	apt-get clean && \
+	apt-get autoremove && \
+	rm -rf /var/lib/apt/lists/*
+RUN rm -rf /usr/bin/python
+RUN ln -s /usr/bin/python3 /usr/bin/python
+# Install pip
+RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
+	python3 get-pip.py && \
+	rm get-pip.py
+
+RUN pip --no-cache-dir install redis==2.10.6
+
+RUN pip --no-cache-dir install \
+		pyopenssl \
+		ndg-httpsclient \
+		pyasn1 \
+    numpy \
+    scipy \
+    matplotlib \
+    pandas \
+    sympy \
+    nose \
+    Flask \
+    opencv-python \
+    uuid \
+    flask_jwt_extended \
+    boto3 \
+    Cython \
+    contextlib2 \
+    pillow \
+    lxml \
+    grpcio-tools \
+		imgaug \
+		google-cloud-storage \
+		pyyaml \
+		imageio \
+		pillow \
+		protobuf \
+		scipy \
+		uuid \
+		rq \
+		flask-restplus \
+		requests \
+		imutils \
+		pyzbar
+
+
+#Install protobuf 3.6
+RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz && \
+		tar -xzvf protobuf-all-3.6.1.tar.gz && \
+		rm protobuf-all-3.6.1.tar.gz && \
+		cd protobuf-3.6.1 && \
+		./configure && \
+		make -j4 && \
+		make check && \
+		make install && \
+		ldconfig
+WORKDIR "/"
+RUN rm -rf protobuf-3.6.1
+WORKDIR "/imagerie"
+
+
+
+
+CMD ["bash"]

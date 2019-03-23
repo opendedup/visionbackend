@@ -1,0 +1,202 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: faster
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+
+apiVersion: apps/v1beta1
+kind: StatefulSet
+
+metadata:
+  # This name uniquely identifies the Deployment
+  name: minio-deployment
+spec:
+  serviceName: minio
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        # Label is used as selector in the service.
+        app: minio
+    spec:
+      containers:
+      - name: minio
+        # Pulls the default Minio image from Docker Hub
+        image: minio/minio
+        args:
+        - gateway
+        - gcs
+        - shwingo-222722
+        env:
+        # Minio access key and secret key
+        - name: MINIO_CACHE_DRIVES
+          value: "/storage"
+        - name: MINIO_ACCESS_KEY
+          value: "imagerie"
+        - name: MINIO_SECRET_KEY
+          value: "imagerie"
+        ports:
+        - containerPort: 9000
+        # Mount the volume into the pod
+        volumeMounts:
+        - name: data # must match the volume name, above
+          mountPath: "/storage"
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 60Gi
+      # Uncomment and add storageClass specific to your requirements below. Read more https://kubernetes.io/docs/concepts/storage/persistent-volumes/#class-1
+      #storageClassName:
+      storageClassName: faster
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-service
+spec:
+  #type: LoadBalancer
+  ports:
+    - port: 9000
+      targetPort: 9000
+      protocol: TCP
+  selector:
+    app: minio
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  labels:
+    app: redis
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+    protocol: TCP
+  selector:
+    app: redis
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pipeline-api
+spec:
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: pipeline-api
+    spec:
+      containers:
+      - name: pipeline-api
+        image: gcr.io/shwingo-222722/pipeline-api
+        env:
+        # Minio access key and secret key
+        - name: REDIS_SERVER
+          value: "redis-service"
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pipeline-api-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 5000
+      protocol: TCP
+  selector:
+    app: pipeline-api
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tag-ui
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tag-ui
+    spec:
+      containers:
+      - name: tag-ui
+        image: gcr.io/shwingo-222722/imagerie-ui
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tag-ui-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: tag-ui
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: prep
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: prep
+    spec:
+      containers:
+      - name: prep
+        image: gcr.io/shwingo-222722/prep
+        env:
+        - name: REDIS_URL
+          value: "redis://redis-service:6379"
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: train
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: train
+    spec:
+      containers:
+      - name: train
+        image: gcr.io/shwingo-222722/train
+        env:
+        - name: REDIS_URL
+          value: "redis://redis-service:6379"

@@ -1,0 +1,35 @@
+FROM gcr.io/imagerie-209214/base-gpu
+
+MAINTAINER Sam Silverberg sam.silverberg@gmail.com
+WORKDIR "/imagerie"
+#Compile object detection models
+RUN git clone https://github.com/opendedup/models.git && \
+	cd models/research/ && \
+	protoc object_detection/protos/*.proto --python_out=.
+
+WORKDIR "/imagerie"
+RUN git clone https://github.com/cocodataset/cocoapi.git && \
+cd cocoapi/PythonAPI && \
+make -j4 && \
+cp -r pycocotools /imagerie/models/research/
+
+WORKDIR /imagerie/models/research/
+RUN bash object_detection/dataset_tools/create_pycocotools_package.sh /tmp/pycocotools && \
+	python setup.py sdist && \
+	(cd slim && python setup.py sdist) && \
+	mkdir /imagerie/mlpackages/ && \
+	cp dist/object_detection-0.1.tar.gz /imagerie/mlpackages/ && \
+	cp slim/dist/slim-0.1.tar.gz /imagerie/mlpackages/ && \
+	cp /tmp/pycocotools/pycocotools-2.0.tar.gz /imagerie/mlpackages/
+
+WORKDIR "/imagerie"
+COPY dockerimages/runscripts/prep_worker.sh /imagerie/prep_worker.sh
+RUN ["chmod", "+x", "/imagerie/prep_worker.sh"]
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+ENV PYTHONPATH=/imagerie/tfpipeline:/imagerie/models/research/:/imagerie/models/research/slim
+
+COPY tfpipeline /imagerie/tfpipeline
+
+WORKDIR "/imagerie"
+CMD ["./prep_worker.sh"]

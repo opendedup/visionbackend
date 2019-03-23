@@ -1,0 +1,93 @@
+FROM gcr.io/shwingo-222722/base:latest
+
+MAINTAINER Sam Silverberg sam.silverberg@gmail.com
+
+WORKDIR "/imagerie"
+RUN rm -rf models
+RUN git clone https://github.com/opendedup/models.git && \
+	cd models/research/ && \
+	protoc object_detection/protos/*.proto --python_out=.
+
+WORKDIR "/imagerie"
+RUN rm -rf cocoapi
+RUN git clone https://github.com/cocodataset/cocoapi.git && \
+cd cocoapi/PythonAPI && \
+make -j4 && \
+cp -r pycocotools /imagerie/models/research/
+
+WORKDIR /imagerie/models/research/
+RUN bash object_detection/dataset_tools/create_pycocotools_package.sh /tmp/pycocotools && \
+	python setup.py sdist && \
+	(cd slim && python setup.py sdist) && \
+	mkdir /imagerie/mlpackages/ && \
+	cp dist/object_detection-0.1.tar.gz /imagerie/mlpackages/ && \
+	cp slim/dist/slim-0.1.tar.gz /imagerie/mlpackages/ && \
+	cp /tmp/pycocotools/pycocotools-2.0.tar.gz /imagerie/mlpackages/
+
+
+WORKDIR "/imagerie"
+COPY dockerimages/runscripts/train_worker.sh /imagerie/train_worker.sh
+RUN ["chmod", "+x", "/imagerie/train_worker.sh"]
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+ENV PYTHONPATH=/imagerie/tfpipeline:/imagerie/models/research/:/imagerie/models/research/slim:/imagerie/webserver/flaskr
+
+# Downloading gcloud package
+RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
+
+# Installing the package
+RUN mkdir -p /usr/local/gcloud \
+  && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz \
+  && /usr/local/gcloud/google-cloud-sdk/install.sh
+
+# Adding the package path to local
+ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
+
+COPY tfpipeline /imagerie/tfpipeline
+#Copy webserver for tests
+COPY webserver /imagerie/webserver
+#COPY shwingo-222722-2285d752bd23.json /imagerie/
+#RUN gcloud auth activate-service-account --key-file /imagerie/imagerie-209214-23885678398b.json
+RUN gcloud config set project shwingo-222722
+
+WORKDIR /imagerie/tfpipeline/tmodels/
+RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_v2_coco_2018_01_28.tar.gz && \
+	mkdir faster_rcnn_inception_v2_coco && \
+	tar -xzvf faster_rcnn_inception_v2_coco_2018_01_28.tar.gz -C faster_rcnn_inception_v2_coco --strip-components=1 && rm faster_rcnn_inception_v2_coco_2018_01_28.tar.gz
+
+RUN wget http://download.tensorflow.org/models/object_detection/ssd_resnet50_v1_fpn_shared_box_predictor_640x640_coco14_sync_2018_07_03.tar.gz && \
+	mkdir ssd_resnet50_v1_fpn_shared_box_predictor_coco14_sync && \
+	tar -xzvf ssd_resnet50_v1_fpn_shared_box_predictor_640x640_coco14_sync_2018_07_03.tar.gz -C ssd_resnet50_v1_fpn_shared_box_predictor_coco14_sync \ 
+	--strip-components=1 && \
+	rm ssd_resnet50_v1_fpn_shared_box_predictor_640x640_coco14_sync_2018_07_03.tar.gz
+
+RUN wget http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_fpn_shared_box_predictor_640x640_coco14_sync_2018_07_03.tar.gz && \
+	mkdir ssd_mobilenet_v1_fpn_shared_box_predictor_coco14_sync && \
+	tar -xzvf ssd_mobilenet_v1_fpn_shared_box_predictor_640x640_coco14_sync_2018_07_03.tar.gz \
+	-C ssd_mobilenet_v1_fpn_shared_box_predictor_coco14_sync \
+	--strip-components=1 && \
+	rm ssd_mobilenet_v1_fpn_shared_box_predictor_640x640_coco14_sync_2018_07_03.tar.gz
+
+RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_resnet101_coco_2018_01_28.tar.gz && \
+	mkdir faster_rcnn_resnet101_coco && \
+	tar -xzvf faster_rcnn_resnet101_coco_2018_01_28.tar.gz \
+	-C faster_rcnn_resnet101_coco \
+	--strip-components=1 && \
+	rm faster_rcnn_resnet101_coco_2018_01_28.tar.gz
+
+RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_resnet_v2_atrous_coco_2018_01_28.tar.gz && \
+	mkdir faster_rcnn_inception_resnet_v2_atrous_coco && \
+	tar -xzvf faster_rcnn_inception_resnet_v2_atrous_coco_2018_01_28.tar.gz \
+	-C faster_rcnn_inception_resnet_v2_atrous_coco \
+	--strip-components=1 && \
+	rm faster_rcnn_inception_resnet_v2_atrous_coco_2018_01_28.tar.gz
+
+RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_resnet50_coco_2018_01_28.tar.gz && \
+	mkdir faster_rcnn_resnet50_coco && \
+	tar -xzvffaster_rcnn_resnet50_coco_2018_01_28.tar.gz \
+	-C faster_rcnn_resnet50_coco \
+	--strip-components=1 && \
+	rm faster_rcnn_resnet50_coco_2018_01_28.tar.gz
+
+WORKDIR "/imagerie"
+CMD ["./train_worker.sh"]

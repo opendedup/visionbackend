@@ -1,0 +1,44 @@
+FROM gcr.io/shwingo-222722/capture
+
+MAINTAINER Sam Silverberg sam.silverberg@gmail.com
+
+#install pgrey packages
+RUN apt update && apt upgrade -y && apt install -y \
+		libavcodec57 \
+		libavformat57 \
+        libswscale4 \
+		libswresample2 \
+		libavutil55 \
+		libusb-1.0-0 \
+		libgtkmm-2.4-dev
+
+#Copy Spinaker drivers from pgrey cams
+COPY extra_drivers/spinnaker-1.20.0.14-amd64-bionic-pkg.tar.gz /tmp
+COPY extra_drivers/spinnaker_python-1.20.0.14-cp36-cp36m-linux_x86_64.whl /tmp
+WORKDIR /tmp
+RUN tar -xzvf spinnaker-1.20.0.14-amd64-bionic-pkg.tar.gz && \
+		rm spinnaker-1.20.0.14-amd64-bionic-pkg.tar.gz && \
+		cd spinnaker-1.20.0.14-amd64 && \
+		dpkg -i libspinnaker-*.deb && \
+		dpkg -i libspinvideo-*.deb && \
+		dpkg -i spinview-qt-*.deb && \
+		dpkg -i spinupdate-*.deb && \
+		dpkg -i spinnaker-*.deb && \
+		dpkg -i spinnaker-*.deb && \
+		rm -rf spinnaker-1.20.0.14-amd64
+
+WORKDIR /tmp
+RUN pip install readerwriterlock spinnaker_python-1.20.0.14-cp36-cp36m-linux_x86_64.whl &&\
+	pip install -U numpy && \
+	rm -rf spinnaker_python-1.20.0.14-cp36-cp36m-linux_x86_64.whl
+
+ENV FLASK_APP=webapp
+ENV FLASK_ENV=development
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+ENV PYTHONPATH=/imagerie/webapp/:/imagerie/models/research/:/imagerie/models/research/slim/
+ENV SPINNAKER=true
+EXPOSE 5000
+
+WORKDIR "/imagerie"
+CMD ["flask","run","--host=0.0.0.0"]

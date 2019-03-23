@@ -1,0 +1,16 @@
+FROM gcr.io/shwingo-222722/base
+
+MAINTAINER Sam Silverberg sam.silverberg@gmail.com
+
+
+WORKDIR "/imagerie"
+COPY dockerimages/runscripts/prep_worker.sh /imagerie/prep_worker.sh
+RUN ["chmod", "+x", "/imagerie/prep_worker.sh"]
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+ENV PYTHONPATH=/imagerie/tfpipeline:/imagerie/models/research/:/imagerie/models/research/slim
+
+COPY tfpipeline /imagerie/tfpipeline
+
+WORKDIR "/imagerie"
+CMD ["./prep_worker.sh"]

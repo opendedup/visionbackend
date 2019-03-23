@@ -1,0 +1,40 @@
+gcloud config set project shwingo-222722
+gcloud config set compute/zone us-central1-a
+docker build -t gcr.io/shwingo-222722/base -t gcr.io/shwingo-222722/base:$(git rev-parse --short HEAD)  -f dockerimages/Docker.base .
+docker push gcr.io/shwingo-222722/base
+docker build -t gcr.io/shwingo-222722/pipeline-api -t gcr.io/shwingo-222722/pipeline-api:$(git rev-parse --short HEAD)  -f dockerimages/Docker.pipeline.api .
+docker push gcr.io/shwingo-222722/pipeline-api
+docker build -t gcr.io/shwingo-222722/train -t gcr.io/shwingo-222722/train:$(git rev-parse --short HEAD)  -f dockerimages/Docker.train.worker .
+docker push gcr.io/shwingo-222722/train
+docker build -t gcr.io/shwingo-222722/prep -t gcr.io/shwingo-222722/prep:$(git rev-parse --short HEAD)  -f dockerimages/Docker.prep.worker .
+docker push gcr.io/shwingo-222722/prep
+docker build  -t gcr.io/shwingo-222722/capture -t gcr.io/shwingo-222722/capture:$(git rev-parse --short HEAD)  -f dockerimages/Docker.capture .
+docker push gcr.io/shwingo-222722/capture
+docker build -t gcr.io/shwingo-222722/capture:latest-pointgrey -t gcr.io/shwingo-222722/capture:$(git rev-parse --short HEAD)-pointgrey  -f dockerimages/Docker.pg.capture .
+docker push gcr.io/shwingo-222722/capture:latest-pointgrey
+gcloud auth configure-docker
+gcloud container clusters get-credentials standard-cluster-1
+kubectl get namespaces
+kubectl create -f https://k8s.io/examples/admin/namespace-dev.json
+kubectl create -f https://k8s.io/examples/admin/namespace-prod.json
+kubectl config view
+kubectl config set-context dev --namespace=development --cluster=gke_shwingo-222722_us-central1-a_standard-cluster-1 --user=gke_shwingo-222722_us-central1-a_standard-cluster-1
+kubectl config set-context prod --namespace=production --cluster=gke_shwingo-222722_us-central1-a_standard-cluster-1 --user=gke_shwingo-222722_us-central1-a_standard-cluster-1
+kubectl config use-context prod
+kubectl get deployment
+kubectl get pods
+#kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user sam.silverberg@gmail.com
+kubectl create -f ssd-storageclass.yaml
+kubectl apply -f pipeline-api-secrets.yaml
+kubectl apply -f minio-secrets.yaml
+kubectl get secret minio-secret -o yaml
+kubectl get secret pipeline-api-secrets -o yaml
+
+kubectl delete -f kubernetes/pipeline-api.yaml
+kubectl apply -f kubernetes/pipeline-api.yaml
+kubectl delete -f kubernetes/prep.yaml
+kubectl apply -f kubernetes/prep.yaml
+kubectl delete -f kubernetes/train.yaml
+kubectl apply -f kubernetes/train.yaml
+
+kubectl set image deployment/tag-ui tag-ui=gcr.io/shwingo-222722/tag-ui:0.4 --record

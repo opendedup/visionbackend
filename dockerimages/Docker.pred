@@ -1,0 +1,8 @@
+FROM tensorflow/serving:latest-gpu
+
+MAINTAINER Sam Silverberg sam.silverberg@gmail.com
+
+COPY dockerimages/runscripts/tf_serving_entrypoint.sh /imagerie/tf_serving_entrypoint.sh
+RUN chmod +x /imagerie/tf_serving_entrypoint.sh
+
+ENTRYPOINT ["/imagerie/tf_serving_entrypoint.sh"]

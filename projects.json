@@ -1,0 +1,4123 @@
+{
+    "project22": {
+        "name": "project22",
+        "id": "project22",
+        "predict": true,
+        "model": "project22",
+        "version": "1548266712324",
+        "mlengine": false,
+        "tfserver": "project22",
+        "tfport": 8501,
+        "sensitivity": 0,
+        "created": 1548096554698,
+        "modified": 1548374687112,
+        "ux": {
+            "cat1": {
+                "name": "Default",
+                "color": "#5f94c2",
+                "count": 95,
+                "alpha": 50
+            }
+        },
+        "cameras": {},
+        "tags": {
+            "rpi2": {
+                "name": "rpi2",
+                "count": 6
+            },
+            "rpi3": {
+                "name": "rpi3",
+                "count": 4
+            },
+            "rpi3cpu": {
+                "name": "rpi3cpu",
+                "count": 4
+            },
+            "name": {
+                "name": "name",
+                "count": 10
+            },
+            "pins": {
+                "name": "pins",
+                "count": 14
+            },
+            "hdmi": {
+                "name": "hdmi",
+                "count": 10
+            },
+            "displayport": {
+                "name": "displayport",
+                "count": 8
+            },
+            "cameraport": {
+                "name": "cameraport",
+                "count": 8
+            },
+            "fccid": {
+                "name": "fccid",
+                "count": 4
+            },
+            "ethernet": {
+                "name": "ethernet",
+                "count": 13
+            },
+            "rpi2cpu": {
+                "name": "rpi2cpu",
+                "count": 4
+            },
+            "c2": {
+                "name": "c2",
+                "count": 2
+            },
+            "c2cpu": {
+                "name": "c2cpu",
+                "count": 2
+            },
+            "r64": {
+                "name": "r64",
+                "count": 2
+            },
+            "r64cpu": {
+                "name": "r64cpu",
+                "count": 2
+            },
+            "emmc": {
+                "name": "emmc",
+                "count": 2
+            }
+        },
+        "activePhoto": {
+            "photoId": "mhd8zpa",
+            "title": "fff17898-1644-4741-bbf5-84fa8a11ae66.jpg",
+            "expanded": true,
+            "imgUrl": "project22/fff17898-1644-4741-bbf5-84fa8a11ae66.jpg",
+            "children": [
+                {
+                    "index": 105,
+                    "photoId": "mhd8zpa",
+                    "tagInstance": 1548119134098,
+                    "title": "pins",
+                    "flag": "cat1",
+                    "regionStyle": {
+                        "backgroundColor": "rgba(95,148,194,0.5)",
+                        "outlineColor": "#5f94c2",
+                        "outlineWidth": "2px"
+                    },
+                    "expanded": true,
+                    "shape": {
+                        "p1": {
+                            "x": 0.2498291015625,
+                            "y": 0.2333333333333333
+                        },
+                        "p2": {
+                            "x": 0.6211832682291667,
+                            "y": 0.33333333333333326
+                        }
+                    },
+                    "children": [],
+                    "modified": 1548119465180,
+                    "className": "cat1 tagProps "
+                },
+                {
+                    "index": 106,
+                    "photoId": "mhd8zpa",
+                    "tagInstance": 1548119144256,
+                    "title": "name",
+                    "flag": "cat1",
+                    "regionStyle": {
+                        "backgroundColor": "rgba(95,148,194,0.5)",
+                        "outlineColor": "#5f94c2",
+                        "outlineWidth": "2px"
+                    },
+                    "expanded": true,
+                    "shape": {
+                        "p1": {
+                            "x": 0.40347493489583336,
+                            "y": 0.33666666666666667
+                        },
+                        "p2": {
+                            "x": 0.5711832682291667,
+                            "y": 0.39166666666666666
+                        }
+                    },
+                    "children": [],
+                    "modified": 1548119465181,
+                    "className": "cat1 tagProps ",
+                    "tool": "tagOCR"
+                },
+                {
+                    "index": 107,
+                    "photoId": "mhd8zpa",
+                    "tagInstance": 1548119154550,
+                    "title": "ethernet",
+                    "flag": "cat1",
+                    "regionStyle": {
+                        "backgroundColor": "rgba(95,148,194,0.5)",
+                        "outlineColor": "#5f94c2",
+                        "outlineWidth": "2px"
+                    },
+                    "expanded": true,
+                    "shape": {
+                        "p1": {
+                            "x": 0.6555582682291665,
+                            "y": 0.6083333333333333
+                        },
+                        "p2": {
+                            "x": 0.8451416015625,
+                            "y": 0.8333333333333335
+                        }
+                    },
+                    "children": [],
+                    "modified": 1548119465181,
+                    "className": "cat1 tagProps "
+                },
+                {
+                    "index": 108,
+                    "photoId": "mhd8zpa",
+                    "tagInstance": 1548119161075,
+                    "title": "rpi2cpu",
+                    "flag": "cat1",
+                    "regionStyle": {
+                        "backgroundColor": "rgba(95,148,194,0.5)",
+                        "outlineColor": "#5f94c2",
+                        "outlineWidth": "2px"
+                    },
+                    "expanded": true,
+                    "shape": {
+                        "p1": {
+                            "x": 0.34774576822916664,
+                            "y": 0.4266666666666667
+                        },
+                        "p2": {
+                            "x": 0.4638916015625,
+                            "y": 0.6166666666666667
+                        }
+                    },
+                    "children": [],
+                    "modified": 1548119465181,
+                    "className": "cat1 tagProps "
+                },
+                {
+                    "index": 109,
+                    "photoId": "mhd8zpa",
+                    "tagInstance": 1548119179751,
+                    "title": "displayport",
+                    "flag": "cat1",
+                    "regionStyle": {
+                        "backgroundColor": "rgba(95,148,194,0.5)",
+                        "outlineColor": "#5f94c2",
+                        "outlineWidth": "2px"
+                    },
+                    "expanded": true,
+                    "shape": {
+                        "p1": {
+                            "x": 0.2086832682291667,
+                            "y": 0.4241666666666667
+                        },
+                        "p2": {
+                            "x": 0.27743326822916664,
+                            "y": 0.705
+                        }
+                    },
+                    "children": [],
+                    "modified": 1548119465183,
+                    "className": "cat1 tagProps "
+                },
+                {
+                    "index": 110,
+                    "photoId": "mhd8zpa",
+                    "tagInstance": 1548119186364,
+                    "title": "cameraport",
+                    "flag": "cat1",
+                    "regionStyle": {
+                        "backgroundColor": "rgba(95,148,194,0.5)",
+                        "outlineColor": "#5f94c2",
+                        "outlineWidth": "2px"
+                    },
+                    "expanded": true,
+                    "shape": {
+                        "p1": {
+                            "x": 0.5013916015625,
+                            "y": 0.5925
+                        },
+                        "p2": {
+                            "x": 0.5664957682291667,
+                            "y": 0.8725
+                        }
+                    },
+                    "children": [],
+                    "modified": 1548119465183,
+                    "className": "cat1 tagProps "
+                },
+                {
+                    "index": 111,
+                    "photoId": "mhd8zpa",
+                    "tagInstance": 1548119191932,
+                    "title": "ethernet",
+                    "flag": "cat1",
+                    "regionStyle": {
+                        "backgroundColor": "rgba(95,148,194,0.5)",
+                        "outlineColor": "#5f94c2",
+                        "outlineWidth": "2px"
+                    },
+                    "expanded": true,
+                    "shape": {
+                        "p1": {
+                            "x": 0.37691243489583326,
+                            "y": 0.7083333333333335
+                        },
+                        "p2": {
+                            "x": 0.4982666015625,
+                            "y": 0.8875
+                        }
+                    },
+                    "children": [],
+                    "modified": 1548119465183,
+                    "className": "cat1 tagProps "
+                },
+                {
+                    "index": 112,
+                    "photoId": "mhd8zpa",
+                    "tagInstance": 1548119201062,
+                    "title": "rpi2",
+                    "flag": "cat1",
+                    "regionStyle": {
+                        "backgroundColor": "rgba(95,148,194,0.5)",
+                        "outlineColor": "#5f94c2",
+                        "outlineWidth": "2px"
+                    },
+                    "expanded": true,
+                    "shape": {
+                        "p1": {
+                            "x": 0.19149576822916667,
+                            "y": 0.2008333333333333
+                        },
+                        "p2": {
+                            "x": 0.8560791015625,
+                            "y": 0.8975
+                        }
+                    },
+                    "children": [],
+                    "modified": 1548119465183,
+                    "className": "cat1 tagProps "
+                }
+            ],
+            "ETag": "2651866379-1",
+            "modified": 1548115991067,
+            "dimensions": {
+                "width": "1920",
+                "height": "1200",
+                "size": "740873"
+            }
+        },
+        "photos": [
+            {
+                "photoId": "k4ul5c",
+                "title": "0775abaf-cf30-4e5d-9e97-8b7ef380e2de.jpg",
+                "expanded": false,
+                "imgUrl": "project22/0775abaf-cf30-4e5d-9e97-8b7ef380e2de.jpg",
+                "children": [
+                    {
+                        "index": 0,
+                        "photoId": "k4ul5c",
+                        "tagInstance": 1548117737695,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2607666015625,
+                                "y": 0.22833333333333333
+                            },
+                            "p2": {
+                                "x": 0.6232666015625,
+                                "y": 0.29833333333333334
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119241135,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 1,
+                        "photoId": "k4ul5c",
+                        "tagInstance": 1548117753765,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6623291015625,
+                                "y": 0.6008333333333333
+                            },
+                            "p2": {
+                                "x": 0.8529541015625,
+                                "y": 0.8108333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119241135,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 2,
+                        "photoId": "k4ul5c",
+                        "tagInstance": 1548117760455,
+                        "title": "rpi3cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3539957682291666,
+                                "y": 0.415
+                            },
+                            "p2": {
+                                "x": 0.46597493489583336,
+                                "y": 0.5766666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119241135,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 3,
+                        "photoId": "k4ul5c",
+                        "tagInstance": 1548117770375,
+                        "title": "displayport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2217041015625,
+                                "y": 0.4083333333333334
+                            },
+                            "p2": {
+                                "x": 0.28472493489583334,
+                                "y": 0.6625
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119241136,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 4,
+                        "photoId": "k4ul5c",
+                        "tagInstance": 1548117776958,
+                        "title": "cameraport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5034749348958333,
+                                "y": 0.5675
+                            },
+                            "p2": {
+                                "x": 0.5592041015625,
+                                "y": 0.8441666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119241136,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 5,
+                        "photoId": "k4ul5c",
+                        "tagInstance": 1548117783788,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3810791015625,
+                                "y": 0.7
+                            },
+                            "p2": {
+                                "x": 0.4935791015625,
+                                "y": 0.8625
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119241136,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 7,
+                        "photoId": "k4ul5c",
+                        "tagInstance": 1548117810209,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4107666015625,
+                                "y": 0.31833333333333336
+                            },
+                            "p2": {
+                                "x": 0.5753499348958333,
+                                "y": 0.37083333333333335
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119241136,
+                        "className": "cat1 tagProps ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 8,
+                        "photoId": "k4ul5c",
+                        "tagInstance": 1548117818613,
+                        "title": "fccid",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3763916015625,
+                                "y": 0.5858333333333333
+                            },
+                            "p2": {
+                                "x": 0.4951416015625,
+                                "y": 0.65
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119241136,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 12,
+                        "photoId": "k4ul5c",
+                        "tagInstance": 1548117881264,
+                        "title": "rpi3",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2086832682291667,
+                                "y": 0.19166666666666668
+                            },
+                            "p2": {
+                                "x": 0.8706624348958333,
+                                "y": 0.8675
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119241138,
+                        "className": "cat1 tagProps "
+                    }
+                ],
+                "ETag": "746634513-1",
+                "modified": 1548116137598,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "601524"
+                }
+            },
+            {
+                "photoId": "mxhvy4t",
+                "title": "08dbb516-e417-4080-8577-a04875e1b027.jpg",
+                "expanded": false,
+                "imgUrl": "project22/08dbb516-e417-4080-8577-a04875e1b027.jpg",
+                "children": [
+                    {
+                        "index": 13,
+                        "photoId": "mxhvy4t",
+                        "tagInstance": 1548117921839,
+                        "title": "rpi2cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6732666015625,
+                                "y": 0.4733333333333334
+                            },
+                            "p2": {
+                                "x": 0.8050374348958332,
+                                "y": 0.6666666666666665
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119270141,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 14,
+                        "photoId": "mxhvy4t",
+                        "tagInstance": 1548117927880,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.30503743489583335,
+                                "y": 0.22583333333333333
+                            },
+                            "p2": {
+                                "x": 0.4753499348958334,
+                                "y": 0.44666666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119270141,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 15,
+                        "photoId": "mxhvy4t",
+                        "tagInstance": 1548117933488,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6435791015625,
+                                "y": 0.1875
+                            },
+                            "p2": {
+                                "x": 0.7612874348958333,
+                                "y": 0.36083333333333334
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119270141,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 16,
+                        "photoId": "mxhvy4t",
+                        "tagInstance": 1548117938292,
+                        "title": "cameraport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5774332682291666,
+                                "y": 0.21416666666666667
+                            },
+                            "p2": {
+                                "x": 0.6399332682291666,
+                                "y": 0.4925
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119270141,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 17,
+                        "photoId": "mxhvy4t",
+                        "tagInstance": 1548117944787,
+                        "title": "displayport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.8607666015625,
+                                "y": 0.3725
+                            },
+                            "p2": {
+                                "x": 0.9336832682291667,
+                                "y": 0.6641666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119270141,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 18,
+                        "photoId": "mxhvy4t",
+                        "tagInstance": 1548117950125,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5076416015625,
+                                "y": 0.7516666666666667
+                            },
+                            "p2": {
+                                "x": 0.8862874348958333,
+                                "y": 0.8516666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119270141,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 19,
+                        "photoId": "mxhvy4t",
+                        "tagInstance": 1548117959992,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5696207682291666,
+                                "y": 0.6966666666666668
+                            },
+                            "p2": {
+                                "x": 0.7336832682291665,
+                                "y": 0.7641666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119270141,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 20,
+                        "photoId": "mxhvy4t",
+                        "tagInstance": 1548117986552,
+                        "title": "rpi2",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.28472493489583334,
+                                "y": 0.18
+                            },
+                            "p2": {
+                                "x": 0.9440999348958333,
+                                "y": 0.8825
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119270141,
+                        "className": "cat1 tagProps "
+                    }
+                ],
+                "ETag": "725825829-1",
+                "modified": 1548116188737,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "609134"
+                }
+            },
+            {
+                "photoId": "d1wdfih",
+                "title": "1f0559fa-c398-4753-84ff-92608bbe4db7.jpg",
+                "expanded": false,
+                "imgUrl": "project22/1f0559fa-c398-4753-84ff-92608bbe4db7.jpg",
+                "children": [
+                    {
+                        "index": 21,
+                        "photoId": "d1wdfih",
+                        "tagInstance": 1548118023939,
+                        "title": "c2cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.34878743489583336,
+                                "y": 0.27
+                            },
+                            "p2": {
+                                "x": 0.6779541015625,
+                                "y": 0.6583333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118908774,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 25,
+                        "photoId": "d1wdfih",
+                        "tagInstance": 1548118053708,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3185791015625,
+                                "y": 0.1716666666666667
+                            },
+                            "p2": {
+                                "x": 0.6883707682291668,
+                                "y": 0.26166666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118896416,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 26,
+                        "photoId": "d1wdfih",
+                        "tagInstance": 1548118066984,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.7180582682291665,
+                                "y": 0.5366666666666666
+                            },
+                            "p2": {
+                                "x": 0.9097249348958333,
+                                "y": 0.7625
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118896416,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 27,
+                        "photoId": "d1wdfih",
+                        "tagInstance": 1548118075376,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.42587076822916664,
+                                "y": 0.6716666666666665
+                            },
+                            "p2": {
+                                "x": 0.5732666015625,
+                                "y": 0.8125
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118896416,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 86,
+                        "photoId": "d1wdfih",
+                        "tagInstance": 1548118908775,
+                        "title": "c2",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2571207682291667,
+                                "y": 0.11916666666666668
+                            },
+                            "p2": {
+                                "x": 0.9149332682291668,
+                                "y": 0.8233333333333335
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118915852,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "1566788427-1",
+                "modified": 1548116230003,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "558523"
+                }
+            },
+            {
+                "photoId": "9lfw0gm",
+                "title": "271ec4ca-c2fd-4d56-bb6d-1a2e79efdb05.jpg",
+                "expanded": false,
+                "imgUrl": "project22/271ec4ca-c2fd-4d56-bb6d-1a2e79efdb05.jpg",
+                "children": [
+                    {
+                        "index": 29,
+                        "photoId": "9lfw0gm",
+                        "tagInstance": 1548118106603,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5571207682291667,
+                                "y": 0.7225
+                            },
+                            "p2": {
+                                "x": 0.7258707682291665,
+                                "y": 0.7925
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119290892,
+                        "className": "cat1 tagProps ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 30,
+                        "photoId": "9lfw0gm",
+                        "tagInstance": 1548118115401,
+                        "title": "fccid",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6373291015625,
+                                "y": 0.4508333333333333
+                            },
+                            "p2": {
+                                "x": 0.7581624348958332,
+                                "y": 0.5075
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119290893,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 31,
+                        "photoId": "9lfw0gm",
+                        "tagInstance": 1548118122223,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6217041015625,
+                                "y": 0.20916666666666667
+                            },
+                            "p2": {
+                                "x": 0.7565999348958333,
+                                "y": 0.3858333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119290893,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 32,
+                        "photoId": "9lfw0gm",
+                        "tagInstance": 1548118129746,
+                        "title": "cameraport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5701416015625,
+                                "y": 0.25
+                            },
+                            "p2": {
+                                "x": 0.6331624348958333,
+                                "y": 0.515
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119290893,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 33,
+                        "photoId": "9lfw0gm",
+                        "tagInstance": 1548118140369,
+                        "title": "displayport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.8581624348958333,
+                                "y": 0.40916666666666673
+                            },
+                            "p2": {
+                                "x": 0.9305582682291668,
+                                "y": 0.6883333333333332
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119290893,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 34,
+                        "photoId": "9lfw0gm",
+                        "tagInstance": 1548118146130,
+                        "title": "rpi3cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6727457682291668,
+                                "y": 0.5191666666666667
+                            },
+                            "p2": {
+                                "x": 0.7920166015625,
+                                "y": 0.6891666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119290893,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 35,
+                        "photoId": "9lfw0gm",
+                        "tagInstance": 1548118154620,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.29774576822916665,
+                                "y": 0.25666666666666665
+                            },
+                            "p2": {
+                                "x": 0.47378743489583336,
+                                "y": 0.47916666666666674
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119290894,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 36,
+                        "photoId": "9lfw0gm",
+                        "tagInstance": 1548118163544,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5097249348958334,
+                                "y": 0.7966666666666665
+                            },
+                            "p2": {
+                                "x": 0.8836832682291668,
+                                "y": 0.8666666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119290894,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 37,
+                        "photoId": "9lfw0gm",
+                        "tagInstance": 1548118206721,
+                        "title": "rpi3",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.28524576822916664,
+                                "y": 0.2075
+                            },
+                            "p2": {
+                                "x": 0.9305582682291665,
+                                "y": 0.8775
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119290894,
+                        "className": "cat1 tagProps "
+                    }
+                ],
+                "ETag": "2693895133-1",
+                "modified": 1548115745249,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "741169"
+                }
+            },
+            {
+                "photoId": "ia5cepq",
+                "title": "6e28116b-085f-46bb-bf88-65f11544672e.jpg",
+                "expanded": false,
+                "imgUrl": "project22/6e28116b-085f-46bb-bf88-65f11544672e.jpg",
+                "children": [
+                    {
+                        "index": 38,
+                        "photoId": "ia5cepq",
+                        "tagInstance": 1548118227944,
+                        "title": "fccid",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.39618326822916666,
+                                "y": 0.5466666666666666
+                            },
+                            "p2": {
+                                "x": 0.5159749348958333,
+                                "y": 0.6041666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119310894,
+                        "className": "cat1 tagProps ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 39,
+                        "photoId": "ia5cepq",
+                        "tagInstance": 1548118234498,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.39097493489583335,
+                                "y": 0.27416666666666667
+                            },
+                            "p2": {
+                                "x": 0.5784749348958333,
+                                "y": 0.3391666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119310894,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 40,
+                        "photoId": "ia5cepq",
+                        "tagInstance": 1548118290031,
+                        "title": "rpi3cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.372357895421436,
+                                "y": 0.3639371381306865
+                            },
+                            "p2": {
+                                "x": 0.48161908168574397,
+                                "y": 0.5343258891645989
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119310894,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 41,
+                        "photoId": "ia5cepq",
+                        "tagInstance": 1548118305651,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2842041015625,
+                                "y": 0.185
+                            },
+                            "p2": {
+                                "x": 0.6414957682291668,
+                                "y": 0.25916666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119310894,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 42,
+                        "photoId": "ia5cepq",
+                        "tagInstance": 1548118313213,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6810791015625,
+                                "y": 0.5591666666666667
+                            },
+                            "p2": {
+                                "x": 0.8722249348958333,
+                                "y": 0.7758333333333334
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119310895,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 43,
+                        "photoId": "ia5cepq",
+                        "tagInstance": 1548118325544,
+                        "title": "displayport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2373291015625,
+                                "y": 0.35583333333333333
+                            },
+                            "p2": {
+                                "x": 0.2920166015625,
+                                "y": 0.6266666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119310895,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 44,
+                        "photoId": "ia5cepq",
+                        "tagInstance": 1548118345967,
+                        "title": "cameraport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5211832682291667,
+                                "y": 0.5391666666666667
+                            },
+                            "p2": {
+                                "x": 0.5727457682291667,
+                                "y": 0.8058333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119310895,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 45,
+                        "photoId": "ia5cepq",
+                        "tagInstance": 1548118353560,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3904541015625,
+                                "y": 0.66
+                            },
+                            "p2": {
+                                "x": 0.5144124348958333,
+                                "y": 0.82
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119310895,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 46,
+                        "photoId": "ia5cepq",
+                        "tagInstance": 1548118361055,
+                        "title": "rpi3",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.21753743489583333,
+                                "y": 0.135
+                            },
+                            "p2": {
+                                "x": 0.8888916015625,
+                                "y": 0.8258333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119310895,
+                        "className": "cat1 tagProps "
+                    }
+                ],
+                "ETag": "2692193662-1",
+                "modified": 1548115733980,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "760542"
+                },
+                "scale": 1
+            },
+            {
+                "photoId": "ruzbudp",
+                "title": "7edca16d-2c0c-46e8-9645-3415ea957c9e.jpg",
+                "expanded": false,
+                "imgUrl": "project22/7edca16d-2c0c-46e8-9645-3415ea957c9e.jpg",
+                "children": [
+                    {
+                        "index": 49,
+                        "photoId": "ruzbudp",
+                        "tagInstance": 1548118435127,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.48003743489583334,
+                                "y": 0.665
+                            },
+                            "p2": {
+                                "x": 0.6404541015625,
+                                "y": 0.7275
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119319940,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 50,
+                        "photoId": "ruzbudp",
+                        "tagInstance": 1548118449902,
+                        "title": "rpi2cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5737874348958333,
+                                "y": 0.44416666666666665
+                            },
+                            "p2": {
+                                "x": 0.6993082682291667,
+                                "y": 0.6275
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119319940,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 51,
+                        "photoId": "ruzbudp",
+                        "tagInstance": 1548118463050,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5435791015625,
+                                "y": 0.16
+                            },
+                            "p2": {
+                                "x": 0.6685791015625,
+                                "y": 0.33416666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119319940,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 52,
+                        "photoId": "ruzbudp",
+                        "tagInstance": 1548118468928,
+                        "title": "cameraport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.48628743489583326,
+                                "y": 0.19166666666666668
+                            },
+                            "p2": {
+                                "x": 0.5388916015625,
+                                "y": 0.46
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119319940,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 53,
+                        "photoId": "ruzbudp",
+                        "tagInstance": 1548118475841,
+                        "title": "displayport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.7722249348958333,
+                                "y": 0.35583333333333333
+                            },
+                            "p2": {
+                                "x": 0.8321207682291667,
+                                "y": 0.6183333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119319940,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 54,
+                        "photoId": "ruzbudp",
+                        "tagInstance": 1548118481149,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.41962076822916666,
+                                "y": 0.7291666666666665
+                            },
+                            "p2": {
+                                "x": 0.7956624348958333,
+                                "y": 0.8133333333333332
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119319940,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 55,
+                        "photoId": "ruzbudp",
+                        "tagInstance": 1548118487051,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.19409993489583333,
+                                "y": 0.195
+                            },
+                            "p2": {
+                                "x": 0.38680826822916664,
+                                "y": 0.42
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119319940,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 57,
+                        "photoId": "ruzbudp",
+                        "tagInstance": 1548118497601,
+                        "title": "rpi2",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.1967041015625,
+                                "y": 0.16333333333333333
+                            },
+                            "p2": {
+                                "x": 0.8847249348958335,
+                                "y": 0.8283333333333335
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119319940,
+                        "className": "cat1 tagProps "
+                    }
+                ],
+                "ETag": "3325540272-1",
+                "modified": 1548116010321,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "706187"
+                }
+            },
+            {
+                "photoId": "bqev0zc",
+                "title": "a7297268-9220-4b67-a6a5-7285384986ae.jpg",
+                "expanded": false,
+                "imgUrl": "project22/a7297268-9220-4b67-a6a5-7285384986ae.jpg",
+                "children": [
+                    {
+                        "index": 58,
+                        "photoId": "bqev0zc",
+                        "tagInstance": 1548118541194,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5279541015625,
+                                "y": 0.7216666666666667
+                            },
+                            "p2": {
+                                "x": 0.7039957682291668,
+                                "y": 0.7975
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119330870,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 59,
+                        "photoId": "bqev0zc",
+                        "tagInstance": 1548118557616,
+                        "title": "cameraport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5461832682291666,
+                                "y": 0.25916666666666666
+                            },
+                            "p2": {
+                                "x": 0.6045166015625,
+                                "y": 0.5266666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119330871,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 60,
+                        "photoId": "bqev0zc",
+                        "tagInstance": 1548118567570,
+                        "title": "displayport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.8373291015625,
+                                "y": 0.4266666666666667
+                            },
+                            "p2": {
+                                "x": 0.8998291015625,
+                                "y": 0.6891666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119330871,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 61,
+                        "photoId": "bqev0zc",
+                        "tagInstance": 1548118573123,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5993082682291667,
+                                "y": 0.2325
+                            },
+                            "p2": {
+                                "x": 0.7248291015625,
+                                "y": 0.4083333333333334
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119330871,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 62,
+                        "photoId": "bqev0zc",
+                        "tagInstance": 1548118580853,
+                        "title": "fccid",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6149332682291667,
+                                "y": 0.45166666666666666
+                            },
+                            "p2": {
+                                "x": 0.7289957682291667,
+                                "y": 0.5191666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119330871,
+                        "className": "cat1 tagProps ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 65,
+                        "photoId": "bqev0zc",
+                        "tagInstance": 1548118605883,
+                        "title": "rpi3cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6430582682291667,
+                                "y": 0.52
+                            },
+                            "p2": {
+                                "x": 0.7701416015625,
+                                "y": 0.7016666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119330871,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 66,
+                        "photoId": "bqev0zc",
+                        "tagInstance": 1548118617068,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.26962076822916664,
+                                "y": 0.2833333333333333
+                            },
+                            "p2": {
+                                "x": 0.44722493489583326,
+                                "y": 0.49166666666666664
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119330871,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 67,
+                        "photoId": "bqev0zc",
+                        "tagInstance": 1548118623325,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4748291015625,
+                                "y": 0.7916666666666665
+                            },
+                            "p2": {
+                                "x": 0.8628499348958333,
+                                "y": 0.8933333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119330871,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 68,
+                        "photoId": "bqev0zc",
+                        "tagInstance": 1548118631366,
+                        "title": "rpi3",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.25555826822916666,
+                                "y": 0.20166666666666663
+                            },
+                            "p2": {
+                                "x": 0.9034749348958333,
+                                "y": 0.89
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119330871,
+                        "className": "cat1 tagProps "
+                    }
+                ],
+                "ETag": "2193810995-1",
+                "modified": 1548116155390,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "612626"
+                }
+            },
+            {
+                "photoId": "epraet",
+                "title": "d0354155-5562-4da9-a5c3-dcc4d7a7021b.jpg",
+                "expanded": false,
+                "imgUrl": "project22/d0354155-5562-4da9-a5c3-dcc4d7a7021b.jpg",
+                "children": [
+                    {
+                        "index": 69,
+                        "photoId": "epraet",
+                        "tagInstance": 1548118653868,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4732666015625,
+                                "y": 0.3441666666666666
+                            },
+                            "p2": {
+                                "x": 0.6451416015625,
+                                "y": 0.4
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119342998,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 70,
+                        "photoId": "epraet",
+                        "tagInstance": 1548118665287,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3196207682291667,
+                                "y": 0.245
+                            },
+                            "p2": {
+                                "x": 0.6868082682291665,
+                                "y": 0.3325
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119342999,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 71,
+                        "photoId": "epraet",
+                        "tagInstance": 1548118673406,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.7190999348958332,
+                                "y": 0.64
+                            },
+                            "p2": {
+                                "x": 0.9149332682291668,
+                                "y": 0.8475
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119342999,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 72,
+                        "photoId": "epraet",
+                        "tagInstance": 1548118680861,
+                        "title": "displayport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2717041015625,
+                                "y": 0.4191666666666667
+                            },
+                            "p2": {
+                                "x": 0.34097493489583336,
+                                "y": 0.6883333333333332
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119342999,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 73,
+                        "photoId": "epraet",
+                        "tagInstance": 1548118688476,
+                        "title": "cameraport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5519124348958333,
+                                "y": 0.595
+                            },
+                            "p2": {
+                                "x": 0.6175374348958333,
+                                "y": 0.8683333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119342999,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 74,
+                        "photoId": "epraet",
+                        "tagInstance": 1548118694660,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4284749348958334,
+                                "y": 0.71
+                            },
+                            "p2": {
+                                "x": 0.5503499348958333,
+                                "y": 0.89
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119342999,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 75,
+                        "photoId": "epraet",
+                        "tagInstance": 1548118704084,
+                        "title": "rpi2cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.40816243489583326,
+                                "y": 0.42583333333333334
+                            },
+                            "p2": {
+                                "x": 0.5263916015625,
+                                "y": 0.6041666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119342999,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 76,
+                        "photoId": "epraet",
+                        "tagInstance": 1548118714761,
+                        "title": "rpi2",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2685791015625,
+                                "y": 0.21833333333333332
+                            },
+                            "p2": {
+                                "x": 0.9154541015625,
+                                "y": 0.89
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119342999,
+                        "className": "cat1 tagProps "
+                    }
+                ],
+                "ETag": "1629911036-1",
+                "modified": 1548116206407,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "613518"
+                }
+            },
+            {
+                "photoId": "l8vnwu",
+                "title": "d16492b8-d169-47dc-bb18-8a2e39545062.jpg",
+                "expanded": false,
+                "imgUrl": "project22/d16492b8-d169-47dc-bb18-8a2e39545062.jpg",
+                "children": [
+                    {
+                        "index": 77,
+                        "photoId": "l8vnwu",
+                        "tagInstance": 1548118768919,
+                        "title": "c2cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4420166015625,
+                                "y": 0.3283333333333333
+                            },
+                            "p2": {
+                                "x": 0.8180582682291667,
+                                "y": 0.7483333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118811973,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 78,
+                        "photoId": "l8vnwu",
+                        "tagInstance": 1548118781001,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5717041015625,
+                                "y": 0.1708333333333333
+                            },
+                            "p2": {
+                                "x": 0.7055582682291667,
+                                "y": 0.3375
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118811973,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 80,
+                        "photoId": "l8vnwu",
+                        "tagInstance": 1548118786802,
+                        "title": "rpi2",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.45399576822916665,
+                                "y": 0.7575
+                            },
+                            "p2": {
+                                "x": 0.4545166015625,
+                                "y": 0.7583333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118811973,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 81,
+                        "photoId": "l8vnwu",
+                        "tagInstance": 1548118791447,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4597249348958334,
+                                "y": 0.7241666666666666
+                            },
+                            "p2": {
+                                "x": 0.8612874348958335,
+                                "y": 0.8475
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118811974,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 82,
+                        "photoId": "l8vnwu",
+                        "tagInstance": 1548118800912,
+                        "title": "rpi2",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2279541015625,
+                                "y": 0.22666666666666666
+                            },
+                            "p2": {
+                                "x": 0.43055826822916665,
+                                "y": 0.4475
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118811975,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 84,
+                        "photoId": "l8vnwu",
+                        "tagInstance": 1548118819318,
+                        "title": "c2",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.21909993489583332,
+                                "y": 0.15333333333333332
+                            },
+                            "p2": {
+                                "x": 0.9295166015625,
+                                "y": 0.8716666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548118828885,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "1102548647-1",
+                "modified": 1548116247303,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "569921"
+                }
+            },
+            {
+                "photoId": "za7e7ve",
+                "title": "d3e549fa-4755-4d43-a09a-1149e020e85a.jpg",
+                "expanded": false,
+                "imgUrl": "project22/d3e549fa-4755-4d43-a09a-1149e020e85a.jpg",
+                "children": [
+                    {
+                        "index": 88,
+                        "photoId": "za7e7ve",
+                        "tagInstance": 1548118927829,
+                        "title": "r64cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.39149576822916665,
+                                "y": 0.4825
+                            },
+                            "p2": {
+                                "x": 0.5102457682291667,
+                                "y": 0.6533333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119413757,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagBox"
+                    },
+                    {
+                        "index": 89,
+                        "photoId": "za7e7ve",
+                        "tagInstance": 1548118937826,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4763916015625,
+                                "y": 0.72
+                            },
+                            "p2": {
+                                "x": 0.6836832682291667,
+                                "y": 0.7941666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119389271,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 90,
+                        "photoId": "za7e7ve",
+                        "tagInstance": 1548118945063,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3576416015625,
+                                "y": 0.7858333333333334
+                            },
+                            "p2": {
+                                "x": 0.7284749348958335,
+                                "y": 0.8641666666666665
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119389271,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 91,
+                        "photoId": "za7e7ve",
+                        "tagInstance": 1548118952216,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.14305826822916667,
+                                "y": 0.24166666666666667
+                            },
+                            "p2": {
+                                "x": 0.3196207682291667,
+                                "y": 0.4691666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119389271,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 92,
+                        "photoId": "za7e7ve",
+                        "tagInstance": 1548118968269,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.47274576822916664,
+                                "y": 0.21166666666666667
+                            },
+                            "p2": {
+                                "x": 0.6019124348958333,
+                                "y": 0.3975
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119389271,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 93,
+                        "photoId": "za7e7ve",
+                        "tagInstance": 1548118983969,
+                        "title": "emmc",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6243082682291666,
+                                "y": 0.4733333333333334
+                            },
+                            "p2": {
+                                "x": 0.7654541015625,
+                                "y": 0.6258333333333334
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119389272,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 95,
+                        "photoId": "za7e7ve",
+                        "tagInstance": 1548119022224,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4284749348958334,
+                                "y": 0.6383333333333333
+                            },
+                            "p2": {
+                                "x": 0.5321207682291667,
+                                "y": 0.7008333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119389272,
+                        "className": "cat1 tagProps ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 115,
+                        "photoId": "za7e7ve",
+                        "tagInstance": 1548119413758,
+                        "title": "r64",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.12587076822916668,
+                                "y": 0.19416666666666665
+                            },
+                            "p2": {
+                                "x": 0.7925374348958333,
+                                "y": 0.8741666666666665
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119417729,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "153383627-1",
+                "modified": 1548115705136,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "761462"
+                }
+            },
+            {
+                "photoId": "h5zjuma",
+                "title": "d9fabcbd-d30d-4de3-a16a-539dd4908543.jpg",
+                "expanded": false,
+                "imgUrl": "project22/d9fabcbd-d30d-4de3-a16a-539dd4908543.jpg",
+                "children": [
+                    {
+                        "index": 97,
+                        "photoId": "h5zjuma",
+                        "tagInstance": 1548119050671,
+                        "title": "r64cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.38993326822916674,
+                                "y": 0.38
+                            },
+                            "p2": {
+                                "x": 0.4920166015625,
+                                "y": 0.5475
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119430541,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 98,
+                        "photoId": "h5zjuma",
+                        "tagInstance": 1548119063217,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3618082682291666,
+                                "y": 0.3458333333333334
+                            },
+                            "p2": {
+                                "x": 0.4592041015625,
+                                "y": 0.3975
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119430542,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 99,
+                        "photoId": "h5zjuma",
+                        "tagInstance": 1548119075090,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.1763916015625,
+                                "y": 0.1725
+                            },
+                            "p2": {
+                                "x": 0.5321207682291667,
+                                "y": 0.24333333333333335
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119430542,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 100,
+                        "photoId": "h5zjuma",
+                        "tagInstance": 1548119083950,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.20972493489583333,
+                                "y": 0.23833333333333337
+                            },
+                            "p2": {
+                                "x": 0.4092041015625,
+                                "y": 0.30333333333333334
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119430542,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 101,
+                        "photoId": "h5zjuma",
+                        "tagInstance": 1548119089505,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5612874348958333,
+                                "y": 0.5466666666666666
+                            },
+                            "p2": {
+                                "x": 0.7399332682291667,
+                                "y": 0.7591666666666668
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119430543,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 102,
+                        "photoId": "h5zjuma",
+                        "tagInstance": 1548119096149,
+                        "title": "hdmi",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.28941243489583335,
+                                "y": 0.6516666666666666
+                            },
+                            "p2": {
+                                "x": 0.40347493489583336,
+                                "y": 0.7983333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119430543,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 103,
+                        "photoId": "h5zjuma",
+                        "tagInstance": 1548119105965,
+                        "title": "emmc",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.1404541015625,
+                                "y": 0.41416666666666674
+                            },
+                            "p2": {
+                                "x": 0.2649332682291667,
+                                "y": 0.5525
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119430543,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 104,
+                        "photoId": "h5zjuma",
+                        "tagInstance": 1548119121163,
+                        "title": "r64",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.1279541015625,
+                                "y": 0.1525
+                            },
+                            "p2": {
+                                "x": 0.7420166015625,
+                                "y": 0.7933333333333333
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119430543,
+                        "className": "cat1 tagProps "
+                    }
+                ],
+                "ETag": "779235309-1",
+                "modified": 1548115690067,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "762473"
+                }
+            },
+            {
+                "photoId": "mhd8zpa",
+                "title": "fff17898-1644-4741-bbf5-84fa8a11ae66.jpg",
+                "expanded": false,
+                "imgUrl": "project22/fff17898-1644-4741-bbf5-84fa8a11ae66.jpg",
+                "children": [
+                    {
+                        "index": 105,
+                        "photoId": "mhd8zpa",
+                        "tagInstance": 1548119134098,
+                        "title": "pins",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2498291015625,
+                                "y": 0.2333333333333333
+                            },
+                            "p2": {
+                                "x": 0.6211832682291667,
+                                "y": 0.33333333333333326
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119441491,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 106,
+                        "photoId": "mhd8zpa",
+                        "tagInstance": 1548119144256,
+                        "title": "name",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.40347493489583336,
+                                "y": 0.33666666666666667
+                            },
+                            "p2": {
+                                "x": 0.5711832682291667,
+                                "y": 0.39166666666666666
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119441491,
+                        "className": "cat1 tagProps  isActive ",
+                        "tool": "tagOCR"
+                    },
+                    {
+                        "index": 107,
+                        "photoId": "mhd8zpa",
+                        "tagInstance": 1548119154550,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6555582682291665,
+                                "y": 0.6083333333333333
+                            },
+                            "p2": {
+                                "x": 0.8451416015625,
+                                "y": 0.8333333333333335
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119441491,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 108,
+                        "photoId": "mhd8zpa",
+                        "tagInstance": 1548119161075,
+                        "title": "rpi2cpu",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.34774576822916664,
+                                "y": 0.4266666666666667
+                            },
+                            "p2": {
+                                "x": 0.4638916015625,
+                                "y": 0.6166666666666667
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119441491,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 109,
+                        "photoId": "mhd8zpa",
+                        "tagInstance": 1548119179751,
+                        "title": "displayport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2086832682291667,
+                                "y": 0.4241666666666667
+                            },
+                            "p2": {
+                                "x": 0.27743326822916664,
+                                "y": 0.705
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119441492,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 110,
+                        "photoId": "mhd8zpa",
+                        "tagInstance": 1548119186364,
+                        "title": "cameraport",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.5013916015625,
+                                "y": 0.5925
+                            },
+                            "p2": {
+                                "x": 0.5664957682291667,
+                                "y": 0.8725
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119441492,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 111,
+                        "photoId": "mhd8zpa",
+                        "tagInstance": 1548119191932,
+                        "title": "ethernet",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.37691243489583326,
+                                "y": 0.7083333333333335
+                            },
+                            "p2": {
+                                "x": 0.4982666015625,
+                                "y": 0.8875
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119441492,
+                        "className": "cat1 tagProps "
+                    },
+                    {
+                        "index": 112,
+                        "photoId": "mhd8zpa",
+                        "tagInstance": 1548119201062,
+                        "title": "rpi2",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.19149576822916667,
+                                "y": 0.2008333333333333
+                            },
+                            "p2": {
+                                "x": 0.8560791015625,
+                                "y": 0.8975
+                            }
+                        },
+                        "children": [],
+                        "modified": 1548119441492,
+                        "className": "cat1 tagProps "
+                    }
+                ],
+                "ETag": "2651866379-1",
+                "modified": 1548115991067,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "740873"
+                }
+            }
+        ],
+        "notificationEmail": "aaron@flexibleassembly.com",
+        "searchString": "",
+        "searchFocusIndex": 0,
+        "searchFoundCount": 0,
+        "trainUrl": "http://104.154.243.126/api",
+        "detectUrl": "http://104.198.65.105/api",
+        "nodeUrl": "http://localhost:3080",
+        "bucket": "imagerie2",
+        "access_key": "imagerie",
+        "secret_key": "imagerie",
+        "url": "http://gcs-s3:9000",
+        "folder": "project22",
+        "tempdir": "/tmp/project22/",
+        "label_file": "trained_models/project22/1548266712324/object-detection.pbtxt",
+        "grpc": false
+    },
+    "gummies": {
+        "name": "gummies",
+        "id": "gummies",
+        "predict": true,
+        "model": "gummies",
+        "version": "1550268685513",
+        "mlengine": false,
+        "tfserver": "gummies",
+        "tfport": 8501,
+        "sensitivity": 0,
+        "created": 1548121885032,
+        "modified": 1550268858281,
+        "ux": {
+            "cat1": {
+                "name": "Default",
+                "color": "#5f94c2",
+                "count": 127,
+                "alpha": "22"
+            }
+        },
+        "cameras": {},
+        "notificationEmail": "aaron@flexibleassembly.com",
+        "searchString": "",
+        "searchFocusIndex": 0,
+        "searchFoundCount": 0,
+        "nodeUrl": "http://localhost:3080",
+        "bucket": "imagerie2",
+        "folder": "gummies",
+        "tempdir": "/tmp/gummies/",
+        "label_file": "trained_models/gummies/1550268685513/object-detection.pbtxt",
+        "grpc": false,
+        "activeTag": {
+            "index": 23,
+            "photoId": "thts0w",
+            "tagInstance": 1550280764606,
+            "title": "goodgummy",
+            "tool": "tagBox",
+            "flag": "cat1",
+            "regionStyle": {
+                "backgroundColor": "rgba(95,148,194,0.22)",
+                "outlineColor": "#5f94c2",
+                "outlineWidth": "2px"
+            },
+            "expanded": true,
+            "shape": {
+                "p1": {
+                    "x": 0.5591779096228868,
+                    "y": 0.6160249739854319
+                },
+                "p2": {
+                    "x": 0.7262780396618986,
+                    "y": 0.882414151925078
+                }
+            },
+            "children": [],
+            "modified": 1550280764661,
+            "className": "cat1 tagProps  isActive "
+        },
+        "treeView": "details"
+    },
+    "fuses": {
+        "id": "fuses",
+        "name": "fuses",
+        "created": 1549424728635,
+        "modified": 1549428229380,
+        "ux": {
+            "cat1": {
+                "name": "Default",
+                "color": "#5f94c2",
+                "count": 0,
+                "alpha": 50
+            }
+        },
+        "cameras": {},
+        "tags": {},
+        "nodeUrl": "http://localhost:3080",
+        "notificationEmail": "aaron@flexibleassembly.com",
+        "sensitivity": 0,
+        "predict": false,
+        "mlserver": false,
+        "model": "fuses",
+        "version": "0",
+        "tfserver": "",
+        "tfport": 8501,
+        "photos": []
+    },
+    "candy": {
+        "id": "candy",
+        "name": "candy",
+        "created": 1549922739504,
+        "modified": 1549925493276,
+        "ux": {
+            "cat1": {
+                "name": "Default",
+                "color": "#5f94c2",
+                "count": 24,
+                "alpha": 50
+            }
+        },
+        "cameras": {},
+        "tags": {
+            "reeses": {
+                "name": "reeses",
+                "count": 7,
+                "tool": "tagBox"
+            },
+            "rtag": {
+                "name": "rtag",
+                "count": 3,
+                "tool": "tagOCR"
+            },
+            "ttbar": {
+                "name": "ttbar",
+                "count": 1,
+                "tool": "tagBarcode"
+            },
+            "tt": {
+                "name": "tt",
+                "count": 4,
+                "tool": "tagBox"
+            },
+            "ttflav": {
+                "name": "ttflav",
+                "count": 3,
+                "tool": "tagOCR"
+            },
+            "gbar": {
+                "name": "gbar",
+                "count": 2,
+                "tool": "tagBarcode"
+            },
+            "gum": {
+                "name": "gum",
+                "count": 4,
+                "tool": "tagBox"
+            }
+        },
+        "nodeUrl": "http://192.168.86.44:8080",
+        "notificationEmail": "aaron@flexibleassembly.com",
+        "sensitivity": 0,
+        "predict": false,
+        "mlserver": false,
+        "model": "candy",
+        "version": "0",
+        "tfserver": "",
+        "tfport": 8501,
+        "photos": [
+            {
+                "photoId": "ha6wuj",
+                "title": "0b934af0-c1b1-49a2-b95e-2ac6c4cceac7.jpg",
+                "expanded": true,
+                "imgUrl": "candy/0b934af0-c1b1-49a2-b95e-2ac6c4cceac7.jpg",
+                "children": [
+                    {
+                        "index": 1,
+                        "photoId": "ha6wuj",
+                        "tagInstance": 1549926000861,
+                        "title": "rtag",
+                        "tool": "tagOCR",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.43630134080108623,
+                                "y": 0.2793478260869565
+                            },
+                            "p2": {
+                                "x": 0.5517120672097761,
+                                "y": 0.4293478260869565
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926025956,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 2,
+                        "photoId": "ha6wuj",
+                        "tagInstance": 1549926025957,
+                        "title": "reeses",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.09889468771215207,
+                                "y": 0.07282608695652174
+                            },
+                            "p2": {
+                                "x": 0.6976726917854719,
+                                "y": 0.9032608695652173
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926026007,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "989529475-1",
+                "modified": 1549925655924,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "814410"
+                }
+            },
+            {
+                "photoId": "aqd5okl",
+                "title": "12912c75-c662-452d-a989-9c1e29e26210.jpg",
+                "expanded": true,
+                "imgUrl": "candy/12912c75-c662-452d-a989-9c1e29e26210.jpg",
+                "children": [
+                    {
+                        "index": 3,
+                        "photoId": "aqd5okl",
+                        "tagInstance": 1549926052477,
+                        "title": "ttbar",
+                        "tool": "tagBarcode",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4356224541751528,
+                                "y": 0.3826086956521739
+                            },
+                            "p2": {
+                                "x": 0.6175640699253224,
+                                "y": 0.483695652173913
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926057727,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 4,
+                        "photoId": "aqd5okl",
+                        "tagInstance": 1549926068304,
+                        "title": "tt",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3860637304820095,
+                                "y": 0.11521739130434783
+                            },
+                            "p2": {
+                                "x": 0.6616917006109979,
+                                "y": 0.8206521739130435
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926072623,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "976826763-1",
+                "modified": 1549925808516,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "801056"
+                }
+            },
+            {
+                "photoId": "5129uwb",
+                "title": "1bd60bdb-0d05-4658-8ae5-0a0166decab9.jpg",
+                "expanded": true,
+                "imgUrl": "candy/1bd60bdb-0d05-4658-8ae5-0a0166decab9.jpg",
+                "children": [
+                    {
+                        "index": 7,
+                        "photoId": "5129uwb",
+                        "tagInstance": 1549926099337,
+                        "title": "ttflav",
+                        "tool": "tagOCR",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.4023570095044128,
+                                "y": 0.34130434782608693
+                            },
+                            "p2": {
+                                "x": 0.4980800237610319,
+                                "y": 0.45217391304347826
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926128738,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 8,
+                        "photoId": "5129uwb",
+                        "tagInstance": 1549926128739,
+                        "title": "tt",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2272042600135777,
+                                "y": 0.07608695652173914
+                            },
+                            "p2": {
+                                "x": 0.7085348778004074,
+                                "y": 0.8434782608695653
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926131435,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "3497527195-1",
+                "modified": 1549925766272,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "732145"
+                }
+            },
+            {
+                "photoId": "4vkd7wk",
+                "title": "5e8d4846-ffbb-4bdf-a0ea-400defd46e6b.jpg",
+                "expanded": true,
+                "imgUrl": "candy/5e8d4846-ffbb-4bdf-a0ea-400defd46e6b.jpg",
+                "children": [
+                    {
+                        "index": 9,
+                        "photoId": "4vkd7wk",
+                        "tagInstance": 1549926138412,
+                        "title": "reeses",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2109109809911745,
+                                "y": 0.12282608695652174
+                            },
+                            "p2": {
+                                "x": 0.8823298540393755,
+                                "y": 0.951086956521739
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926138468,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "2979128498-1",
+                "modified": 1549925547199,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "783880"
+                }
+            },
+            {
+                "photoId": "3j69iv7",
+                "title": "5ea7cadd-7b43-4d58-9c36-64970f615313.jpg",
+                "expanded": true,
+                "imgUrl": "candy/5ea7cadd-7b43-4d58-9c36-64970f615313.jpg",
+                "children": [
+                    {
+                        "index": 10,
+                        "photoId": "3j69iv7",
+                        "tagInstance": 1549926145020,
+                        "title": "gbar",
+                        "tool": "tagBarcode",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.25300195179904955,
+                                "y": 0.3293478260869564
+                            },
+                            "p2": {
+                                "x": 0.44580575356415475,
+                                "y": 0.5684782608695652
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926201391,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 11,
+                        "photoId": "3j69iv7",
+                        "tagInstance": 1549926164754,
+                        "title": "gum",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.16610446367956552,
+                                "y": 0.06304347826086956
+                            },
+                            "p2": {
+                                "x": 0.6956360319076716,
+                                "y": 0.9336956521739129
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926204172,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "1088725646-1",
+                "modified": 1549925834337,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "833157"
+                }
+            },
+            {
+                "photoId": "gczi3nr",
+                "title": "62ece772-a688-4176-bb78-315ceccc784d.jpg",
+                "expanded": true,
+                "imgUrl": "candy/62ece772-a688-4176-bb78-315ceccc784d.jpg",
+                "children": [
+                    {
+                        "index": 12,
+                        "photoId": "gczi3nr",
+                        "tagInstance": 1549926211547,
+                        "title": "ttflav",
+                        "tool": "tagOCR",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.47364010522742706,
+                                "y": 0.3076086956521739
+                            },
+                            "p2": {
+                                "x": 0.5978763577732519,
+                                "y": 0.383695652173913
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926232804,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 15,
+                        "photoId": "gczi3nr",
+                        "tagInstance": 1549926232804,
+                        "title": "tt",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.34533053292600135,
+                                "y": 0.03804347826086957
+                            },
+                            "p2": {
+                                "x": 0.7587724881194841,
+                                "y": 0.7847826086956522
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926235316,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "2334853242-1",
+                "modified": 1549925775468,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "805456"
+                }
+            },
+            {
+                "photoId": "w7qtuek",
+                "title": "663ec789-bec6-46d3-8e61-3ed7310deeea.jpg",
+                "expanded": true,
+                "imgUrl": "candy/663ec789-bec6-46d3-8e61-3ed7310deeea.jpg",
+                "children": [
+                    {
+                        "index": 16,
+                        "photoId": "w7qtuek",
+                        "tagInstance": 1549926240550,
+                        "title": "reeses",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.19190215546503733,
+                                "y": 0.18043478260869567
+                            },
+                            "p2": {
+                                "x": 0.7479103021045487,
+                                "y": 0.7923913043478261
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926240611,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "3135958403-1",
+                "modified": 1549925587912,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "807353"
+                }
+            },
+            {
+                "photoId": "pmcu4k",
+                "title": "6905f7c7-a213-448f-83e9-997fb504b151.jpg",
+                "expanded": true,
+                "imgUrl": "candy/6905f7c7-a213-448f-83e9-997fb504b151.jpg",
+                "children": [
+                    {
+                        "index": 17,
+                        "photoId": "pmcu4k",
+                        "tagInstance": 1549926248402,
+                        "title": "rtag",
+                        "tool": "tagOCR",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.6406462152070604,
+                                "y": 0.20869565217391306
+                            },
+                            "p2": {
+                                "x": 0.7723502206381534,
+                                "y": 0.3130434782608696
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926281570,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 18,
+                        "photoId": "pmcu4k",
+                        "tagInstance": 1549926281571,
+                        "title": "reeses",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3073128818737271,
+                                "y": 0.006521739130434783
+                            },
+                            "p2": {
+                                "x": 0.8694310081466395,
+                                "y": 0.8282608695652174
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926287908,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "90653903-1",
+                "modified": 1549925691170,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "806995"
+                }
+            },
+            {
+                "photoId": "irj0niw",
+                "title": "86292a88-da31-4349-b62a-7ac19880a2db.jpg",
+                "expanded": true,
+                "imgUrl": "candy/86292a88-da31-4349-b62a-7ac19880a2db.jpg",
+                "children": [
+                    {
+                        "index": 19,
+                        "photoId": "irj0niw",
+                        "tagInstance": 1549926295976,
+                        "title": "reeses",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.22245205363204346,
+                                "y": 0.21086956521739134
+                            },
+                            "p2": {
+                                "x": 0.7390847759674134,
+                                "y": 0.9967391304347825
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926299768,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "1844143438-1",
+                "modified": 1549925565433,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "791896"
+                }
+            },
+            {
+                "photoId": "frb54qn",
+                "title": "bfc5e924-fb7e-4b1c-a4ee-7d25e990d9db.jpg",
+                "expanded": true,
+                "imgUrl": "candy/bfc5e924-fb7e-4b1c-a4ee-7d25e990d9db.jpg",
+                "children": [
+                    {
+                        "index": 20,
+                        "photoId": "frb54qn",
+                        "tagInstance": 1549926307619,
+                        "title": "ttflav",
+                        "tool": "tagOCR",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.40846698913781393,
+                                "y": 0.36195652173913045
+                            },
+                            "p2": {
+                                "x": 0.5904086048879837,
+                                "y": 0.4576086956521739
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926321271,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 21,
+                        "photoId": "frb54qn",
+                        "tagInstance": 1549926321271,
+                        "title": "tt",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.3310739137813985,
+                                "y": 0.052173913043478265
+                            },
+                            "p2": {
+                                "x": 0.7098926510522743,
+                                "y": 0.8989130434782608
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926329743,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "1404294942-1",
+                "modified": 1549925749530,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "799854"
+                }
+            },
+            {
+                "photoId": "sp4nuwm",
+                "title": "c00efc0b-8b42-45a9-a1b3-9481451cd190.jpg",
+                "expanded": true,
+                "imgUrl": "candy/c00efc0b-8b42-45a9-a1b3-9481451cd190.jpg",
+                "children": [
+                    {
+                        "index": 22,
+                        "photoId": "sp4nuwm",
+                        "tagInstance": 1549926343883,
+                        "title": "gum",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.1952965885947047,
+                                "y": 0.10543478260869567
+                            },
+                            "p2": {
+                                "x": 0.7771024270196877,
+                                "y": 0.9173913043478261
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926346518,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "513074597-1",
+                "modified": 1549925816917,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "764789"
+                }
+            },
+            {
+                "photoId": "50scnpx",
+                "title": "c8e32c77-9bc6-4676-abf6-88c27e673022.jpg",
+                "expanded": true,
+                "imgUrl": "candy/c8e32c77-9bc6-4676-abf6-88c27e673022.jpg",
+                "children": [
+                    {
+                        "index": 23,
+                        "photoId": "50scnpx",
+                        "tagInstance": 1549926352885,
+                        "title": "rtag",
+                        "tool": "tagOCR",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.541528767820774,
+                                "y": 0.2423913043478261
+                            },
+                            "p2": {
+                                "x": 0.6732327732518669,
+                                "y": 0.3217391304347826
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926359175,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 24,
+                        "photoId": "50scnpx",
+                        "tagInstance": 1549926359176,
+                        "title": "reeses",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.20004879497623895,
+                                "y": 0.04565217391304348
+                            },
+                            "p2": {
+                                "x": 0.7995056856754921,
+                                "y": 0.7326086956521739
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926370022,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "2961141975-1",
+                "modified": 1549925634799,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "823183"
+                }
+            },
+            {
+                "photoId": "ljpxr1o",
+                "title": "d97f6567-91ed-47ab-b854-d15c5d59f31b.jpg",
+                "expanded": true,
+                "imgUrl": "candy/d97f6567-91ed-47ab-b854-d15c5d59f31b.jpg",
+                "children": [
+                    {
+                        "index": 27,
+                        "photoId": "ljpxr1o",
+                        "tagInstance": 1549926375244,
+                        "title": "gbar",
+                        "tool": "tagBarcode",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.29034071622539037,
+                                "y": 0.3728260869565217
+                            },
+                            "p2": {
+                                "x": 0.4688878988458927,
+                                "y": 0.5467391304347826
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926386117,
+                        "className": "cat1 tagProps  isActive "
+                    },
+                    {
+                        "index": 28,
+                        "photoId": "ljpxr1o",
+                        "tagInstance": 1549926386118,
+                        "title": "gum",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.23331423964697895,
+                                "y": 0.1282608695652174
+                            },
+                            "p2": {
+                                "x": 0.6820582993890021,
+                                "y": 0.9130434782608695
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926392823,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "2126414355-1",
+                "modified": 1549925726769,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "821824"
+                }
+            },
+            {
+                "photoId": "ltiilrt",
+                "title": "f0dc329a-c41d-4de4-8235-6ee815d14a03.jpg",
+                "expanded": true,
+                "imgUrl": "candy/f0dc329a-c41d-4de4-8235-6ee815d14a03.jpg",
+                "children": [
+                    {
+                        "index": 29,
+                        "photoId": "ltiilrt",
+                        "tagInstance": 1549926400072,
+                        "title": "reeses",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2570752715546504,
+                                "y": 0.005434782608695652
+                            },
+                            "p2": {
+                                "x": 0.7825335200271555,
+                                "y": 0.558695652173913
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926400146,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "462846162-1",
+                "modified": 1549925611295,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "791883"
+                }
+            },
+            {
+                "photoId": "b6wz7i",
+                "title": "f9b36711-d7e6-477e-ab14-1ebe452d78ae.jpg",
+                "expanded": true,
+                "imgUrl": "candy/f9b36711-d7e6-477e-ab14-1ebe452d78ae.jpg",
+                "children": [
+                    {
+                        "index": 30,
+                        "photoId": "b6wz7i",
+                        "tagInstance": 1549926408126,
+                        "title": "gum",
+                        "tool": "tagBox",
+                        "flag": "cat1",
+                        "regionStyle": {
+                            "backgroundColor": "rgba(95,148,194,0.5)",
+                            "outlineColor": "#5f94c2",
+                            "outlineWidth": "2px"
+                        },
+                        "expanded": true,
+                        "shape": {
+                            "p1": {
+                                "x": 0.2149843007467753,
+                                "y": 0.1358695652173913
+                            },
+                            "p2": {
+                                "x": 0.7397636625933469,
+                                "y": 0.7706521739130436
+                            }
+                        },
+                        "children": [],
+                        "modified": 1549926411898,
+                        "className": "cat1 tagProps  isActive "
+                    }
+                ],
+                "ETag": "553271959-1",
+                "modified": 1549925736459,
+                "dimensions": {
+                    "width": "1920",
+                    "height": "1200",
+                    "size": "750939"
+                }
+            }
+        ],
+        "access_key": "imagerie",
+        "secret_key": "imagerie",
+        "url": "http://gcs-s3:9000",
+        "bucket": "imagerie2",
+        "folder": "candy",
+        "tempdir": "/tmp/candy/",
+        "mlengine": false,
+        "activePhoto": {
+            "photoId": "b6wz7i",
+            "title": "f9b36711-d7e6-477e-ab14-1ebe452d78ae.jpg",
+            "expanded": true,
+            "imgUrl": "candy/f9b36711-d7e6-477e-ab14-1ebe452d78ae.jpg",
+            "children": [
+                {
+                    "index": 30,
+                    "photoId": "b6wz7i",
+                    "tagInstance": 1549926408126,
+                    "title": "gum",
+                    "tool": "tagBox",
+                    "flag": "cat1",
+                    "regionStyle": {
+                        "backgroundColor": "rgba(95,148,194,0.5)",
+                        "outlineColor": "#5f94c2",
+                        "outlineWidth": "2px"
+                    },
+                    "expanded": true,
+                    "shape": {
+                        "p1": {
+                            "x": 0.2149843007467753,
+                            "y": 0.1358695652173913
+                        },
+                        "p2": {
+                            "x": 0.7397636625933469,
+                            "y": 0.7706521739130436
+                        }
+                    },
+                    "children": [],
+                    "modified": 1549926411898,
+                    "className": "cat1 tagProps  isActive "
+                }
+            ],
+            "ETag": "553271959-1",
+            "modified": 1549925736459,
+            "dimensions": {
+                "width": "1920",
+                "height": "1200",
+                "size": "750939"
+            }
+        },
+        "searchString": "",
+        "searchFocusIndex": 0,
+        "searchFoundCount": 0,
+        "treeView": "details",
+        "activeTag": {
+            "index": 30,
+            "photoId": "b6wz7i",
+            "tagInstance": 1549926408126,
+            "title": "gum",
+            "tool": "tagBox",
+            "flag": "cat1",
+            "regionStyle": {
+                "backgroundColor": "rgba(95,148,194,0.5)",
+                "outlineColor": "#5f94c2",
+                "outlineWidth": "2px"
+            },
+            "expanded": true,
+            "shape": {
+                "p1": {
+                    "x": 0.2149843007467753,
+                    "y": 0.1358695652173913
+                },
+                "p2": {
+                    "x": 0.7397636625933469,
+                    "y": 0.7706521739130436
+                }
+            },
+            "children": [],
+            "modified": 1549926411898,
+            "className": "cat1 tagProps  isActive "
+        }
+    },
+    "gummies2": {
+        "id": "gummies2",
+        "name": "gummies2",
+        "created": 1550427396305,
+        "modified": 1550427421083,
+        "ux": {
+            "cat1": {
+                "name": "Default",
+                "color": "#5f94c2",
+                "count": 0,
+                "alpha": 50
+            }
+        },
+        "cameras": {},
+        "nodeUrl": "http://localhost:3080",
+        "notificationEmail": "aaron@flexibleassembly.com",
+        "sensitivity": 0,
+        "predict": false,
+        "mlserver": false,
+        "model": "gummies2",
+        "version": "0",
+        "tfserver": "",
+        "tfport": 8501
+    }
+}

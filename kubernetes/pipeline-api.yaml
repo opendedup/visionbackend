@@ -1,0 +1,52 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pipeline-api
+spec:
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: pipeline-api
+    spec:
+      containers:
+      - name: pipeline-api
+        image: gcr.io/shwingo-222722/pipeline-api
+        env:
+        # Minio access key and secret key
+        - name: REDIS_SERVER
+          value: "redis-service"
+        - name: USER_NAME
+          valueFrom:
+            secretKeyRef:
+              name: pipeline-api-secrets
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pipeline-api-secrets
+              key: password
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: pipeline-api-secrets
+              key: jwt_secret
+        - name: ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: access_key
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: secret_key
+        - name: S3_URL
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: apiUrl
+        ports:
+        - containerPort: 5000
+

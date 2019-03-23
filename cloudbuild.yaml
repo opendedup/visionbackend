@@ -1,0 +1,17 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/base', '-f','dockerimages/Docker.base','.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/pipeline-api', '-f','dockerimages/Docker.pipeline.api','.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/train', '-f','dockerimages/Docker.train.worker','.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/prep', '-f','dockerimages/Docker.prep.worker','.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/capture', '-f','dockerimages/Docker.capture','.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/capture:latest-pointgrey', '-f','dockerimages/Docker.pg.capture','.']
+images: ['gcr.io/$PROJECT_ID/capture:latest-pointgrey', 'gcr.io/$PROJECT_ID/capture','gcr.io/$PROJECT_ID/prep','gcr.io/$PROJECT_ID/train','gcr.io/$PROJECT_ID/pipeline-api','gcr.io/$PROJECT_ID/base']
+timeout: 10800s
+options:
+  machineType: 'N1_HIGHCPU_32'

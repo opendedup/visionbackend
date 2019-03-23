@@ -1,0 +1,65 @@
+docker run -d -p 9000:9000 --name minio1 \
+  -v /home/sam/imagerie/objectstorage/data:/data \
+  -v /home/sam/imagerie/objectstorage/config:/root/.minio \
+  minio/minio server /data
+
+  docker run -p 8500:8500 -p 8501:8501 -it --runtime=nvidia \
+  --mount type=bind,source=/home/sam/GitHub/imagerie/model0/,target=/models/predserv1 \
+  -e MODEL_NAME=predserv1 -t tensorflow/serving:nightly-gpu bash
+
+  docker run -p 8500:8500 -it --runtime=nvidia \
+  --mount type=bind,source=/home/sam/tfimager/predserv1/,target=/models/predserv1 \
+  -e MODEL_NAME=predserv1 -t tensorflow/serving:nightly-gpu bash
+
+  tools/bazel_in_docker.sh -d tensorflow/serving:1.11.0-rc1-devel-gpu \
+    bazel build -c opt tensorflow_serving/...
+
+docker network create -d bridge imagerie_nw
+
+    docker run -d -p 9001:9000 --name gcs-s3 \
+    --network imagerie_nw \
+     -v /home/sam/keys/shwingo-222722-7dff125d6169.json:/credentials.json \
+     -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" \
+     -e "MINIO_ACCESS_KEY=imagerie" \
+     -e "MINIO_SECRET_KEY=imagerie" \
+     -e MINIO_CACHE_DRIVES=/cache \
+     -e MINIO_CACHE_EXPIRY=90 \
+     -e MINIO_CACHE_MAXUSE=80 \
+     minio/minio gateway gcs shwingo-222722
+
+/usr/local/gcloud/google-cloud-sdk/bin/gcloud ml-engine jobs submit training e9980ef9_6342_48a4_a674_6f0d45ff2767 --job-dir gs://tfimagetopia/training_jobs/model7/ --packages gs://tfimagetopia/packages/object_detection-0.1.tar.gz,gs://tfimagetopia/packages/slim-0.1.tar.gz,gs://tfimagetopia/packages/pycocotools-2.0.tar.gz --runtime-version 1.9 --module-name object_detection.model_tpu_main --region us-central1 --scale-tier BASIC_TPU -- --model_dir gs://tfimagetopia/training_jobs/model7/ --pipeline_config_path gs://tfimagetopia/training_jobs/model7/ssd_pipeline.config
+
+docker run -p 8500:8500 -p 8501:8501 -it --runtime=nvidia   --mount type=bind,source=/home/sam/GitHub/imagerie/model0/,target=/models/predserv1 \
+-e MODEL_NAME=predserv1 -t tensorflow/serving
+
+docker run -p 8500:8500 -p 8501:8501 -it --runtime=nvidia   -e AWS_ACCESS_KEY_ID=imagerie -e AWS_SECRET_ACCESS_KEY=imagerie \
+-e AWS_REGION=us-east-1 -e S3_ENDPOINT=localhost:9001 -e S3_USE_HTTPS=0 \
+-e MODEL_NAME=model2 -e MODEL_BASE_PATH="s3://imagerie0/trained_models/model2" -t tensorflow/serving:latest-gpu
+
+
+docker run -p 8500:8500 -p 8501:8501 -it --runtime=nvidia   -e AWS_ACCESS_KEY_ID=imagerie -e AWS_SECRET_ACCESS_KEY=imagerie -e AWS_REGION=us-east-1 -e S3_ENDPOINT=gcs-s3:9000 --link gcs-s3 -e S3_USE_HTTPS=0 --name predict-service -e MODEL_NAME=small_computers0 -e MODEL_BASE_PATH="s3://bucket0011/trained_models" -t tensorflow/serving:latest-gpu
+
+docker run --name some-redis -d redis
+
+docker run --rm --name prep --link some-redis --link gcs-s3 -e REDIS_URL=redis://some-redis:6379 -e ACCESS_KEY=imagerie -e SECRET_KEY=imagerie -e S3_URL=http://gcs-s3:9000 -v /home/sam/keys/shwingo-222722-7dff125d6169.json:/credentials.json -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" gcr.io/shwingo-222722/prep:latest
+docker run --rm --name train --network=imagerie_nw -e REDIS_URL=redis://some-redis:6379 -v /home/sam/keys/shwingo-222722-7dff125d6169.json:/credentials.json -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" -v /home/sam/git/imagerie/webserver:/imagerie/webserver -v /home/sam/git/imagerie/tfpipeline/controllers:/imagerie/tfpipeline/controllers -v /home/sam/git/imagerie/tfpipeline/tests:/imagerie/tfpipeline/tests gcr.io/shwingo-222722/train:latest
+docker run --rm -p 0.0.0.0:5000:5000 --network=imagerie_nw -e REDIS_SERVER=some-redis -e BUCKET=imagerie1 -e ACCESS_KEY=imagerie -e SECRET_KEY=imagerie -e S3_URL=http://gcs-s3:9000 -v /home/sam/keys/shwingo-222722-7dff125d6169.json:/credentials.json -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" gcr.io/shwingo-222722/pipeline-api
+
+docker run --rm -p 0.0.0.0:5000:5000 --privileged -v /dev/bus/usb:/dev/bus/usb --link gcs-s3 -e BUCKET=imagerie1 -e ACCESS_KEY=imagerie -e SECRET_KEY=imagerie -e S3_URL=http://gcs-s3:9000 -v /home/sam/keys/shwingo-222722-7dff125d6169.json:/credentials.json -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" gcr.io/shwingo-222722/capture
+docker run --name=capdev -p 0.0.0.0:5000:5000 --privileged -v /dev:/dev -v /sys:/sys --link gcs-s3 -e BUCKET=imagerie1 -e ACCESS_KEY=imagerie -e SECRET_KEY=imagerie -e S3_URL=http://gcs-s3:9000 -v /home/sam/git/imagerie/webserver/flaskr:/imagerie/webapp  -v /home/sam/Downloads/shwingo-222722-7dff125d6169.json:/credentials.json -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" gcr.io/shwingo-222722/capture
+docker run --name=capdev -p 0.0.0.0:5000:5000 --privileged -v /dev:/dev -v /sys:/sys --rm -e BUCKET=imagerie3 --network imagerie_nw -e ACCESS_KEY=imagerie -e SECRET_KEY=imagerie -e S3_URL=http://gcs-s3:9000 -v /home/sam/git/imagerie/webserver/flaskr:/imagerie/webapp  -v /home/sam/Downloads/shwingo-222722-7dff125d6169.json:/credentials.json -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" gcr.io/shwingo-222722/capture:latest-pointgrey
+
+
+docker run --name=capdev -p 0.0.0.0:5000:5000 --privileged -v /dev:/dev -v /sys:/sys --rm -e BUCKET=imagerie2 --network imagerie_nw -e ACCESS_KEY=imagerie -e SECRET_KEY=imagerie -e S3_URL=http://gcs-s3:9000 -v /home/sam/keys/shwingo-222722-7dff125d6169.json:/credentials.json -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" gcr.io/shwingo-222722/capture:latest-pointgrey
+
+export GOOGLE_APPLICATION_CREDENTIALS=/home/sam/Downloads/shwingo-222722-7dff125d6169.json
+tensorboard --logdir=gs://imagerie1/training_jobs/pred0
+
+
+docker run -p 8500:8500 -p 8501:8501 -it --runtime=nvidia --network imagerie_nw  -e AWS_ACCESS_KEY_ID=imagerie -e AWS_SECRET_ACCESS_KEY=imagerie \
+-e AWS_REGION=us-east-1 -e S3_ENDPOINT=gcs-s3:9000 --link=gcs-s3 -e S3_USE_HTTPS=0 \
+-e MODEL_NAME=gummies -e MODEL_BASE_PATH="s3://imagerie2/trained_models" --name gummies --rm -t gcr.io/shwingo-222722/prediction
+
+docker run -p 8500:8500 -p 8501:8501 -it --name gummies  -e AWS_ACCESS_KEY_ID=imagerie -e AWS_SECRET_ACCESS_KEY=imagerie -e AWS_REGION=us-east-1 -e S3_ENDPOINT=gcs-s3:9000 --network imagerie_nw -e S3_USE_HTTPS=0 -e MODEL_NAME=gummies -e MODEL_BASE_PATH="s3://imagerie2/trained_models" --rm -t tensorflow/serving:latest
+
+docker run -p 8500:8500 -p 8501:8501 -it --name gummies  -e AWS_ACCESS_KEY_ID=imagerie -e AWS_SECRET_ACCESS_KEY=imagerie -e AWS_REGION=us-east-1 -e S3_ENDPOINT=gcs-s3:9000 --network imagerie_nw -e S3_USE_HTTPS=0 --rm -t tensorflow/serving:latest --model_config_file=s3://imagerie2/trained_models/model.config

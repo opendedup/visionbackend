@@ -1,0 +1,17 @@
+FROM gcr.io/shwingo-222722/base
+
+COPY tfpipeline /imagerie/tfpipeline
+COPY webserver/flaskr/utils/storage.py /imagerie/tfpipeline/utils/
+WORKDIR /imagerie/tfpipeline/tmodels/
+
+WORKDIR "/imagerie"
+ENV FLASK_APP=tfpipeline
+ENV FLASK_ENV=production
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+ENV PYTHONPATH=/imagerie/tfpipeline:/imagerie/models/research/:/imagerie/models/research/slim:/imagerie/models/research/
+
+
+WORKDIR "/imagerie"
+EXPOSE 5000
+CMD ["flask","run","--host=0.0.0.0"]

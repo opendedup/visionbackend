@@ -1,0 +1,15 @@
+{
+    "s3url" : "http://localhost:9000",
+    "access_key" : "L9FLHHZJ08PLTPSNJ9IZ",
+    "secret_key" : "2rgZLGntdJUcsoIp17uJTFIXQrCXjW/Eny6yUhaX",
+    "bucket" : "cc0",
+    "xres" : 1280,
+    "yres" : 720,
+    "bw" :false,
+    "image_type" : ".jpg",
+    "jwt_secret" : "changeme",
+    "labels_path" : "object-detection.pbtxt",
+    "tf_server" : "localhost:8500",
+    "tf_model" : "predserv1",
+    "tf_model_sig" : "detection_signature"
+  }

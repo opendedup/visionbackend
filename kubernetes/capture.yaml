@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: capture
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: capture
+    spec:
+      containers:
+      - name: capture
+        image: gcr.io/shwingo-222722/capture:latest
+        env:
+        - name: ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: access_key
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: secret_key
+        - name: S3_URL
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: apiUrl
+        - name: BUCKET
+          value: imagerie2
+
