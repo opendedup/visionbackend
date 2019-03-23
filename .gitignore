@@ -176,3 +176,4 @@ tfpipeline/tmodels/faster_rcnn_resnet101_coco
 tfpipeline/tmodels/faster_rcnn_inception_v2_coco
 tfpipeline/utils/test.txt
 tfpipeline/utils/test2.txt
+.vscode/settings.json

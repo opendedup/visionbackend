@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/usr/bin/python3",
+    "python.pythonPath": "env/bin/python",
     "python.autoComplete.extraPaths": [
         "/home/sam/git/svbackend/models/research/slim",
         "/home/sam/git/svbackend/models/research"
