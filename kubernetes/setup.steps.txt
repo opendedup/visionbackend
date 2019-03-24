@@ -1,17 +1,17 @@
 gcloud config set project $GCP_PROJECT
 gcloud config set compute/zone us-central1-a
-docker build -t gcr.io/$GCP_PROJECT/base -t gcr.io/$GCP_PROJECT/base:$(git rev-parse --short HEAD)  -f dockerimages/Docker.base .
-docker push gcr.io/$GCP_PROJECT/base
-docker build -t gcr.io/$GCP_PROJECT/pipeline-api -t gcr.io/$GCP_PROJECT/pipeline-api:$(git rev-parse --short HEAD)  -f dockerimages/Docker.pipeline.api .
-docker push gcr.io/$GCP_PROJECT/pipeline-api
-docker build -t gcr.io/$GCP_PROJECT/train -t gcr.io/$GCP_PROJECT/train:$(git rev-parse --short HEAD)  -f dockerimages/Docker.train.worker .
-docker push gcr.io/$GCP_PROJECT/train
-docker build -t gcr.io/$GCP_PROJECT/prep -t gcr.io/$GCP_PROJECT/prep:$(git rev-parse --short HEAD)  -f dockerimages/Docker.prep.worker .
-docker push gcr.io/$GCP_PROJECT/prep
-docker build  -t gcr.io/$GCP_PROJECT/capture -t gcr.io/$GCP_PROJECT/capture:$(git rev-parse --short HEAD)  -f dockerimages/Docker.capture .
-docker push gcr.io/$GCP_PROJECT/capture
-docker build -t gcr.io/$GCP_PROJECT/capture:latest-pointgrey -t gcr.io/$GCP_PROJECT/capture:$(git rev-parse --short HEAD)-pointgrey  -f dockerimages/Docker.pg.capture .
-docker push gcr.io/$GCP_PROJECT/capture:latest-pointgrey
+docker build -t suttlevision/base -t suttlevision/base:$(git rev-parse --short HEAD)  -f dockerimages/Docker.base .
+docker push suttlevision/base
+docker build -t suttlevision/pipeline-api -t suttlevision/pipeline-api:$(git rev-parse --short HEAD)  -f dockerimages/Docker.pipeline.api .
+docker push suttlevision/pipeline-api
+docker build -t suttlevision/train -t suttlevision/train:$(git rev-parse --short HEAD)  -f dockerimages/Docker.train.worker .
+docker push suttlevision/train
+docker build -t suttlevision/prep -t suttlevision/prep:$(git rev-parse --short HEAD)  -f dockerimages/Docker.prep.worker .
+docker push suttlevision/prep
+docker build  -t suttlevision/capture -t suttlevision/capture:$(git rev-parse --short HEAD)  -f dockerimages/Docker.capture .
+docker push suttlevision/capture
+docker build -t suttlevision/capture-pointgrey:latest -t suttlevision/capture-pointgrey :$(git rev-parse --short HEAD)  -f dockerimages/Docker.pg.capture .
+docker push suttlevision/capture-pointgrey:latest
 gcloud auth configure-docker
 gcloud container clusters get-credentials standard-cluster-1
 kubectl get namespaces
@@ -37,4 +37,4 @@ kubectl apply -f kubernetes/prep.yaml
 kubectl delete -f kubernetes/train.yaml
 kubectl apply -f kubernetes/train.yaml
 
-kubectl set image deployment/tag-ui tag-ui=gcr.io/$GCP_PROJECT/tag-ui:0.4 --record
+kubectl set image deployment/tag-ui tag-ui=suttlevision/tag-ui:0.4 --record

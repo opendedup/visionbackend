@@ -450,7 +450,8 @@ def download_eval(job):
     eval_dir = Path(modeldir)
     if eval_dir.is_dir():
         fls = os.listdir(modeldir)
-        logger.debug (fls)
+        for f in fls:
+            logger.info ("############## " +f)
         if len(fls) > 0:
             get_eval(job,modeldir + '/' +fls[0])
 
@@ -576,7 +577,7 @@ def export(job, input_type='image_tensor', serving="True"):
                                     trained_checkpoint_prefix=input_checkpoint, output_directory=output_directory)
     eval_dir = Path(trained_model_dir +'/eval_0')
     if eval_dir.is_dir():
-        fls = os.listdir(eval_dir)
+        fls = os.listdir(trained_model_dir +'/eval_0')
         if len(fls) > 0:
             get_eval(job,eval_dir + '/' +fls[0])
             

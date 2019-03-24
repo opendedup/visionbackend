@@ -129,14 +129,6 @@ def create_app(test_config=None):
     @app.route('/')
     def root():
         return render_template('index.html')
-
-    @app.route('/predict')
-    def predict():
-        return render_template('predict.html')
-
-    @app.route('/upload')
-    def upload_file():
-       return render_template('upload.html')
     
     @app.after_request
     def add_header(r):

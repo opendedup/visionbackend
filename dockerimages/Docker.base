@@ -127,15 +127,15 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/pr
 		ldconfig
 WORKDIR "/"
 RUN rm -rf protobuf-3.6.1
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 #Compile object detection models
 RUN git clone https://github.com/suttlevision/models.git && \
 	cd models/research/ && \
 	protoc object_detection/protos/*.proto --python_out=.
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
 cd cocoapi/PythonAPI && \
 make -j4 && \

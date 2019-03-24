@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: pipeline-api
-        image: gcr.io/$GCP_PROJECT/pipeline-api
+        image: suttlevision/pipeline-api
         env:
         # Minio access key and secret key
         - name: REDIS_SERVER

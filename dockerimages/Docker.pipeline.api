@@ -1,10 +1,10 @@
-FROM gcr.io/$GCP_PROJECT/base
+FROM suttlevision/base:latest
 
 COPY tfpipeline /svbackend/tfpipeline
 COPY webserver/flaskr/utils/storage.py /svbackend/tfpipeline/utils/
 WORKDIR /svbackend/tfpipeline/tmodels/
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 ENV FLASK_APP=tfpipeline
 ENV FLASK_ENV=production
 ENV LC_ALL=C.UTF-8
@@ -12,6 +12,6 @@ ENV LANG=C.UTF-8
 ENV PYTHONPATH=/svbackend/tfpipeline:/svbackend/models/research/:/svbackend/models/research/slim:/svbackend/models/research/
 
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 EXPOSE 5000
 CMD ["flask","run","--host=0.0.0.0"]

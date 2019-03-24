@@ -1,14 +1,14 @@
-FROM gcr.io/$GCP_PROJECT/base:latest
+FROM suttlevision/base:latest
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
-
-WORKDIR "/imagerie"
+ARG GCP_PROJECT
+WORKDIR "/svbackend"
 RUN rm -rf models
 RUN git clone https://github.com/suttlevision/models.git && \
 	cd models/research/ && \
 	protoc object_detection/protos/*.proto --python_out=.
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 RUN rm -rf cocoapi
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
 cd cocoapi/PythonAPI && \
@@ -25,7 +25,7 @@ RUN bash object_detection/dataset_tools/create_pycocotools_package.sh /tmp/pycoc
 	cp /tmp/pycocotools/pycocotools-2.0.tar.gz /svbackend/mlpackages/
 
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 COPY dockerimages/runscripts/train_worker.sh /svbackend/train_worker.sh
 RUN ["chmod", "+x", "/svbackend/train_worker.sh"]
 ENV LC_ALL=C.UTF-8
@@ -47,8 +47,8 @@ COPY tfpipeline /svbackend/tfpipeline
 #Copy webserver for tests
 COPY webserver /svbackend/webserver
 #COPY $GCP_PROJECT-2285d752bd23.json /svbackend/
-#RUN gcloud auth activate-service-account --key-file /svbackend/imagerie-209214-23885678398b.json
-RUN gcloud config set project $GCP_PROJECT
+#RUN gcloud auth activate-service-account --key-file /svbackend/svbackend-209214-23885678398b.json
+#RUN gcloud config set project $GCP_PROJECT
 
 WORKDIR /svbackend/tfpipeline/tmodels/
 RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_v2_coco_2018_01_28.tar.gz && \
@@ -89,5 +89,5 @@ RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_resn
 	--strip-components=1 && \
 	rm faster_rcnn_resnet50_coco_2018_01_28.tar.gz
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 CMD ["./train_worker.sh"]

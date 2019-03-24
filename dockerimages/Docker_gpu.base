@@ -124,7 +124,7 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/pr
 		ldconfig
 WORKDIR "/"
 RUN rm -rf protobuf-3.6.1
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 
 
 

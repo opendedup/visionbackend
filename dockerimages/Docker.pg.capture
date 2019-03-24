@@ -40,5 +40,5 @@ ENV PYTHONPATH=/svbackend/webapp/:/svbackend/models/research/:/svbackend/models/
 ENV SPINNAKER=true
 EXPOSE 5000
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 CMD ["flask","run","--host=0.0.0.0"]

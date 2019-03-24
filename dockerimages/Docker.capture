@@ -137,13 +137,13 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/pr
 WORKDIR "/"
 RUN rm -rf protobuf-3.6.1
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 #Compile object detection models
 RUN git clone https://github.com/suttlevision/models.git && \
 	cd models/research/ && \
 	protoc object_detection/protos/*.proto --python_out=.
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
 cd cocoapi/PythonAPI && \
@@ -181,5 +181,5 @@ ENV PYTHONPATH=/svbackend/webapp/:/svbackend/models/research/:/svbackend/models/
 
 EXPOSE 5000
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 CMD ["flask","run","--host=0.0.0.0"]

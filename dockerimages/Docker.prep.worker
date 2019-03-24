@@ -1,9 +1,9 @@
-FROM gcr.io/$GCP_PROJECT/base
+FROM suttlevision/base:latest
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 COPY dockerimages/runscripts/prep_worker.sh /svbackend/prep_worker.sh
 RUN ["chmod", "+x", "/svbackend/prep_worker.sh"]
 ENV LC_ALL=C.UTF-8
@@ -12,5 +12,5 @@ ENV PYTHONPATH=/svbackend/tfpipeline:/svbackend/models/research/:/svbackend/mode
 
 COPY tfpipeline /svbackend/tfpipeline
 
-WORKDIR "/imagerie"
+WORKDIR "/svbackend"
 CMD ["./prep_worker.sh"]
