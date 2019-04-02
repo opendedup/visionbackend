@@ -36,7 +36,7 @@ import logging
 import settings
 from werkzeug import secure_filename
 log = logging.getLogger(__name__)
-
+import utils.tflogs as tflogs
 
 ns = Namespace(
     'train', description='Operations related capturing images from cameras for training')
@@ -69,6 +69,24 @@ snaprequest = ns.model('SnapRequest', {
                            example=10),
     'base64': fields.Boolean(required=False, description='If true will return a base64 response',
                            example=False,default=False )
+})
+
+
+eval_summary = ns.model('EvalSummary', {
+    'key': fields.String(required=True, description='The number of images to snap',
+                           example=10),
+    'image_b64': fields.String(required=False, description='A Base64 representation of the JPG Eval Image',
+                           example="ADEW43" ),
+    'value': fields.Float(required=False, description='The numeric value returned for the key.',
+                                example=0.90),
+})
+
+train_eval = ns.model('TrainingEval', {
+    'timestamp': fields.Integer(required=True, description='Timestamp when eval was completed',
+                           example=1553306439506),
+    'step': fields.Integer(required=True, description='The training step of the evaluation',
+                           example="475697" ),
+    'summary':fields.List(fields.Nested(eval_summary,required=True, description='The list of eval statistics and images at this step')),
 })
 
 multisnap = ns.model('SnapResponse',{
@@ -109,6 +127,7 @@ training = ns.model('Training',{
     'bucket':fields.String(required=True, description='The bucket where the data is located',
                           example='bucket0'),
     'categories':fields.List(fields.Nested(category,required=True, description='The object tags for this training')),
+    'training_eval':fields.List(fields.Nested(train_eval,required=True, description='The training evaluation')),
     'batch_size':fields.Integer(required=True, description='The number of images to process in training in one pass.'+
                           ' A larger number is increases speed at the expense of memory.',
                           default=2,
@@ -489,6 +508,17 @@ class TrainingJobCollection(Resource):
                     var = traceback.format_exc()
                     log.error(var)    
         return list(mp.values())
+
+@ns.route('/eval/<string:name>')
+class TrainingEval(Resource):
+    @ns.marshal_list_with(train_eval)
+    def get(self,name):
+        """
+        Returns latest training evaluation.
+        """
+        fldr = 'training_jobs/' + name    
+        return tflogs.get_events(fldr,'/tmp',settings.storage,full=True,dim=720)
+
 
 @ns.route('/traingjobs/<string:name>')
 @ns.response(404, 'Training Job not found.')

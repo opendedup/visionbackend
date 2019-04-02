@@ -88,6 +88,8 @@ RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_resn
 	-C faster_rcnn_resnet50_coco \
 	--strip-components=1 && \
 	rm faster_rcnn_resnet50_coco_2018_01_28.tar.gz
+RUN pip --no-cache-dir install \
+		google-auth
 
 WORKDIR "/svbackend"
 CMD ["./train_worker.sh"]

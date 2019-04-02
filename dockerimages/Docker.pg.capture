@@ -1,4 +1,4 @@
-FROM gcr.io/$GCP_PROJECT/capture
+FROM suttlevision/capture
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 

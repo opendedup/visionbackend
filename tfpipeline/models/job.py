@@ -8,6 +8,7 @@ from google.protobuf import text_format
 import utils.string_int_label_map_pb2 as labelmap
 from google.cloud import storage
 from google.cloud.storage import Blob
+import utils.storage
 
 import boto3
 import botocore
@@ -132,7 +133,50 @@ class Job(object):
                     kwargs['ContinuationToken'] = resp['NextContinuationToken']
                 except KeyError:
                     break
-            
+    
+    def list_files(self,prefix,delimiter=None,metadata=False):
+        lst = []
+        if self.use_gcs:
+            blobs = self.gcs_bucket.list_blobs(prefix=prefix, delimiter=delimiter)
+            for blob in blobs:
+                if metadata:
+                    lst.append({
+                        'name': blob.name,
+                        'ETag': blob.etag,
+                        'size': blob.size,
+                        'lastModified': int(blob.updated.timestamp()*1000)
+
+                    })
+                else:
+                    lst.append(blob.name)
+        else:
+            while True:
+                kwargs = {'Bucket': self.bucket,
+                'Prefix':prefix}
+                if delimiter is not None:
+                    kwargs['Delimiter'] = delimiter
+                resp = self.s3.list_objects_v2(**kwargs)
+                try:
+                    
+                    for obj in resp['Contents']:
+                        if metadata:
+                            lst.append({
+                                'name': obj['Key'],
+                                'ETag': obj['ETag'].replace('"', ''),
+                                'size': obj['Size'],
+                                'lastModified': int(obj['LastModified'].timestamp()*1000)
+
+                            })
+                        else:
+                            lst.append(obj['Key'])
+                        
+                except KeyError:
+                    break
+                try:
+                    kwargs['ContinuationToken'] = resp['NextContinuationToken']
+                except KeyError:
+                    break
+        return lst
     
     def upload_file(self,source,dest,contentType=None):
         if self.use_gcs:

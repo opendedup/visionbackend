@@ -22,6 +22,7 @@ from googleapiclient.errors import HttpError
 from googleapiclient import errors
 from googleapiclient import discovery
 from oauth2client.client import GoogleCredentials
+import google.auth
 import traceback
 import json
 import yaml
@@ -45,6 +46,7 @@ import io
 from object_detection import model_lib
 from object_detection import model_hparams
 
+import utils.tflogs as tflogs
 
 
 
@@ -261,10 +263,10 @@ def start_ml_engine(job):
                                'runtimeVersion': '1.12',
                                'pythonVersion': '3.5'}
     job_spec = {'jobId': job.ml_job_id, 'trainingInput': training_inputs}
-    project_id = 'projects/{}'.format('$GCP_PROJECT')
+    _, project_id = google.auth.default()
     cloudml = discovery.build('ml', 'v1')
     request = cloudml.projects().jobs().create(body=job_spec,
-                                               parent=project_id)
+                                               parent='projects/'+project_id)
     try:
         response = request.execute()
         logging.info(response)
@@ -274,7 +276,7 @@ def start_ml_engine(job):
             job.jb.exec_error = None
             job.jb.save_meta()
         while True:
-            jobId = '{}/jobs/{}'.format(project_id, job.ml_job_id)
+            jobId = '{}/jobs/{}'.format('projects/' + project_id, job.ml_job_id)
             request = cloudml.projects().jobs().get(name=jobId)
             response = request.execute()
             logger.info(response)
@@ -447,13 +449,6 @@ def download_eval(job):
                 kwargs['ContinuationToken'] = resp['NextContinuationToken']
             except KeyError:
                 break
-    eval_dir = Path(modeldir)
-    if eval_dir.is_dir():
-        fls = os.listdir(modeldir)
-        for f in fls:
-            logger.info ("############## " +f)
-        if len(fls) > 0:
-            get_eval(job,modeldir + '/' +fls[0])
 
 def download_training(job):
     modeldir = job.tempdir + '/model'
@@ -575,31 +570,7 @@ def export(job, input_type='image_tensor', serving="True"):
     output_directory = job.tempdir + '/trained/' + str(model_version_id)
     exporter.export_inference_graph(input_type=input_type, pipeline_config=pipeline_proto,
                                     trained_checkpoint_prefix=input_checkpoint, output_directory=output_directory)
-    eval_dir = Path(trained_model_dir +'/eval_0')
-    if eval_dir.is_dir():
-        fls = os.listdir(trained_model_dir +'/eval_0')
-        if len(fls) > 0:
-            get_eval(job,eval_dir + '/' +fls[0])
-            
-
-def get_eval(job,fl):
-    events = []
-
-    for e in tf.train.summary_iterator(fl):
-        if hasattr(e,'summary'):
-            evt = {}
-            evt['timestamp'] = int(e.wall_time*1000)
-            evt['step'] = e.step
-            evt['summary'] = []
-            for v in e.summary.value:
-                if hasattr(v,'simple_value'):
-                    value = {}
-                    value['key'] = v.tag
-                    value['value'] = v.simple_value
-                    evt['summary'].append(value)
-            if len(evt['summary']) > 0:
-                events.append(evt)
-    job.evaluation = events
+    
 
 def upload_metadata(job, dir, history):
     dt = datetime.now()
@@ -771,7 +742,7 @@ def train_mlengine(job):
             'corpus/' + job.prep_name + "/job_def.json"))
         job.project_name = source['project_name']
         job.num_evals = source['test_image_ct']-1
-        jb.meta['steps'] = 6
+        jb.meta['steps'] = 7
         jb.meta['current_step_processed'] = 0
         jb.meta['current_step_size'] = 0
         jb.meta['current_step_name'] = 'preping_config'
@@ -793,6 +764,7 @@ def train_mlengine(job):
         job.tr_result = start_ml_engine(job)
         history = json.loads(job.download_to_string(
             'corpus/' + job.prep_name + "/job_history.json"))
+        job.training_eval = tflogs.get_events('training_jobs/{}'.format(job.name),job.tempdir,job)
         upload_metadata(job, "training_jobs/" + job.name, history)
         if job.tr_result == 'SUCCEEDED':
             job.training = job.name
@@ -931,6 +903,7 @@ def export_mlengine(job):
             jb.save_meta()
         history = json.loads(job.download_to_string(
             'training_jobs/' + job.training + "/job_history.json"))
+        job.training_eval = tflogs.get_events('training_jobs/{}'.format(job.training),job.tempdir,job)
         upload_metadata(job, 'trained_models/' + job.name +
                         '/' + str(job.model_version), history)
         upload_labels(job, 'trained_models/' + job.name +
