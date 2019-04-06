@@ -1,6 +1,7 @@
-#Imagerie
+# Suttle Vision
+![alt text](https://github.com/suttlevision/svbackend/raw/master/githubui/logo.png "Suttle Vision Logo")
 
-Imagerie is an object detection pipeline for training and predicting objects within images for industrial applications. It includes 3 major components:
+Suttlevision is an object detection pipeline for training and predicting objects within images for industrial applications. It includes 3 major components:
 * Image Aquisition and Predition API Server (Capture)
 * Model Preparation, Training and Preparation API Server (Pipeline API)
 * Training and Image Prep Workers

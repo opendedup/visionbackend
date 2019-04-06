@@ -181,3 +181,4 @@ tfpipeline/utils/test2.txt
 *terraform.tfstate.lock.info
 *terraform.tfstate.backup
 terraform/cloud_setup/config/svision_creds.json
+terraform/cloud_config/input.tfvars

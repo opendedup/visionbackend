@@ -1,4 +1,18 @@
-FROM python:3.6
+FROM ubuntu:18.04
+
+RUN apt update -y && \
+    apt upgrade -y && \
+    apt install -y wget unzip \
+    openssh-client \
+    build-essential \
+    golang \
+    python3 \
+    curl &&\
+    apt-get clean && \
+	  apt-get autoremove && \
+	  rm -rf /var/lib/apt/lists/*
+RUN rm -rf /usr/bin/python
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 # Downloading gcloud package
 RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
@@ -19,7 +33,7 @@ RUN gcloud config set core/disable_usage_reporting true && \
 
 WORKDIR /svsetup
 RUN apt update -y && \
-    apt install -y wget unzip openssh-client
+    apt install -y wget unzip openssh-client build-essential golang
 RUN wget https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
 RUN unzip terraform_0.11.13_linux_amd64.zip && \
     rm terraform_0.11.13_linux_amd64.zip

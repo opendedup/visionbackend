@@ -159,7 +159,7 @@ resource "google_compute_instance" "default" {
   }
 
   metadata = {
-    sshKeys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    sshKeys = "ubuntu:${file("${path.module}/id_rsa.pub")}"
   }
 
   depends_on = ["google_service_account.svision_service_acct","google_project_iam_member.svision_permissions"]
@@ -170,6 +170,7 @@ resource "google_compute_instance" "default" {
     connection {
       type= "ssh"
       user="ubuntu"
+      private_key="${file("${path.module}/id_rsa")}"
     }
 
   }
@@ -182,6 +183,7 @@ resource "google_compute_instance" "default" {
     connection {
       type= "ssh"
       user="ubuntu"
+      private_key="${file("${path.module}/id_rsa")}"
     }
   }
 
@@ -195,6 +197,7 @@ resource "google_compute_instance" "default" {
     connection {
       type= "ssh"
       user="ubuntu"
+      private_key="${file("${path.module}/id_rsa")}"
     }
     
   }
