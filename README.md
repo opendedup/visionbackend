@@ -1,5 +1,5 @@
 # Suttle Vision
-![alt text](https://github.com/suttlevision/svbackend/raw/master/githubui/logo.png "Suttle Vision Logo")
+![alt text](https://github.com/suttlevision/svbackend/raw/master/githubui/svlogo.png "Suttle Vision Logo")
 
 Suttlevision is an object detection pipeline for training and predicting objects within images for industrial applications. It includes 3 major components:
 * Image Aquisition and Predition API Server (Capture)
