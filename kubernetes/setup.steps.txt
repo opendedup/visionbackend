@@ -1,17 +1,17 @@
 gcloud config set project $GCP_PROJECT
 gcloud config set compute/zone us-central1-a
-docker build -t suttlevision/base -t suttlevision/base:$(git rev-parse --short HEAD)  -f dockerimages/Docker.base .
-docker push suttlevision/base
-docker build -t suttlevision/pipeline-api -t suttlevision/pipeline-api:$(git rev-parse --short HEAD)  -f dockerimages/Docker.pipeline.api .
-docker push suttlevision/pipeline-api
-docker build -t suttlevision/train -t suttlevision/train:$(git rev-parse --short HEAD)  -f dockerimages/Docker.train.worker .
-docker push suttlevision/train
-docker build -t suttlevision/prep -t suttlevision/prep:$(git rev-parse --short HEAD)  -f dockerimages/Docker.prep.worker .
-docker push suttlevision/prep
-docker build  -t suttlevision/capture -t suttlevision/capture:$(git rev-parse --short HEAD)  -f dockerimages/Docker.capture .
-docker push suttlevision/capture
-docker build -t suttlevision/capture-pointgrey:latest -t suttlevision/capture-pointgrey :$(git rev-parse --short HEAD)  -f dockerimages/Docker.pg.capture .
-docker push suttlevision/capture-pointgrey:latest
+docker build -t flexiblevision/base -t flexiblevision/base:$(git rev-parse --short HEAD)  -f dockerimages/Docker.base .
+docker push flexiblevision/base
+docker build -t flexiblevision/pipeline-api -t flexiblevision/pipeline-api:$(git rev-parse --short HEAD)  -f dockerimages/Docker.pipeline.api .
+docker push flexiblevision/pipeline-api
+docker build -t flexiblevision/train -t flexiblevision/train:$(git rev-parse --short HEAD)  -f dockerimages/Docker.train.worker .
+docker push flexiblevision/train
+docker build -t flexiblevision/prep -t flexiblevision/prep:$(git rev-parse --short HEAD)  -f dockerimages/Docker.prep.worker .
+docker push flexiblevision/prep
+docker build  -t flexiblevision/capture -t flexiblevision/capture:$(git rev-parse --short HEAD)  -f dockerimages/Docker.capture .
+docker push flexiblevision/capture
+docker build -t flexiblevision/capture-pointgrey:latest -t flexiblevision/capture-pointgrey :$(git rev-parse --short HEAD)  -f dockerimages/Docker.pg.capture .
+docker push flexiblevision/capture-pointgrey:latest
 gcloud auth configure-docker
 gcloud container clusters get-credentials standard-cluster-1
 kubectl get namespaces
@@ -37,4 +37,4 @@ kubectl apply -f kubernetes/prep.yaml
 kubectl delete -f kubernetes/train.yaml
 kubectl apply -f kubernetes/train.yaml
 
-kubectl set image deployment/tag-ui tag-ui=suttlevision/tag-ui:0.4 --record
+kubectl set image deployment/tag-ui tag-ui=flexiblevision/tag-ui:0.4 --record

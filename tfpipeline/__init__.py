@@ -44,7 +44,7 @@ def create_app(test_config=None):
     app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
     blueprint = Blueprint('api', __name__, url_prefix='/api/process')
-    api = Api(blueprint,version='1.0', title='Suttle Vision Preparation and Training API Gateway',
+    api = Api(blueprint,version='1.0', title='Flexible Vision Preparation and Training API Gateway',
               description='Do Great things')
 
     print(api)

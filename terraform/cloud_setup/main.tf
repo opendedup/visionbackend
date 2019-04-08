@@ -29,22 +29,22 @@ variable "project" {
   type = "string"
   default ="svision"
 }
-resource "google_project" "suttlevision" {
-  name = "Suttle Vision Project"
+resource "google_project" "flexiblevision" {
+  name = "flexible Vision Project"
   project_id = "${var.project}-${random_id.project_id.hex}"
   billing_account = "${data.google_billing_account.acct.id}"
   org_id = "${var.gcp_organization_id}"
 }
 
 resource "google_service_account" "svision_service_acct" {
-  project = "${google_project.suttlevision.project_id}"
+  project = "${google_project.flexiblevision.project_id}"
   account_id   = "svision"
   display_name = "Flexible Node Vision Editor"
 }
 
 
 resource "google_project_iam_member" "svision_permissions" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   role    = "roles/editor"
   member  = "serviceAccount:${google_service_account.svision_service_acct.email}"
 }
@@ -54,49 +54,49 @@ resource "google_service_account_key" "svision_key" {
 }
 
 resource "google_project_service" "storage" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   service   = "storage-api.googleapis.com"
   disable_on_destroy = false
 }
 
 resource "google_project_service" "cloudresourcemanager" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   service   = "cloudresourcemanager.googleapis.com"
   disable_on_destroy = false
 }
 
 resource "google_project_service" "iam" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   service   = "iam.googleapis.com"
   disable_on_destroy = false
 }
 
 resource "google_project_service" "container" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   service   = "container.googleapis.com"
   disable_on_destroy = false
 }
 
 resource "google_project_service" "ml" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   service   = "ml.googleapis.com"
   disable_on_destroy = false
 }
 
 resource "google_project_service" "serviceusage" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   service   = "serviceusage.googleapis.com"
   disable_on_destroy = false
 }
 
 resource "google_project_service" "compute" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   service   = "compute.googleapis.com",
   disable_on_destroy = false
 }
 
 resource "google_project_service" "oslogin" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   service   = "oslogin.googleapis.com"
   disable_on_destroy = false
 }
@@ -114,20 +114,20 @@ resource "random_id" "project_id" {
 }
 
 resource "google_compute_disk" "data_disk" {
-  project = "${google_project.suttlevision.project_id}"
+  project = "${google_project.flexiblevision.project_id}"
   name  = "sv-data-disk"
   type  = "pd-ssd"
   size = 300
   zone  = "${var.location}-a"
   labels = {
-    environment = "suttlevision"
+    environment = "flexiblevision"
   }
   depends_on = ["google_service_account.svision_service_acct","google_project_iam_member.svision_permissions","google_project_service.compute"]
   physical_block_size_bytes = 4096
 }
 
 resource "google_compute_instance" "default" {
-  project = "${google_project.suttlevision.project_id}"
+  project = "${google_project.flexiblevision.project_id}"
   name         = "svserver"
   machine_type = "n1-standard-16"
   zone         = "${var.location}-a"
@@ -214,7 +214,7 @@ resource "google_compute_instance" "default" {
 
 
 resource "google_storage_bucket" "project-bucket" {
-  project = "${google_project.suttlevision.number}"
+  project = "${google_project.flexiblevision.number}"
   name     = "svision-${random_id.bucket_id.hex}"
   storage_class = "REGIONAL"
   force_destroy = true
@@ -222,8 +222,8 @@ resource "google_storage_bucket" "project-bucket" {
 }
 
 resource "google_storage_bucket_object" "upload_models" {
-  name   = "trained_models/models.config"
-  source = "${path.module}/resources/models.config"
+  name   = "trained_models/model.config"
+  source = "${path.module}/resources/model.config"
   bucket = "${google_storage_bucket.project-bucket.name}"
 }
 
@@ -235,7 +235,7 @@ resource "google_storage_bucket_object" "upload_projects" {
 }
 
 resource "google_compute_firewall" "svision_firewall" {
-  project = "${google_project.suttlevision.project_id}"
+  project = "${google_project.flexiblevision.project_id}"
   name = "svision-firewall"
   network = "default"
   depends_on = ["google_service_account.svision_service_acct","google_project_iam_member.svision_permissions","google_project_service.compute","google_compute_instance.default"]
@@ -270,7 +270,7 @@ output "bucket_name" {
 }
 
 output "project_id" {
- value = "\"${google_project.suttlevision.project_id}\""
+ value = "\"${google_project.flexiblevision.project_id}\""
 }
 
 output "cloud_password" {
@@ -278,7 +278,7 @@ output "cloud_password" {
 }
 
 output "project_number" {
-  value = "\"${google_project.suttlevision.number}\""
+  value = "\"${google_project.flexiblevision.number}\""
 }
 
 output "service_account_name" {

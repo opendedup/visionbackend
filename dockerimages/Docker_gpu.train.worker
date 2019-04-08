@@ -5,7 +5,7 @@ MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 
 WORKDIR "/svbackend"
 #Compile object detection models
-RUN git clone https://github.com/suttlevision/models.git && \
+RUN git clone https://github.com/flexiblevision/models.git && \
 	cd models/research/ && \
 	protoc object_detection/protos/*.proto --python_out=.
 

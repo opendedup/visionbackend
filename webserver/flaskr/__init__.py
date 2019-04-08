@@ -54,7 +54,7 @@ def create_app(test_config=None):
     app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
     blueprint = Blueprint('api', __name__, url_prefix='/api/capture')
-    settings.api = Api(blueprint,version='1.0', title='Suttle Vision Capture and Detection API',
+    settings.api = Api(blueprint,version='1.0', title='Flexible Vision Capture and Detection API',
               description='An Image capture and object detection api')
     
     print(settings.api)

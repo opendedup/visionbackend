@@ -1,4 +1,4 @@
-FROM suttlevision/base:latest
+FROM flexiblevision/base:latest
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 

@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "suttlechart.fullname" . }}
+  name: {{ include "flexiblechart.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "suttlechart.name" . }}
-    helm.sh/chart: {{ include "suttlechart.chart" . }}
+    app.kubernetes.io/name: {{ include "flexiblechart.name" . }}
+    helm.sh/chart: {{ include "flexiblechart.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "suttlechart.name" . }}
+      app.kubernetes.io/name: {{ include "flexiblechart.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "suttlechart.name" . }}
+        app.kubernetes.io/name: {{ include "flexiblechart.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:

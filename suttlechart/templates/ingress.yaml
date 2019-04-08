@@ -1,12 +1,12 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "suttlechart.fullname" . -}}
+{{- $fullName := include "flexiblechart.fullname" . -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app.kubernetes.io/name: {{ include "suttlechart.name" . }}
-    helm.sh/chart: {{ include "suttlechart.chart" . }}
+    app.kubernetes.io/name: {{ include "flexiblechart.name" . }}
+    helm.sh/chart: {{ include "flexiblechart.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   {{- with .Values.ingress.annotations }}

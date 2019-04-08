@@ -1,4 +1,4 @@
-FROM suttlevision/base:latest
+FROM flexiblevision/base:latest
 
 COPY tfpipeline /svbackend/tfpipeline
 COPY webserver/flaskr/utils/storage.py /svbackend/tfpipeline/utils/
