@@ -18,7 +18,7 @@ exports.dialogflowRequest = functions.https.onRequest((request, response) => {
         try {
             let msg = { 'type': 'count', 'request': request.body }
             const dataBuffer = Buffer.from(JSON.stringify(msg));
-            const connection = new Connection('amqp://user:Z7xBMdauGT@35.222.194.94')
+            const connection = new Connection('amqp://user:aaa@35.222.19.94')
             await connection.init()
             const channel = await connection.createChannel()
             const respChannel = await connection.createChannel()

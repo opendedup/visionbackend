@@ -1,5 +1,6 @@
 gcloud config set project $GCP_PROJECT
 gcloud config set compute/zone us-central1-a
+export 
 docker build -t flexiblevision/base -t flexiblevision/base:$(git rev-parse --short HEAD)  -f dockerimages/Docker.base .
 docker push flexiblevision/base
 docker build -t flexiblevision/pipeline-api -t flexiblevision/pipeline-api:$(git rev-parse --short HEAD)  -f dockerimages/Docker.pipeline.api .
