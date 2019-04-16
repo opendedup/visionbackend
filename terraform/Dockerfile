@@ -30,19 +30,18 @@ RUN gcloud config set core/disable_usage_reporting true && \
     gcloud config set metrics/environment github_docker_image && \
     gcloud --version
 
-
-WORKDIR /svsetup
+WORKDIR /fvsetup
 RUN apt update -y && \
     apt install -y wget unzip openssh-client build-essential golang
 RUN wget https://releases.hashicorp.com/terraform/0.11.13/terraform_0.11.13_linux_amd64.zip
 RUN unzip terraform_0.11.13_linux_amd64.zip && \
     rm terraform_0.11.13_linux_amd64.zip
-ENV TERRAFORM_PATH=/svsetup/terraform
-COPY deploy.py /svsetup
-COPY runme.sh /svsetup
+ENV TERRAFORM_PATH=/fvsetup/terraform
+COPY deploy.py /fvsetup
+COPY runme.sh /fvsetup
 RUN chmod +x runme.sh
-COPY cloud_setup /svsetup/cloud_setup
-COPY local_setup /svsetup/local_setup
+COPY cloud_setup /fvsetup/cloud_setup
+COPY local_setup /fvsetup/local_setup
 
 
 CMD [ "./runme.sh" ]

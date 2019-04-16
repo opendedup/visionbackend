@@ -62,7 +62,7 @@ bregistry = BaseRegistry('aug', connection=redis_con)
 ns = Namespace('prep', description='Prepare a vision corpus for training')
 
 
-aug_rules = ns.model('Augmentation Rules', {
+aug_rules = ns.model('Augmentation_Rules', {
     'remove_out_of_image': fields.String(required=False,description="""Specify "cut_out_partly" to cut out objects that are partly out of view.
     Specify "cut_out_of_image" to trim the box to the image field of view. Specify "leave_partly_in_image" to keep all boxes regardless of their field of view.
      """,example="cut_out_of_image",
@@ -164,7 +164,7 @@ class RunPrep(Resource):
 
 
 @ns.route('/job/<string:id>')
-class QJob(Resource):
+class PrepJob(Resource):
     @ns.response(200, 'Returns a job status from queue')
     def get(self,id):
         """
@@ -183,7 +183,7 @@ class QJob(Resource):
 
 
 @ns.route('/jobs/running')
-class RunningJobs(Resource):
+class PrepRunningJobs(Resource):
     @ns.response(200, 'Returns running jobs from the queue')
     def get(self):
         """
@@ -204,7 +204,7 @@ class RunningJobs(Resource):
         return ar,200
 
 @ns.route('/jobs/failed')
-class FailedJobs(Resource):
+class PrepFailedJobs(Resource):
     @ns.response(200, 'Returns failed jobs from the queue')
     def get(self):
         """
@@ -221,7 +221,7 @@ class FailedJobs(Resource):
         return ar,200
 
 @ns.route('/jobs/finished')
-class FinishedJobs(Resource):
+class PrepFinishedJobs(Resource):
     @ns.response(200, 'Returns finished jobs from the queue')
     def get(self):
         job_ids = fregistry.get_job_ids()

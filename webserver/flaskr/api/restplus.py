@@ -6,7 +6,7 @@ from flask_cors import CORS
 
 log = logging.getLogger(__name__)
 
-api = Api(version='1.0', title='flexible Vision Capture and Detection API',
+api = Api(version='1.0', title='Flexible Vision Capture and Detection API',
           description='A Image capture and object detection api')
 cors = CORS(api, resources={r"/api/*": {"origins": "*"}})
 

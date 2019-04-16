@@ -1,17 +1,18 @@
 FROM flexiblevision/base:latest
 
-COPY tfpipeline /svbackend/tfpipeline
-COPY webserver/flaskr/utils/storage.py /svbackend/tfpipeline/utils/
-WORKDIR /svbackend/tfpipeline/tmodels/
+COPY tfpipeline /fvbackend/tfpipeline
+COPY webserver/flaskr/utils/storage.py /fvbackend/tfpipeline/utils/
+COPY webserver/flaskr/utils/tflogs.py /fvbackend/tfpipeline/utils/
+WORKDIR /fvbackend/tfpipeline/tmodels/
 
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 ENV FLASK_APP=tfpipeline
 ENV FLASK_ENV=production
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=/svbackend/tfpipeline:/svbackend/models/research/:/svbackend/models/research/slim:/svbackend/models/research/
+ENV PYTHONPATH=/fvbackend/tfpipeline:/fvbackend/models/research/:/fvbackend/models/research/slim:/fvbackend/models/research/
 
 
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 EXPOSE 5000
 CMD ["flask","run","--host=0.0.0.0"]

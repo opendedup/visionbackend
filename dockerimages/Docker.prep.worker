@@ -3,14 +3,14 @@ FROM flexiblevision/base:latest
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 
 
-WORKDIR "/svbackend"
-COPY dockerimages/runscripts/prep_worker.sh /svbackend/prep_worker.sh
-RUN ["chmod", "+x", "/svbackend/prep_worker.sh"]
+WORKDIR "/fvbackend"
+COPY dockerimages/runscripts/prep_worker.sh /fvbackend/prep_worker.sh
+RUN ["chmod", "+x", "/fvbackend/prep_worker.sh"]
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=/svbackend/tfpipeline:/svbackend/models/research/:/svbackend/models/research/slim
+ENV PYTHONPATH=/fvbackend/tfpipeline:/fvbackend/models/research/:/fvbackend/models/research/slim
 
-COPY tfpipeline /svbackend/tfpipeline
+COPY tfpipeline /fvbackend/tfpipeline
 
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 CMD ["./prep_worker.sh"]

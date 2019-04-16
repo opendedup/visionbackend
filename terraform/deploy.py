@@ -44,7 +44,7 @@ def query_yes_no(question, default="yes"):
 
 def remove_cloud_instance():
     check_gcp_login()
-    p = query_yes_no("Remove the CLOUD INSTACE for flexible Vision ? ",default="no")
+    p = query_yes_no("Remove the CLOUD INSTACE for Flexible Vision ? ",default="no")
     if p:
         sys.stdout.write("######################      Warning     ########################\n")
         sys.stdout.write("THIS WILL REMOVE THE CLOUD INSTANCE AND ALL DATA.\n")
@@ -59,7 +59,7 @@ def remove_cloud_instance():
 
 def remove_local_instance():
     check_gcp_login()
-    p = query_yes_no("Remove a LOCAL CAMERA SERVER for flexible Vision ? ",default="no")
+    p = query_yes_no("Remove a LOCAL CAMERA SERVER for Flexible Vision ? ",default="no")
     if p:
         sys.stdout.write("######################      Warning     ########################\n")
         sys.stdout.write("THIS WILL REMOVE A LOCAL CAMERA SERVER AND ALL CONFIG DATA ON IT.\n")
@@ -84,7 +84,7 @@ def remove_local_instance():
 
 def deploy_cloud_instance():
     check_gcp_login()
-    p = query_yes_no("Setup a cloud instance of flexible Vision ? ")
+    p = query_yes_no("Setup a cloud instance of Flexible Vision ? ")
     if p:
         sys.stdout.write("What GCP region would you like to deploy in [us-west1] ? ")
 
@@ -115,7 +115,7 @@ def deploy_local_cam():
     if not exists:
         sys.stdout.write("File cloud_config/output.tfvars does not exist.\n")
         sys.stdout.write("Deploy Cloud Components before continuing.\n")
-    p = query_yes_no("Deploy a flexible Vision local camera server?")
+    p = query_yes_no("Deploy a Flexible Vision local camera server?")
     if p:
         sys.stdout.write("######################      Warning     ########################\n")
         sys.stdout.write("Local Camera Servers Must :\n")
@@ -159,7 +159,7 @@ def revoke_gcp_login():
     sys.stdout.write(cmd_out.decode("utf-8"))
 
 def main():
-    sys.stdout.write("Welcome to the flexible Vision Setup.\n")
+    sys.stdout.write("Welcome to the Flexible Vision Setup.\n")
     while True:
         for i in range(len(options)):
             sys.stdout.write("[{}] {}\n".format(i,options[i]))
@@ -185,11 +185,6 @@ def main():
                 revoke_gcp_login()
         except ValueError:
             pass
-        
-
-
-
-
 
     
 if __name__ == '__main__':

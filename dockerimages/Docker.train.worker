@@ -2,35 +2,35 @@ FROM flexiblevision/base:latest
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 ARG GCP_PROJECT
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 RUN rm -rf models
 RUN git clone https://github.com/flexiblevision/models.git && \
 	cd models/research/ && \
 	protoc object_detection/protos/*.proto --python_out=.
 
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 RUN rm -rf cocoapi
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
 cd cocoapi/PythonAPI && \
 make -j4 && \
-cp -r pycocotools /svbackend/models/research/
+cp -r pycocotools /fvbackend/models/research/
 
-WORKDIR /svbackend/models/research/
+WORKDIR /fvbackend/models/research/
 RUN bash object_detection/dataset_tools/create_pycocotools_package.sh /tmp/pycocotools && \
 	python setup.py sdist && \
 	(cd slim && python setup.py sdist) && \
-	mkdir /svbackend/mlpackages/ && \
-	cp dist/object_detection-0.1.tar.gz /svbackend/mlpackages/ && \
-	cp slim/dist/slim-0.1.tar.gz /svbackend/mlpackages/ && \
-	cp /tmp/pycocotools/pycocotools-2.0.tar.gz /svbackend/mlpackages/
+	mkdir /fvbackend/mlpackages/ && \
+	cp dist/object_detection-0.1.tar.gz /fvbackend/mlpackages/ && \
+	cp slim/dist/slim-0.1.tar.gz /fvbackend/mlpackages/ && \
+	cp /tmp/pycocotools/pycocotools-2.0.tar.gz /fvbackend/mlpackages/
 
 
-WORKDIR "/svbackend"
-COPY dockerimages/runscripts/train_worker.sh /svbackend/train_worker.sh
-RUN ["chmod", "+x", "/svbackend/train_worker.sh"]
+WORKDIR "/fvbackend"
+COPY dockerimages/runscripts/train_worker.sh /fvbackend/train_worker.sh
+RUN ["chmod", "+x", "/fvbackend/train_worker.sh"]
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=/svbackend/tfpipeline:/svbackend/models/research/:/svbackend/models/research/slim:/svbackend/webserver/flaskr
+ENV PYTHONPATH=/fvbackend/tfpipeline:/fvbackend/models/research/:/fvbackend/models/research/slim:/fvbackend/webserver/flaskr
 
 # Downloading gcloud package
 RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
@@ -43,14 +43,14 @@ RUN mkdir -p /usr/local/gcloud \
 # Adding the package path to local
 ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
 
-COPY tfpipeline /svbackend/tfpipeline
+COPY tfpipeline /fvbackend/tfpipeline
 #Copy webserver for tests
-COPY webserver /svbackend/webserver
-#COPY $GCP_PROJECT-2285d752bd23.json /svbackend/
-#RUN gcloud auth activate-service-account --key-file /svbackend/svbackend-209214-23885678398b.json
+COPY webserver /fvbackend/webserver
+#COPY $GCP_PROJECT-2285d752bd23.json /fvbackend/
+#RUN gcloud auth activate-service-account --key-file /fvbackend/fvbackend-209214-23885678398b.json
 #RUN gcloud config set project $GCP_PROJECT
 
-WORKDIR /svbackend/tfpipeline/tmodels/
+WORKDIR /fvbackend/tfpipeline/tmodels/
 RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_v2_coco_2018_01_28.tar.gz && \
 	mkdir faster_rcnn_inception_v2_coco && \
 	tar -xzvf faster_rcnn_inception_v2_coco_2018_01_28.tar.gz -C faster_rcnn_inception_v2_coco --strip-components=1 && rm faster_rcnn_inception_v2_coco_2018_01_28.tar.gz
@@ -91,5 +91,5 @@ RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_resn
 RUN pip --no-cache-dir install \
 		google-auth
 
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 CMD ["./train_worker.sh"]

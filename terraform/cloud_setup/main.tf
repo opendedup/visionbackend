@@ -27,30 +27,30 @@ data "google_billing_account" "acct" {
 variable "project" {
   description="The name for the GCP project where everything will run"
   type = "string"
-  default ="svision"
+  default ="fvision"
 }
 resource "google_project" "flexiblevision" {
-  name = "flexible Vision Project"
+  name = "Flexible Vision Project"
   project_id = "${var.project}-${random_id.project_id.hex}"
   billing_account = "${data.google_billing_account.acct.id}"
   org_id = "${var.gcp_organization_id}"
 }
 
-resource "google_service_account" "svision_service_acct" {
+resource "google_service_account" "fvision_service_acct" {
   project = "${google_project.flexiblevision.project_id}"
-  account_id   = "svision"
+  account_id   = "fvision"
   display_name = "Flexible Node Vision Editor"
 }
 
 
-resource "google_project_iam_member" "svision_permissions" {
+resource "google_project_iam_member" "fvision_permissions" {
   project = "${google_project.flexiblevision.number}"
   role    = "roles/editor"
-  member  = "serviceAccount:${google_service_account.svision_service_acct.email}"
+  member  = "serviceAccount:${google_service_account.fvision_service_acct.email}"
 }
 
-resource "google_service_account_key" "svision_key" {
-  service_account_id = "${google_service_account.svision_service_acct.name}"
+resource "google_service_account_key" "fvision_key" {
+  service_account_id = "${google_service_account.fvision_service_acct.name}"
 }
 
 resource "google_project_service" "storage" {
@@ -59,9 +59,20 @@ resource "google_project_service" "storage" {
   disable_on_destroy = false
 }
 
-resource "google_project_service" "cloudresourcemanager" {
+resource "google_project_service" "servicemanagement" {
   project = "${google_project.flexiblevision.number}"
-  service   = "cloudresourcemanager.googleapis.com"
+  service   = "servicemanagement.googleapis.com"
+  disable_on_destroy = false
+}
+resource "google_project_service" "servicecontrol" {
+  project = "${google_project.flexiblevision.number}"
+  service   = "servicecontrol.googleapis.com"
+  disable_on_destroy = false
+}
+
+resource "google_project_service" "endpoints" {
+  project = "${google_project.flexiblevision.number}"
+  service   = "endpoints.googleapis.com"
   disable_on_destroy = false
 }
 
@@ -101,6 +112,12 @@ resource "google_project_service" "oslogin" {
   disable_on_destroy = false
 }
 
+resource "google_project_service" "pipeline-api" {
+  project = "${google_project.flexiblevision.number}"
+  service   = "${google_endpoints_service.pipeline_service.service_name}"
+  disable_on_destroy = false
+}
+
 resource "random_id" "instance_id" {
  byte_length = 8
 }
@@ -115,24 +132,24 @@ resource "random_id" "project_id" {
 
 resource "google_compute_disk" "data_disk" {
   project = "${google_project.flexiblevision.project_id}"
-  name  = "sv-data-disk"
+  name  = "fv-data-disk-${random_id.instance_id.hex}"
   type  = "pd-ssd"
   size = 300
   zone  = "${var.location}-a"
   labels = {
     environment = "flexiblevision"
   }
-  depends_on = ["google_service_account.svision_service_acct","google_project_iam_member.svision_permissions","google_project_service.compute"]
+  depends_on = ["google_service_account.fvision_service_acct","google_project_iam_member.fvision_permissions","google_project_service.compute"]
   physical_block_size_bytes = 4096
 }
 
 resource "google_compute_instance" "default" {
   project = "${google_project.flexiblevision.project_id}"
-  name         = "svserver"
+  name         = "fvserver-${random_id.instance_id.hex}"
   machine_type = "n1-standard-16"
   zone         = "${var.location}-a"
 
-  tags = ["prepapi", "svision","rabbitmq"]
+  tags = ["prepapi", "fvision","rabbitmq"]
 
   boot_disk {
     initialize_params {
@@ -162,11 +179,11 @@ resource "google_compute_instance" "default" {
     sshKeys = "ubuntu:${file("${path.module}/id_rsa.pub")}"
   }
 
-  depends_on = ["google_service_account.svision_service_acct","google_project_iam_member.svision_permissions"]
+  depends_on = ["google_service_account.fvision_service_acct","google_project_iam_member.fvision_permissions"]
 
   provisioner "file" {
-    content = "${base64decode(google_service_account_key.svision_key.private_key)}"
-    destination = "/home/ubuntu/svision_creds.json"
+    content = "${base64decode(google_service_account_key.fvision_key.private_key)}"
+    destination = "/home/ubuntu/fvision_creds.json"
     connection {
       type= "ssh"
       user="ubuntu"
@@ -174,6 +191,9 @@ resource "google_compute_instance" "default" {
     }
 
   }
+
+  
+
 
 
 
@@ -192,7 +212,7 @@ resource "google_compute_instance" "default" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/cloud_setup.sh",
-      "/tmp/cloud_setup.sh ${var.project} ${google_storage_bucket.project-bucket.name} ${random_string.password.result}"
+      "/tmp/cloud_setup.sh ${google_project.flexiblevision.project_id} ${google_storage_bucket.project-bucket.name} ${random_string.password.result}"
       ]
     connection {
       type= "ssh"
@@ -212,10 +232,25 @@ resource "google_compute_instance" "default" {
   }
 }
 
+resource "google_endpoints_service" "pipeline_service" {
+    service_name   = "pipeline-api.endpoints.${google_project.flexiblevision.project_id}.cloud.goog"
+    project        = "${google_project.flexiblevision.project_id}"
+    openapi_config = "${data.template_file.pipeline_service.rendered}"
+    depends_on = ["google_compute_instance.default","google_project_service.servicemanagement","google_project_service.servicecontrol","google_project_service.endpoints"]
+}
+
+data "template_file" "pipeline_service" {
+  template = "${file("${path.module}/resources/pipelineapi.tpl")}"
+  vars = {
+    api_name = "pipeline-api.endpoints.${google_project.flexiblevision.project_id}.cloud.goog"
+    instance_fqdn = "${google_compute_instance.default.name}.${google_compute_instance.default.zone}.c.${google_project.flexiblevision.project_id}.internal"
+  }
+}
+
 
 resource "google_storage_bucket" "project-bucket" {
   project = "${google_project.flexiblevision.number}"
-  name     = "svision-${random_id.bucket_id.hex}"
+  name     = "fvision-${random_id.bucket_id.hex}"
   storage_class = "REGIONAL"
   force_destroy = true
   location = "${var.location}"
@@ -234,23 +269,23 @@ resource "google_storage_bucket_object" "upload_projects" {
   bucket = "${google_storage_bucket.project-bucket.name}"
 }
 
-resource "google_compute_firewall" "svision_firewall" {
+resource "google_compute_firewall" "fvision_firewall" {
   project = "${google_project.flexiblevision.project_id}"
-  name = "svision-firewall"
+  name = "fvision-firewall"
   network = "default"
-  depends_on = ["google_service_account.svision_service_acct","google_project_iam_member.svision_permissions","google_project_service.compute","google_compute_instance.default"]
+  depends_on = ["google_service_account.fvision_service_acct","google_project_iam_member.fvision_permissions","google_project_service.compute","google_compute_instance.default"]
   allow {
     protocol = "tcp"
     ports = ["80", "5672"]
   }
 
   source_ranges = ["0.0.0.0/0"]
-  target_tags = ["svision"]
+  target_tags = ["fvision"]
 }
 
 resource "local_file" "creds" {
-    content     = "${base64decode(google_service_account_key.svision_key.private_key)}"
-    filename = "${path.module}/config/svision_creds.json"
+    content     = "${base64decode(google_service_account_key.fvision_key.private_key)}"
+    filename = "${path.module}/config/fvision_creds.json"
 }
 
 resource "random_string" "password" {
@@ -263,6 +298,10 @@ resource "random_string" "password" {
 
 output "instance_ip" {
  value = "\"${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}\""
+}
+
+output "instance_name" {
+ value = "\"${google_compute_instance.default.name}\""
 }
 
 output "bucket_name" {
@@ -281,10 +320,15 @@ output "project_number" {
   value = "\"${google_project.flexiblevision.number}\""
 }
 
+output "instance_zone" {
+  value = "\"${google_compute_instance.default.zone}\""
+}
+
+
 output "service_account_name" {
-  value = "\"${google_service_account.svision_service_acct.name}\""
+  value = "\"${google_service_account.fvision_service_acct.name}\""
 }
 
 output "service_account_email" {
-  value = "\"${google_service_account.svision_service_acct.email}\""
+  value = "\"${google_service_account.fvision_service_acct.email}\""
 }

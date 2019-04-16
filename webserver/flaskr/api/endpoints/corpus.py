@@ -39,7 +39,7 @@ category_count = ns.model('Category', {
                           example=1),
 })
 
-aug_rules = ns.model('Augmentation Rules', {
+aug_rules = ns.model('Augmentation_Rules', {
     'remove_out_of_image': fields.String(required=False,description="""Specify "cut_out_partly" to cut out objects that are partly out of view.
     Specify "cut_out_of_image" to trim the box to the image field of view. Specify "leave_partly_in_image" to keep all boxes regardless of their field of view.
      """,example="cut_out_of_image",

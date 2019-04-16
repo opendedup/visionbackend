@@ -201,7 +201,7 @@ class ExportTraining(Resource):
             'meta':jb.meta},201
 
 @ns.route('/job/<string:id>')
-class QJob(Resource):
+class TrainQJob(Resource):
     @ns.response(200, 'Returns a job status from queue')
     def get(self,id):
         jb = None
@@ -216,7 +216,7 @@ class QJob(Resource):
             'meta':jb.meta},200
 
 @ns.route('/jobs/running')
-class RunningJobs(Resource):
+class TrainRunningJobs(Resource):
     @ns.response(200, 'Returns runing jobs from the queue')
     def get(self):
         """
@@ -237,7 +237,7 @@ class RunningJobs(Resource):
         return ar,200
 
 @ns.route('/jobs/failed')
-class FailedJobs(Resource):
+class TrainFailedJobs(Resource):
     @ns.response(200, 'Returns failed jobs from the queue')
     def get(self):
         """
@@ -254,7 +254,7 @@ class FailedJobs(Resource):
         return ar,200
 
 @ns.route('/jobs/finished')
-class FinishedJobs(Resource):
+class TrainFinishedJobs(Resource):
     @ns.response(200, 'Returns finished jobs from the queue')
     def get(self):
         job_ids = fregistry.get_job_ids()

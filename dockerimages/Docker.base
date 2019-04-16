@@ -127,19 +127,19 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/pr
 		ldconfig
 WORKDIR "/"
 RUN rm -rf protobuf-3.6.1
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 #Compile object detection models
 RUN git clone https://github.com/flexiblevision/models.git && \
 	cd models/research/ && \
 	protoc object_detection/protos/*.proto --python_out=.
 
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
 cd cocoapi/PythonAPI && \
 make -j4 && \
-cp -r pycocotools /svbackend/models/research/
+cp -r pycocotools /fvbackend/models/research/
 
 
 

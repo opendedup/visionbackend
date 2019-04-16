@@ -40,8 +40,19 @@ variable "instance_ip" {
   description = "The cloud instance ip address"
 }
 
+variable "instance_name" {
+  type = "string"
+  description = "The cloud instance name"
+}
 
-resource "google_service_account_key" "svision_key" {
+variable "instance_zone" {
+  type = "string"
+  description = "The cloud instance zone location"
+}
+
+
+
+resource "google_service_account_key" "fvision_key" {
   service_account_id = "${var.service_account_name}"
 }
 
@@ -49,7 +60,7 @@ resource "null_resource" "local_server" {
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir -p ${var.ssh_username == "root" ? "/root/sv_do_not_delete/" : "/home/${var.ssh_username}/sv_do_not_delete/"}"
+      "mkdir -p ${var.ssh_username == "root" ? "/root/fv_do_not_delete/" : "/home/${var.ssh_username}/fv_do_not_delete/"}"
       ]
     connection {
       type= "ssh"
@@ -60,8 +71,8 @@ resource "null_resource" "local_server" {
     
   }
   provisioner "file" {
-    content = "${base64decode(google_service_account_key.svision_key.private_key)}"
-    destination = "${var.ssh_username == "root" ? "/root/sv_do_not_delete/svision_creds.json" : "/home/${var.ssh_username}/sv_do_not_delete/svision_creds.json"}"
+    content = "${base64decode(google_service_account_key.fvision_key.private_key)}"
+    destination = "${var.ssh_username == "root" ? "/root/fv_do_not_delete/fvision_creds.json" : "/home/${var.ssh_username}/fv_do_not_delete/fvision_creds.json"}"
     connection {
       type= "ssh"
       user="${var.ssh_username}"
@@ -86,7 +97,7 @@ resource "null_resource" "local_server" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/local_setup.sh",
-      "echo ${var.ssh_password} | sudo -S /tmp/local_setup.sh ${var.ssh_password} ${var.project_id} ${var.instance_ip} ${var.bucket_name}",
+      "echo ${var.ssh_password} | sudo -S /tmp/local_setup.sh ${var.ssh_password} ${var.project_id} ${var.instance_name} ${var.instance_zone} ${var.bucket_name}",
       "rm /tmp/local_setup.sh"
       ]
     connection {
