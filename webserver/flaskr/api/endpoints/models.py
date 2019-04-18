@@ -20,6 +20,8 @@ from flask import g
 from flask import request
 from flask import Response
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 import concurrent.futures
 import multiprocessing
 
@@ -119,6 +121,7 @@ def download_jobdef_proj(fldr,file,mm):
 @ns.route('/')
 class ModelCollection(Resource):
     @ns.marshal_list_with(model)
+    @jwt_required
     def get(self):
         """
         Returns list of Models.
@@ -149,6 +152,7 @@ class ModelCollection(Resource):
 class ModelItem(Resource):
 
     @ns.marshal_with(model)
+    @jwt_required
     def get(self, name):
         """
         Returns a model.
@@ -182,6 +186,7 @@ class ModelItem(Resource):
 class ModelVersionItem(Resource):
 
     @ns.response(204, 'Model successfully deleted.')
+    @jwt_required
     def delete(self, project,model_id):
         """
         Deletes a model version.

@@ -26,6 +26,7 @@ from model.project import projects
 from api.endpoints.predict import ns as predict_ns
 from api.endpoints.train import ns as train_ns
 from api.endpoints.projects import ns as project_ns
+from api.endpoints.auth import ns as auth_ns
 from api.endpoints.cameras import ns as cameras_ns
 from api.endpoints.models import ns as models_ns
 from api.endpoints.corpus import ns as corpus_ns
@@ -33,6 +34,12 @@ from api.endpoints.jobs import ns as jobs_ns
 from utils.storage import Storage
 from flask_restplus import Api
 from flask_cors import CORS
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
+
+
 
 if 'SPINNAKER' in os.environ and os.environ['SPINNAKER'].lower() =='true':
     import PySpin
@@ -53,9 +60,24 @@ def create_app(test_config=None):
     app.config['RESTPLUS_VALIDATE'] = settings.RESTPLUS_VALIDATE
     app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
+    if 'JWT_SECRET_KEY' in os.environ:
+        app.config['JWT_SECRET_KEY'] = os.environ['JWT_SECRET_KEY']
+    else:
+        app.config['JWT_SECRET_KEY'] = 'imagerie'
+   
+
+    app.config['JWT_TOKEN_LOCATION'] = ['headers']
+    settings.jwt = JWTManager(app)
     blueprint = Blueprint('api', __name__, url_prefix='/api/capture')
+    authorizations = {
+        'Bearer Auth': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        },
+    }
     settings.api = Api(blueprint,version='1.0', title='Flexible Vision Capture and Detection API',
-              description='An Image capture and object detection api')
+              description='An Image capture and object detection api',security='Bearer Auth', authorizations=authorizations)
     
     print(settings.api)
     settings.api.add_namespace(project_ns)
@@ -65,7 +87,7 @@ def create_app(test_config=None):
     settings.api.add_namespace(models_ns)
     settings.api.add_namespace(corpus_ns)
     settings.api.add_namespace(jobs_ns)
-    
+    settings.api.add_namespace(auth_ns)
     app.register_blueprint(blueprint)
 
 

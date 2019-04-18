@@ -17,6 +17,8 @@ from flask import g
 from flask import request
 from flask import Response
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 from models.job import Job
 from controllers.preprocess import preprocess
 from controllers.train import train_job
@@ -24,7 +26,7 @@ from controllers.train import train_mlengine
 from controllers.train import export_mlengine
 
 from redis import Redis
-from rq import Queue, get_failed_queue
+from rq import Queue
 from rq.registry import StartedJobRegistry
 from rq.registry import BaseRegistry
 from rq.registry import FinishedJobRegistry
@@ -59,6 +61,7 @@ aug_queue = Queue('aug',connection=redis_con)
 registry = StartedJobRegistry('aug', connection=redis_con)
 fregistry = FinishedJobRegistry('aug', connection=redis_con)
 bregistry = BaseRegistry('aug', connection=redis_con)
+flregistry = aug_queue.failed_job_registry
 ns = Namespace('prep', description='Prepare a vision corpus for training')
 
 
@@ -125,6 +128,7 @@ prep_job = ns.model('Prep_Job', {
 class RunPrep(Resource):
     @ns.response(201, '{"status":"queued","job_id":"uuid"}')
     @ns.expect(prep_job)
+    @jwt_required
     def post(self):
         """
         Executes a prep job to create an image corpus for training.
@@ -166,6 +170,7 @@ class RunPrep(Resource):
 @ns.route('/job/<string:id>')
 class PrepJob(Resource):
     @ns.response(200, 'Returns a job status from queue')
+    @jwt_required
     def get(self,id):
         """
         Returns job metadata for a given id.
@@ -185,6 +190,7 @@ class PrepJob(Resource):
 @ns.route('/jobs/running')
 class PrepRunningJobs(Resource):
     @ns.response(200, 'Returns running jobs from the queue')
+    @jwt_required
     def get(self):
         """
         Returns a list of running jobs.
@@ -206,23 +212,15 @@ class PrepRunningJobs(Resource):
 @ns.route('/jobs/failed')
 class PrepFailedJobs(Resource):
     @ns.response(200, 'Returns failed jobs from the queue')
+    @jwt_required
     def get(self):
-        """
-        Returns a list of failed jobs.
-        """
-        job_ids = get_failed_queue(redis_con).jobs
-        ar = []
-        for job in job_ids:
-            jb = {
-            "status": job.status,
-            'job_id': job.id,
-            'meta':job.meta}
-            ar.append(jb)
-        return ar,200
+        job_ids = flregistry.get_job_ids()
+        return job_ids,200
 
 @ns.route('/jobs/finished')
 class PrepFinishedJobs(Resource):
     @ns.response(200, 'Returns finished jobs from the queue')
+    @jwt_required
     def get(self):
         job_ids = fregistry.get_job_ids()
         return job_ids,200

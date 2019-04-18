@@ -23,8 +23,10 @@ from controllers.train import train_job as train_job_method
 from controllers.train import train_mlengine
 from controllers.train import export_mlengine
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 from redis import Redis
-from rq import Queue, get_failed_queue
+from rq import Queue
 from rq.registry import StartedJobRegistry
 from rq.registry import FinishedJobRegistry
 
@@ -55,6 +57,7 @@ redis_con=Redis(redis_server,redis_port,password=redis_password)
 train_queue = Queue('train',connection=redis_con)
 registry = StartedJobRegistry('train', connection=redis_con)
 fregistry = FinishedJobRegistry('train', connection=redis_con)
+flregistry = train_queue.failed_job_registry
 ns = Namespace('train', description='Train a vision corpus on a prepared dataset')
 
 train_job = ns.model('Train_Job', {
@@ -126,6 +129,7 @@ export_job = ns.model('Export_Job', {
 class RunTraining(Resource):
     @ns.response(201, '{"status":"queued","job_id":"uuid"}')
     @ns.expect(train_job)
+    @jwt_required
     def post(self):
         """
         Executes a training.
@@ -168,6 +172,7 @@ class RunTraining(Resource):
 class ExportTraining(Resource):
     @ns.response(201, '{"status":"queued","job_id":"uuid"}')
     @ns.expect(export_job)
+    @jwt_required
     def post(self):
         """
         Exports a finished training for prediction.
@@ -203,6 +208,7 @@ class ExportTraining(Resource):
 @ns.route('/job/<string:id>')
 class TrainQJob(Resource):
     @ns.response(200, 'Returns a job status from queue')
+    @jwt_required
     def get(self,id):
         jb = None
         jb =train_queue.fetch_job(id)
@@ -218,6 +224,7 @@ class TrainQJob(Resource):
 @ns.route('/jobs/running')
 class TrainRunningJobs(Resource):
     @ns.response(200, 'Returns runing jobs from the queue')
+    @jwt_required
     def get(self):
         """
         Returns a list of running jobs.
@@ -239,23 +246,20 @@ class TrainRunningJobs(Resource):
 @ns.route('/jobs/failed')
 class TrainFailedJobs(Resource):
     @ns.response(200, 'Returns failed jobs from the queue')
+    @jwt_required
     def get(self):
         """
         Returns a list of failed jobs.
         """
-        job_ids = get_failed_queue(redis_con).jobs
-        ar = []
-        for job in job_ids:
-            jb = {
-            "status": job.status,
-            'job_id': job.id,
-            'meta':job.meta}
-            ar.append(jb)
-        return ar,200
+        job_ids = flregistry.get_job_ids()
+        return job_ids,200
 
 @ns.route('/jobs/finished')
 class TrainFinishedJobs(Resource):
     @ns.response(200, 'Returns finished jobs from the queue')
+    @jwt_required
     def get(self):
+        current_user = get_jwt_identity()
         job_ids = fregistry.get_job_ids()
+
         return job_ids,200

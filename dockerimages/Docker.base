@@ -74,7 +74,6 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
 	python3 get-pip.py && \
 	rm get-pip.py
 
-RUN pip --no-cache-dir install redis==2.10.6
 
 RUN pip --no-cache-dir install \
 		pyopenssl \
@@ -86,6 +85,7 @@ RUN pip --no-cache-dir install \
     pandas \
     sympy \
     nose \
+	redis \
     Flask \
     opencv-python \
     uuid \

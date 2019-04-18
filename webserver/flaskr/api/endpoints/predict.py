@@ -19,6 +19,8 @@ from flask import g
 from flask import request
 from flask import Response
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 from model.cameras import cameras
 from model.project import Project
 from model.project import projects
@@ -86,6 +88,7 @@ class Snap(Resource):
 
 @ns.route('/upload/<string:project>')
 class Upload(Resource):
+    @jwt_required
     def post(self,project):
         """
         Predicts results based on uploaded file.
@@ -112,6 +115,7 @@ class Upload(Resource):
 @ns.route('/snap/<string:project>/<string:image>')
 class GetExisting(Resource):
     @ns.produces(['multipart/x-mixed-replace; boundary=--jpgboundary'])
+    @jwt_required
     def get(self,project,image):
         """
         Returns an existing image in the project.
@@ -136,6 +140,7 @@ class Stream(Resource):
 
     #@settings.api.representation('multipart/x-mixed-replace; boundary=--jpgboundary')
     @ns.produces(['multipart/x-mixed-replace; boundary=--jpgboundary'])
+    @jwt_required
     def get(self,project,cam):
         """
         Streams the video from the designated camera.

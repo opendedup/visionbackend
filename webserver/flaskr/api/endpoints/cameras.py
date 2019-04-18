@@ -24,6 +24,8 @@ from flask import request
 from flask import Response
 from flask import stream_with_context
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 from model.cameras import Cameras
 from model.camera import Camera
 
@@ -164,6 +166,7 @@ def subimage(image, center, theta):
 @ns.route('/')
 class GetCameras(Resource):
     @ns.marshal_list_with(camerans)
+    @jwt_required
     def get(self):
         """
         Returns list of cameras attached to the system.
@@ -192,6 +195,7 @@ class GetCameras(Resource):
 @ns.doc(params={'calibrated': 'Return a calibrated image if true. (true|false)'})
 class Snap(Resource):
     @ns.produces(['image/jpeg'])
+    @jwt_required
     def get(self,cam,calibrated="true"):
         """
         Takes a snapshot from the camera
@@ -210,6 +214,7 @@ class Snap(Resource):
 @ns.doc(params={'cam': 'The numeric id of a camera'})
 class Resolution(Resource):
     @ns.marshal_with(resolution)
+    @jwt_required
     def get(self,cam):
         """
         returns the camera resolution
@@ -232,6 +237,7 @@ class Resolution(Resource):
 @ns.doc(params={'cam': 'The numeric id of a camera'})
 class AngleOffset(Resource):
     @ns.marshal_with(angle)
+    @jwt_required
     def get(self,cam):
         """
         returns the camera resolution
@@ -244,6 +250,7 @@ class AngleOffset(Resource):
         return {'degrees':cam.angle_offset,'waypoint':cam.waypoint}
 
     @ns.expect(angle)
+    @jwt_required
     def post(self,cam):
         """
         sets the resolution for a camera
@@ -258,6 +265,7 @@ class AngleOffset(Resource):
 @ns.route('/barcode/<int:cam>')
 class BarCode(Resource):
     @ns.produces(['image/jpeg'])
+    @jwt_required
     def get(self,cam):
         """
         Gets barcodes seen on a camera
@@ -297,6 +305,7 @@ class BarCode(Resource):
 @ns.route('/rotation/stream/<int:cam>')
 class StreamRot(Resource):
     @ns.produces(['multipart/x-mixed-replace; boundary=--jpgboundary'])
+    @jwt_required
     def get(self,cam):
         """
         Stream video finding qr code for rotation and midpoint orientation
@@ -344,6 +353,7 @@ class StreamRot(Resource):
 
 @ns.route('/rotation/<int:cam>')
 class Rot(Resource):
+    @jwt_required
     def get(self,cam):
         """
         Get the rotation and midpoint by scanning qr code in field of view
@@ -387,6 +397,7 @@ class Rot(Resource):
 @ns.doc(params={'cam': 'The numeric id of a camera'})
 class Measure(Resource):
     @ns.produces(['image/jpeg'])
+    @jwt_required
     def get(self,cam):
         """
         Measure the size of objects in a picture
@@ -492,6 +503,7 @@ class Stream(Resource):
 
     #@settings.api.representation('multipart/x-mixed-replace; boundary=--jpgboundary')
     @ns.produces(['multipart/x-mixed-replace; boundary=--jpgboundary'])
+    @jwt_required
     def get(self,cam):
         """
         Streams the video from the designated camera.
@@ -514,6 +526,7 @@ class Stream(Resource):
                 'square_size': 'the size of the squre in Millimeters'})
 class Calibrate(Resource):
     @ns.response(204, 'Calibration successfully removed.')
+    @jwt_required
     def delete(self, cam,h,w,square_size):
         """
         Deletes a project.
@@ -527,6 +540,7 @@ class Calibrate(Resource):
     @ns.response(200, 'Checkerboard foud.')
     @ns.response(404, 'Checkerboard not found.')
     @ns.marshal_with(calibration)
+    @jwt_required
     def get(self,cam,h,w,square_size):
         """
         Outputs corners of a checkerboard
@@ -562,6 +576,7 @@ class Calibrate(Resource):
             return "internal error".format(cam.location), 500
 
     @ns.expect([calibration])
+    @jwt_required
     def post(self,cam,h,w,square_size):
         """
         Outputs and saves calibration info based on an array of corners found in get method

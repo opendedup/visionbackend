@@ -21,6 +21,8 @@ from flask import g
 from flask import request
 from flask import Response
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 from model.cameras import Cameras
 from model.project import Project
 from model.project import get_project
@@ -121,6 +123,7 @@ listed_projects = ns.model('ListedProjects', {
 @ns.route('/')
 class ProjectCollection(Resource):
     @ns.marshal_list_with(project)
+    @jwt_required
     def get(self):
         """
         Returns list of Projects.
@@ -129,6 +132,7 @@ class ProjectCollection(Resource):
 
     @ns.response(201, 'Project successfully created.')
     @ns.expect(project,skip_none=True)
+    @jwt_required
     def post(self):
         """
         Creates a new project.
@@ -151,6 +155,7 @@ class ProjectCollection(Resource):
 class ProjectItem(Resource):
 
     @ns.marshal_with(project)
+    @jwt_required
     def get(self, name):
         """
         Returns a project.
@@ -162,6 +167,7 @@ class ProjectItem(Resource):
 
     @ns.expect(project,skip_none=True)
     @ns.response(204, 'Category successfully updated.')
+    @jwt_required
     def put(self, name):
         """
         Updates a Project.
@@ -192,6 +198,7 @@ class ProjectItem(Resource):
         return None, 204
 
     @ns.response(204, 'Project successfully deleted.')
+    @jwt_required
     def delete(self, name):
         """
         Deletes a project.

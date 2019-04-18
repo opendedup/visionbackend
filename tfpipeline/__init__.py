@@ -22,16 +22,24 @@ from flask import Response
 
 from flask_restplus import Api
 
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
+
+
 from api.endpoints.prepengine import ns as prep_ns
 from api.endpoints.trainengine import ns as train_ns
+from api.endpoints.auth import ns as auth_ns
 
 from flask_cors import CORS
 
+
 def create_app(test_config=None):
     # create and configure the app
-    app = Flask(__name__,instance_relative_config=True)
-    cors = CORS(app, resources={r"/api/*": {"origins": "*"}});
-    
+    app = Flask(__name__, instance_relative_config=True)
+    cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
@@ -43,13 +51,30 @@ def create_app(test_config=None):
     app.config['RESTPLUS_VALIDATE'] = settings.RESTPLUS_VALIDATE
     app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
+    if 'JWT_SECRET_KEY' in os.environ:
+        app.config['JWT_SECRET_KEY'] = os.environ['JWT_SECRET_KEY']
+    else:
+        app.config['JWT_SECRET_KEY'] = 'imagerie'
+   
+
+    app.config['JWT_TOKEN_LOCATION'] = ['headers']
+    settings.jwt = JWTManager(app)
     blueprint = Blueprint('api', __name__, url_prefix='/api/process')
-    api = Api(blueprint,version='1.0', title='Flexible Vision Preparation and Training API Gateway',
-              description='Do Great things')
+    authorizations = {
+        'Bearer Auth': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        },
+    }
+    api = Api(blueprint, version='1.0', title='Flexible Vision Preparation and Training API Gateway',
+              description='Do Great things',security='Bearer Auth', authorizations=authorizations)
+    
 
     print(api)
     api.add_namespace(prep_ns)
     api.add_namespace(train_ns)
+    api.add_namespace(auth_ns)
     app.register_blueprint(blueprint)
 
     # ensure the instance folder exists
@@ -58,6 +83,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-
+    
 
     return app

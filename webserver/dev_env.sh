@@ -1,4 +1,4 @@
-export PYTHONPATH=$PYTHONPATH:`pwd`/flaskr:`pwd`/../models/research/slim:`pwd`/../models/research/
+export PYTHONPATH=$PYTHONPATH:'pwd':`pwd`/flaskr:`pwd`/../models/research/slim:`pwd`/../models/research/
 export BUCKET=imagerie2
 export ACCESS_KEY=imagerie
 export SECRET_KEY=imagerie

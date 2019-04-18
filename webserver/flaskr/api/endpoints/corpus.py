@@ -20,6 +20,8 @@ from flask import g
 from flask import request
 from flask import Response
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 import settings
 
 import concurrent.futures
@@ -116,6 +118,7 @@ def download_jobdef(file,mp):
 @ns.route('/')
 class CorpusCollection(Resource):
     @ns.marshal_list_with(corpus)
+    @jwt_required
     def get(self):
         """
         Returns list of Corpus.
@@ -142,6 +145,7 @@ class CorpusCollection(Resource):
 class CorpusItem(Resource):
 
     @ns.marshal_with(corpus)
+    @jwt_required
     def get(self, name):
         """
         Returns a corpus of data.
@@ -159,6 +163,7 @@ class CorpusItem(Resource):
             return mm
     
     @ns.response(204, 'Model successfully deleted.')
+    @jwt_required
     def delete(self, name):
         """
         Deletes a corpus.

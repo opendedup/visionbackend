@@ -12,4 +12,6 @@ global pgsystem
 pgsystem = None
 global storage
 storge = None
+global jwt
+jwt = None
 

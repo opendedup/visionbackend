@@ -28,20 +28,8 @@ sudo docker run -d --restart unless-stopped --network imagerie_nw --name prep -e
 sudo docker run --restart unless-stopped -d --network imagerie_nw --name train -e REDIS_URL=redis://some-redis:6379 \
     -e ACCESS_KEY=imagerie -e SECRET_KEY=imagerie -e S3_URL=http://gcs-s3:9000 -v /home/ubuntu/fvision_creds.json:/credentials.json \
     -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" flexiblevision/train
-sudo docker run --restart unless-stopped -d --name pipeline-api --network=imagerie_nw -e REDIS_SERVER=some-redis \
-    -e BUCKET=$2 -e ACCESS_KEY=imagerie -e SECRET_KEY=imagerie -e S3_URL=http://gcs-s3:9000 \
+sudo docker run --restart unless-stopped -d -p 0.0.0.0:80:5000 --name pipeline-api --network=imagerie_nw -e REDIS_SERVER=some-redis \
+    -e BUCKET=$2 -e ACCESS_KEY=imagerie -e JWT_SECRET_KEY=$4 -e PASSWORD=$3 -e SECRET_KEY=imagerie -e S3_URL=http://gcs-s3:9000 \
     -v /home/ubuntu/fvision_creds.json:/credentials.json -e "GOOGLE_APPLICATION_CREDENTIALS=/credentials.json" flexiblevision/pipeline-api
 sudo docker run --restart unless-stopped -d --network imagerie_nw -p 0.0.0.0:5672:5672 --hostname my-rabbit -e RABBITMQ_DEFAULT_USER=user \
     -e RABBITMQ_DEFAULT_PASS=$3 --name some-rabbit rabbitmq:3
-sudo docker run \
-    --restart unless-stopped \
-    --name=esp \
-    --detach \
-    --publish=80:8080 \
-    --publish=443:443 \
-    --net=imagerie_nw \
-    gcr.io/endpoints-release/endpoints-runtime:1 \
-    --service=pipeline-api.endpoints.${1}.cloud.goog \
-    --rollout_strategy=managed \
-    --ssl_port=443
-    --backend=pipeline-api:5000

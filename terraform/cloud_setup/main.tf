@@ -64,6 +64,7 @@ resource "google_project_service" "servicemanagement" {
   service   = "servicemanagement.googleapis.com"
   disable_on_destroy = false
 }
+
 resource "google_project_service" "servicecontrol" {
   project = "${google_project.flexiblevision.number}"
   service   = "servicecontrol.googleapis.com"
@@ -109,12 +110,6 @@ resource "google_project_service" "compute" {
 resource "google_project_service" "oslogin" {
   project = "${google_project.flexiblevision.number}"
   service   = "oslogin.googleapis.com"
-  disable_on_destroy = false
-}
-
-resource "google_project_service" "pipeline-api" {
-  project = "${google_project.flexiblevision.number}"
-  service   = "${google_endpoints_service.pipeline_service.service_name}"
   disable_on_destroy = false
 }
 
@@ -212,7 +207,7 @@ resource "google_compute_instance" "default" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/cloud_setup.sh",
-      "/tmp/cloud_setup.sh ${google_project.flexiblevision.project_id} ${google_storage_bucket.project-bucket.name} ${random_string.password.result}"
+      "/tmp/cloud_setup.sh ${google_project.flexiblevision.project_id} ${google_storage_bucket.project-bucket.name} ${random_string.password.result} ${random_string.token.result}"
       ]
     connection {
       type= "ssh"
@@ -229,21 +224,6 @@ resource "google_compute_instance" "default" {
 
   service_account {
     scopes = ["userinfo-email", "compute-rw", "cloud-platform","monitoring-write","logging-write","pubsub","service-control","service-management","https://www.googleapis.com/auth/trace.append"]
-  }
-}
-
-resource "google_endpoints_service" "pipeline_service" {
-    service_name   = "pipeline-api.endpoints.${google_project.flexiblevision.project_id}.cloud.goog"
-    project        = "${google_project.flexiblevision.project_id}"
-    openapi_config = "${data.template_file.pipeline_service.rendered}"
-    depends_on = ["google_compute_instance.default","google_project_service.servicemanagement","google_project_service.servicecontrol","google_project_service.endpoints"]
-}
-
-data "template_file" "pipeline_service" {
-  template = "${file("${path.module}/resources/pipelineapi.tpl")}"
-  vars = {
-    api_name = "pipeline-api.endpoints.${google_project.flexiblevision.project_id}.cloud.goog"
-    instance_fqdn = "${google_compute_instance.default.name}.${google_compute_instance.default.zone}.c.${google_project.flexiblevision.project_id}.internal"
   }
 }
 
@@ -294,6 +274,12 @@ resource "random_string" "password" {
   override_special= "!@#$%_-"
 }
 
+resource "random_string" "token" {
+  length = 16
+  special= true
+  override_special= "!@#$%_-"
+}
+
 
 
 output "instance_ip" {
@@ -314,6 +300,10 @@ output "project_id" {
 
 output "cloud_password" {
  value = "\"${random_string.password.result}\""
+}
+
+output "jwt_token" {
+ value = "\"${random_string.token.result}\""
 }
 
 output "project_number" {

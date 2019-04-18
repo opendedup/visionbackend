@@ -22,6 +22,8 @@ from flask import g
 from flask import request
 from flask import Response
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 
 from api.endpoints.models import category
 from model.project import projects
@@ -175,6 +177,7 @@ class Snap(Resource):
     @ns.response(404, description='Project not found.')
     @ns.response(200, description='return image metadata.')
     @ns.marshal_with(image)
+    @jwt_required
     def get(self, cam, project):
         """
         Takes a snapshot and uploads it to the bucket/project_folder.
@@ -233,6 +236,7 @@ class Snap(Resource):
     @ns.response(404, description='Project not found.')
     @ns.produces(['text/event-stream'])
     @ns.expect(snaprequest,skip_none=True)
+    @jwt_required
     def post(self,cam,project):
         """
         Produces Multiple snapshots from a camera at once responding with an event stream
@@ -315,6 +319,7 @@ class Snap(Resource):
     @ns.response(404, description='Project not found.')
     @ns.marshal_with(multisnap)
     @ns.expect(snaprequest,skip_none=True)
+    @jwt_required
     def put(self,cam,project):
         """
         Produces snapshot(s) from a camera selecting additional paramaters
@@ -391,6 +396,7 @@ class GetExisting(Resource):
     @ns.response(200, description='return image file.')
     @ns.response(404, description='Image not found.')
     @ns.response(404, description='Project not found.')
+    @jwt_required
     def get(self, project, image):
         """
         Returns an existing image in the project.
@@ -411,6 +417,7 @@ class GetExisting(Resource):
     @ns.response(204, 'Image successfully deleted.')
     @ns.response(404, 'Image not found.')
     @ns.response(404, description='Project not found.')
+    @jwt_required
     def delete(self,project,image):
         """
         Deletes an image from a project.
@@ -451,6 +458,7 @@ class GetExistingList(Resource):
     @ns.marshal_list_with(img_item)
     @ns.response(200, description='return a list of images.')
     @ns.response(404, description='Project not found.')
+    @jwt_required
     def get(self, project):
         """
         Returns a list of all images available for training.
@@ -475,6 +483,7 @@ class GetExistingList(Resource):
 @ns.param('cam','The camera number to capture the stream')
 class Stream(Resource):
     @ns.produces(['multipart/x-mixed-replace; boundary=--jpgboundary'])
+    @jwt_required
     def get(self,cam):
         """
         Streams the video from the designated camera.
@@ -490,6 +499,7 @@ class Stream(Resource):
 @ns.route('/traingjobs/')
 class TrainingJobCollection(Resource):
     @ns.marshal_list_with(training)
+    @jwt_required
     def get(self):
         """
         Returns list of Traing Jobs.
@@ -512,6 +522,7 @@ class TrainingJobCollection(Resource):
 @ns.route('/eval/<string:name>')
 class TrainingEval(Resource):
     @ns.marshal_list_with(train_eval)
+    @jwt_required
     def get(self,name):
         """
         Returns latest training evaluation.
@@ -525,6 +536,7 @@ class TrainingEval(Resource):
 class TrainingJobItem(Resource):
 
     @ns.marshal_with(training)
+    @jwt_required
     def get(self, name):
         """
         Returns a training job.
@@ -539,6 +551,7 @@ class TrainingJobItem(Resource):
             mm['bucket'] = settings.data['BUCKET']
             return mm
     @ns.response(204, 'Model successfully deleted.')
+    @jwt_required
     def delete(self, name):
         """
         Deletes a training job.

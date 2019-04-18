@@ -14,6 +14,7 @@ from flask import g
 from flask import request
 from flask import Response
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 import settings
@@ -49,6 +50,7 @@ def list_jobs(fldr):
 @ns.route('/<string:id>')
 class QJob(Resource):
     @ns.response(200, 'Returns a job status from queue')
+    @jwt_required
     def get(self,id):
         """
         Returns job metadata for a given id.
@@ -66,6 +68,7 @@ class QJob(Resource):
 @ns.route('/running')
 class RunningJobs(Resource):
     @ns.response(200, 'Returns running jobs from the queue')
+    @jwt_required
     def get(self):
         """
         Returns a list of running jobs.
@@ -76,6 +79,7 @@ class RunningJobs(Resource):
 @ns.route('/failed')
 class FailedJobs(Resource):
     @ns.response(200, 'Returns failed jobs from the queue')
+    @jwt_required
     def get(self):
         """
         Returns a list of failed jobs.
@@ -87,6 +91,7 @@ class FailedJobs(Resource):
 @ns.route('/finished')
 class FinishedJobs(Resource):
     @ns.response(200, 'Returns finished jobs from the queue')
+    @jwt_required
     def get(self):
         fldr = 'jobs/finished/'
         
@@ -95,6 +100,7 @@ class FinishedJobs(Resource):
 @ns.route('/all')
 class FinishedJobs(Resource):
     @ns.response(200, 'Returns finished jobs from the queue')
+    @jwt_required
     def get(self):
         fldr = 'jobs/all/'
         
