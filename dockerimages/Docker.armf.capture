@@ -110,27 +110,27 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/pr
 		ldconfig
 WORKDIR "/"
 RUN rm -rf protobuf-3.6.1
-WORKDIR "/svbackend"
+WORKDIR "/"
 
 
 #Compile object detection models
 RUN git clone https://github.com/flexiblevision/models.git
-WORKDIR "/svbackend/models/research/"
+WORKDIR "//models/research/"
 RUN /usr/local/bin/protoc object_detection/protos/*.proto --python_out=.
-WORKDIR "/svbackend"
+WORKDIR "/"
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
 cd cocoapi/PythonAPI && \
 make && \
-cp -r pycocotools /svbackend/models/research/
+cp -r pycocotools //models/research/
 
-COPY webserver/flaskr /svbackend/webapp
+COPY webserver/flaskr //webapp
 ENV FLASK_APP=webapp
 ENV FLASK_ENV=development
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=/svbackend/webapp/:/svbackend/models/research/:/svbackend/models/research/slim/
+ENV PYTHONPATH=//webapp/://models/research/://models/research/slim/
 
 EXPOSE 5000
 
-WORKDIR "/svbackend/webapp"
+WORKDIR "//webapp"
 CMD ["flask","run","--host=0.0.0.0"]

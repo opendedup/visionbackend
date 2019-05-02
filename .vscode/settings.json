@@ -1,19 +1,3 @@
 {
-    "python.pythonPath": "env/bin/python",
-    "python.autoComplete.extraPaths": [
-        "/home/sam/git/svbackend/models/research/slim",
-        "/home/sam/git/svbackend/models/research"
-
-    ],
-    "files.watcherExclude": {
-        "**/env/*/**":true
-    },
-    "env": {
-        "PYTHONPATH": "/home/sam/git/svbackend/models/research/slim:/home/sam/git/svbackend/models/research:/home/sam/git/svbackend/webserver/flaskr:/home/sam/git/svbackend/tfpipeline"
-    },
-    "docker.defaultRegistryPath": "gcr.io/$GCP_PROJECT",
-    "python.linting.pylintEnabled": true
-
-
-
+    "python.pythonPath": "env/bin/python3"
 }

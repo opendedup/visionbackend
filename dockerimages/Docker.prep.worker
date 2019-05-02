@@ -11,6 +11,8 @@ ENV LANG=C.UTF-8
 ENV PYTHONPATH=/fvbackend/tfpipeline:/fvbackend/models/research/:/fvbackend/models/research/slim
 
 COPY tfpipeline /fvbackend/tfpipeline
+COPY webserver/flaskr/utils/storage.py /fvbackend/tfpipeline/utils/
+COPY webserver/flaskr/utils/tflogs.py /fvbackend/tfpipeline/utils/
 
 WORKDIR "/fvbackend"
 CMD ["./prep_worker.sh"]

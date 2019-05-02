@@ -142,11 +142,11 @@ class RunPrep(Resource):
         job.start_time = int(dt.timestamp()*1000)
         job.request = {'full_path': request.full_path,'remote_addr':request.remote_addr,'method':request.method}
         jb = aug_queue.enqueue(
-             preprocess, job,timeout=-1,result_ttl=86400,ttl=-1)
+             preprocess, job,job_timeout=-1,result_ttl=86400,ttl=-1)
         jb.meta['job_def'] = job_def
         dt = newdt.now()
         jb.meta['job_init_time'] = str(int(dt.timestamp()*1000))
-
+        jb.status = 'Running'
         jb.save_meta()
         json_str = job.to_json_string()
         st = {

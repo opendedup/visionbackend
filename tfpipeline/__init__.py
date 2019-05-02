@@ -55,9 +55,12 @@ def create_app(test_config=None):
         app.config['JWT_SECRET_KEY'] = os.environ['JWT_SECRET_KEY']
     else:
         app.config['JWT_SECRET_KEY'] = 'imagerie'
-   
 
-    app.config['JWT_TOKEN_LOCATION'] = ['headers']
+    app.config['JWT_TOKEN_LOCATION'] = ['headers','query_string']
+    app.config['PROPAGATE_EXCEPTIONS'] = True
+    app.config['JWT_BLACKLIST_ENABLED'] = True
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
+    app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
     settings.jwt = JWTManager(app)
     blueprint = Blueprint('api', __name__, url_prefix='/api/process')
     authorizations = {
@@ -67,15 +70,23 @@ def create_app(test_config=None):
             'name': 'Authorization'
         },
     }
+
+    
     api = Api(blueprint, version='1.0', title='Flexible Vision Preparation and Training API Gateway',
               description='Do Great things',security='Bearer Auth', authorizations=authorizations)
     
-
+    settings.jwt._set_error_handler_callbacks(api)
     print(api)
+    api.add_namespace(auth_ns)
     api.add_namespace(prep_ns)
     api.add_namespace(train_ns)
-    api.add_namespace(auth_ns)
+    
     app.register_blueprint(blueprint)
+
+    @settings.jwt.token_in_blacklist_loader
+    def check_if_token_in_blacklist(decrypted_token):
+        jti = decrypted_token['jti']
+        return jti in settings.blacklist
 
     # ensure the instance folder exists
     try:

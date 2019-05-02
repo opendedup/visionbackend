@@ -271,13 +271,13 @@ resource "local_file" "creds" {
 resource "random_string" "password" {
   length = 16
   special= true
-  override_special= "!@#$%_-"
+  override_special= "!@#%_-"
 }
 
 resource "random_string" "token" {
   length = 16
   special= true
-  override_special= "!@#$%_-"
+  override_special= "!@#%_-"
 }
 
 

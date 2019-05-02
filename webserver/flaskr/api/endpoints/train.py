@@ -29,9 +29,11 @@ from api.endpoints.models import category
 from model.project import projects
 from model.project import get_project
 from model.project import persist
+from model.project import Project
 
 import concurrent.futures
 import multiprocessing
+from PIL import Image
 
 import logging
 
@@ -518,6 +520,44 @@ class TrainingJobCollection(Resource):
                     var = traceback.format_exc()
                     log.error(var)    
         return list(mp.values())
+
+@ns.route('/upload/<string:project>')
+class UploadTrain(Resource):
+    @ns.response(200, '{msg: \'Image uploaded\'}')
+    @jwt_required
+    def post(self,project):
+        """
+        Uploads an image to the project training set.
+        Images are uploaded as mutli-part \"images\" form
+        element
+        """
+        if not project in projects:
+            pr = get_project(project)
+            projects[project] = Project(project,pr)
+            if pr is None:
+                return 'Project not found.',404
+        p = projects[project]
+        fl = request.files['images']
+        for f in fl:
+            image_name = str(uuid.uuid4())
+            fn = secure_filename(p.tempdir + image_name)
+            try:
+                f.save(fn)
+                im=Image.open(fn)
+                if not im.format == 'JPEG':
+                    im = im.convert("RGB")
+                    f.save(fn + '.jpg')
+                    fn = fn + 'jpg'
+                
+                ofn = "projects/{}/{}{}".format(p.id,image_name,settings.data["image_type"])
+                with open(fn, 'rb') as file_t:
+                    blob_data = bytearray(file_t.read())
+                    settings.storage.upload_data(blob_data,ofn,contentType='image/jpeg')
+                    logging.info("uploaded {}".format(ofn))
+            finally:
+                os.remove(fn)
+        return {'msg': 'Image uploaded'}, 200
+
 
 @ns.route('/eval/<string:name>')
 class TrainingEval(Resource):

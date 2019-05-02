@@ -36,9 +36,9 @@ ENV FLASK_APP=webapp
 ENV FLASK_ENV=development
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=/svbackend/webapp/:/svbackend/models/research/:/svbackend/models/research/slim/
+ENV PYTHONPATH=//webapp/://models/research/://models/research/slim/
 ENV SPINNAKER=true
 EXPOSE 5000
 
-WORKDIR "/svbackend"
+WORKDIR "/"
 CMD ["flask","run","--host=0.0.0.0"]

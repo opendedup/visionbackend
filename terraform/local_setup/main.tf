@@ -50,6 +50,16 @@ variable "instance_zone" {
   description = "The cloud instance zone location"
 }
 
+variable "jwt_token" {
+  type = "string"
+  description = "The jwt encryption token"
+}
+
+variable "cloud_password" {
+  type = "string"
+  description = "The cloud authentication password"
+}
+
 
 
 resource "google_service_account_key" "fvision_key" {
@@ -97,7 +107,7 @@ resource "null_resource" "local_server" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/local_setup.sh",
-      "echo ${var.ssh_password} | sudo -S /tmp/local_setup.sh ${var.ssh_password} ${var.project_id} ${var.instance_name} ${var.instance_zone} ${var.bucket_name}",
+      "echo ${var.ssh_password} | sudo -S /tmp/local_setup.sh ${var.ssh_password} ${var.project_id} ${var.instance_name} ${var.instance_zone} ${var.bucket_name} ${var.jwt_token} ${var.cloud_password}",
       "rm /tmp/local_setup.sh"
       ]
     connection {

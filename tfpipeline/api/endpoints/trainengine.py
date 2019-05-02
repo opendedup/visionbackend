@@ -143,12 +143,11 @@ class RunTraining(Resource):
         job.request = {'full_path': request.full_path,'remote_addr':request.remote_addr,'method':request.method}
         if hasattr(job,'ml_engine') and job.ml_engine:
             jb = train_queue.enqueue(
-                 train_mlengine, job,timeout=-1,result_ttl=-1)
+                 train_mlengine, job,job_timeout=-1,result_ttl=-1)
         else:
             jb = train_queue.enqueue(
-             train_job_method, job,timeout=-1)
+             train_job_method, job,job_timeout=-1)
         jb.meta['job_init_time'] = str(int(dt.timestamp()*1000))
-        
         jb.meta['job_def'] = job_def
         jb.save_meta()
         
@@ -182,7 +181,7 @@ class ExportTraining(Resource):
         job = Job(job_def['project_name'],job_def)
         job.type = 'export'
         job.request = {'full_path': request.full_path,'remote_addr':request.remote_addr,'method':request.method}
-        jb = train_queue.enqueue(export_mlengine, job,timeout=-1,result_ttl=-1)
+        jb = train_queue.enqueue(export_mlengine, job,job_timeout=-1,result_ttl=-1)
         dt = newdt.now()
         job.start_time = int(dt.timestamp()*1000)
         jb.meta['job_init_time'] = str(int(dt.timestamp()*1000))

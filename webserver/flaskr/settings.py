@@ -14,4 +14,6 @@ global storage
 storge = None
 global jwt
 jwt = None
+global blacklist
+blacklist = set()
 

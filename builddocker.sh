@@ -12,3 +12,5 @@ docker build  -t flexiblevision/capture -t flexiblevision/capture:$VERSION  -f d
 docker push flexiblevision/capture
 docker build -t flexiblevision/capture-pointgrey:latest -t flexiblevision/capture-pointgrey:$VERSION  -f dockerimages/Docker.pg.capture .
 docker push flexiblevision/capture-pointgrey:latest
+docker build -t flexiblevision/setup:latest -t flexiblevision/setup:$VERSION  -f terraform/Dockerfile .
+docker push flexiblevision/setup

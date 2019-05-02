@@ -1,7 +1,9 @@
 export PYTHONPATH=$PYTHONPATH:'pwd':`pwd`/flaskr:`pwd`/../models/research/slim:`pwd`/../models/research/
-export BUCKET=imagerie2
+export BUCKET=fvision-2e132c9a1356939c1a8b42019e13a541
 export ACCESS_KEY=imagerie
 export SECRET_KEY=imagerie
-export S3_URL=http://localhost:9001
+export S3_URL=http://localhost:9000
 export FLASK_ENV=development
 export FLASK_APP=flaskr
+export JWT_SECRET_KEY=i6dkeazvLHMGbpsP
+export PASSWORD="6wQosQb3BW!ZAJtL"

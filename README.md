@@ -1,5 +1,5 @@
 # Flexible Vision
-![alt text](https://github.com/flexiblevision/svbackend/raw/master/githubui/svlogo.jpg "Flexible Vision Logo")
+![alt text](https://github.com/flexiblevision//raw/master/githubui/svlogo.jpg "Flexible Vision Logo")
 
 Flexible Vision is an object detection pipeline for training and predicting objects within images for industrial applications. It includes 3 major components:
 * Image Aquisition and Predition API Server (Capture)
@@ -53,4 +53,4 @@ docker run -e REDIS_SERVER=some-redis -e REDIS_PORT=6379 -e ACCESS_KEY=imagerie 
 http://localhost:5000/api/
 http://localhost:5001/api/
 
-![alt text](https://github.com/flexiblevision/svbackend/raw/master/githubui/screenshotapi.png "Logo Title Text 1")
+![alt text](https://github.com/flexiblevision//raw/master/githubui/screenshotapi.png "Logo Title Text 1")

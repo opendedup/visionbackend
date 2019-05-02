@@ -91,5 +91,8 @@ RUN wget http://download.tensorflow.org/models/object_detection/faster_rcnn_resn
 RUN pip --no-cache-dir install \
 		google-auth
 
+COPY webserver/flaskr/utils/storage.py /fvbackend/tfpipeline/utils/
+COPY webserver/flaskr/utils/tflogs.py /fvbackend/tfpipeline/utils/
+
 WORKDIR "/fvbackend"
 CMD ["./train_worker.sh"]

@@ -137,18 +137,18 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/pr
 WORKDIR "/"
 RUN rm -rf protobuf-3.6.1
 
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 #Compile object detection models
 RUN git clone https://github.com/flexiblevision/models.git && \
 	cd models/research/ && \
 	protoc object_detection/protos/*.proto --python_out=.
 
-WORKDIR "/svbackend"
+WORKDIR "/fvbackend"
 
 RUN git clone https://github.com/cocodataset/cocoapi.git && \
 cd cocoapi/PythonAPI && \
 make && \
-cp -r pycocotools /svbackend/models/research/
+cp -r pycocotools /fvbackend/models/research/
 
 #Install tesseract
 WORKDIR /tmp
@@ -170,16 +170,16 @@ RUN pip --no-cache-dir install pytesseract
 
 ENV TESSDATA_PREFIX=/usr/share/tesseract
 
-COPY webserver/logging.config /svbackend/
-COPY webserver/flaskr /svbackend/webapp
-COPY webserver/logging.config /svbackend/
+COPY webserver/logging.config /fvbackend/
+COPY webserver/flaskr /fvbackend/webapp
+COPY webserver/logging.config /fvbackend/
 ENV FLASK_APP=webapp
 ENV FLASK_ENV=production
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=/svbackend/webapp/:/svbackend/models/research/:/svbackend/models/research/slim/
+ENV PYTHONPATH=//webapp/://models/research/://models/research/slim/
 
 EXPOSE 5000
 
-WORKDIR "/svbackend"
+WORKDIR "/"
 CMD ["flask","run","--host=0.0.0.0"]

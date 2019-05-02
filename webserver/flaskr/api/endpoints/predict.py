@@ -99,7 +99,7 @@ class Upload(Resource):
             if pr is None:
                 return 'Project not found.',404
         p = projects[project]
-        f = request.files['file']
+        f = request.files['image']
         fn = secure_filename(p.tempdir + f.filename)
         f.save(fn)
         image_name = uuid.uuid4()

@@ -148,7 +148,7 @@ spec:
     spec:
       containers:
       - name: tag-ui
-        image: gcr.io/$GCP_PROJECT/svbackend-ui
+        image: gcr.io/$GCP_PROJECT/-ui
         ports:
         - containerPort: 3000
 ---
