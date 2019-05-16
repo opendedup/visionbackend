@@ -55,6 +55,8 @@ import boto3
 global cameras
 cameras = {}
 
+from PIL import Image
+
 import settings
 
 import pytesseract
@@ -132,22 +134,110 @@ class Cameras:
         cam.setDimensions(x,y)
 
     def read_picture(self,file,predict=False,project=None):
-        with open(file, "rb") as binary_file:
-            img = binary_file.read()
+            img = cv2.imread(file)
             ids = []
             detections = 0
             if predict:
 
-                if project.grpc:
-                    output_dict = self.run_inference_for_single_image_grpc(img,project)
-                else:
-                    output_dict = self.run_inference_for_single_image(img,project)
-                detections = output_dict['num_detections'].tolist()
-                for x in range(output_dict['num_detections']):
-                    ids.append({'category': project.labelmap_dict[output_dict['detection_classes'][x]],'score': output_dict['detection_scores'][x],
-                              'box': output_dict['detection_boxes'][x].tolist()})
-                print(ids)
+                return self.predict(img,project=project)
             return img,ids,detections
+            
+    def predict(self,frame,cam=None,project=None):
+        height, width = frame.shape[:2]
+        np_image_data = np.asarray(frame)
+        if self.data["bw"]:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        ids = []
+        coords = []
+        detections = 0
+        ret,img = cv2.imencode(self.data["image_type"],frame, self.params)
+        pmp = -1
+        ppmm = -1
+        bimg = None
+        height, width = np.array(frame).shape[:2]    
+        if project.grpc:
+            output_dict = self.run_inference_for_single_image_grpc(img,project)
+        else:
+            output_dict = self.run_inference_for_single_image(img,project)
+        if "num_detections" in output_dict:
+            detections = output_dict['num_detections'].tolist()
+            
+            if not cam == None and hasattr(cam,"waypoint"):
+                (mX, mY) = (cam.waypoint[0],cam.waypoint[1])
+            else:
+                (mX, mY) = (0,0)
+
+            #frame = cv2.drawMarker(frame,(int(mX),int(mY)),(0, 255, 255), cv2.MARKER_CROSS, 40, 6)
+
+
+            for x in range(output_dict['num_detections']):
+                box =output_dict['detection_boxes'][x].tolist()
+                tbox = [height*box[0],width*box[1],height*box[2],width*box[3]]
+
+                catt = project.labelmap_dict[output_dict['detection_classes'][x]].split('_')
+                ocr = ''
+                (oX, oY) = midpoint([tbox[1]-mX,tbox[0]-mY],[tbox[3]-mX,tbox[2]-mY])
+
+                #cv2.drawMarker(frame,(int(oX),int(oY)),(0, 0, 255), cv2.MARKER_CROSS, 10, 1)
+                d = {'tag': catt[0],'flag':catt[1], 'otype':catt[2],'score': output_dict['detection_scores'][x],
+                            'box': output_dict['detection_boxes'][x].tolist()}
+                if not cam == None and cam.calibrated:
+                    dA = dist.euclidean((oX, oY), (mX, mY))
+                    mmd = dA / cam.ppmm
+                    d['distance_waypoint_px'] = dA
+                    d['distance_waypoint_mm']:mmd
+                    d['midpoint_px']=[oX,oY]
+                    d['midpoint_mm']=[oX/cam.ppmm,oY/cam.ppmm]
+                if catt[2] == 'tagOCR':
+                    ci = frame[int(tbox[0]):int(tbox[2]),int(tbox[1]):int(tbox[3])]
+                    cheight, cwidth = ci.shape[:2]
+                    dim = [cwidth,cheight]
+                    if max(dim) < 400:
+                        scalef = 400/max(dim)
+                        swidth = int(ci.shape[1] * scalef)
+                        sheight = int(ci.shape[0] * scalef)
+                        sdim = (swidth, sheight)
+                        ci = cv2.resize(ci, sdim, interpolation = cv2.INTER_CUBIC)
+                    ci = ci[:,:,:3]
+                    fl = '/tmp/{}.jpg'.format(str(uuid.uuid4()))
+                    cv2.imwrite(fl,ci)
+                    logging.debug('writing ' +fl)
+                    ocr = pytesseract.image_to_string(ci)
+                    d['ocr'] = ocr
+                    print(ocr)
+                elif catt[2] == 'tagBarcode':
+                    bar_ar = []
+                    ci = frame[int(tbox[0]):int(tbox[2]),int(tbox[1]):int(tbox[3])]
+                    zimg = cv2.cvtColor(ci, cv2.COLOR_BGR2GRAY)
+                    barcodes = pyzbar.decode(zimg)
+                    # loop over the detected barcodes
+                    for barcode in barcodes:
+                        barcodeData = barcode.data.decode("utf-8")
+                        barcodeType = barcode.type
+                        bc = {'data':barcodeData,'type':barcodeType}
+                        bar_ar.append(bc)
+
+                        # print the barcode type and data to the terminal
+                        print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))
+                    d['barcode']=bar_ar
+                
+            
+                #cv2.line(frame, (int(oX), int(oY)), (int(mX), int(mY)),(255, 0, 255), 2)
+                #np_image_data = np.asarray(frame)
+                ids.append(d)
+
+            bframe = vis_util.visualize_boxes_and_labels_on_image_array(
+                    np_image_data,
+                    output_dict['detection_boxes'],
+                    output_dict['detection_classes'],
+                    output_dict['detection_scores'],
+                    project.category_index,
+                    use_normalized_coordinates=True,
+                    line_thickness=8)
+            ret,bimg = cv2.imencode(self.data["image_type"],bframe, self.params)
+        ret,img = cv2.imencode(self.data["image_type"],frame, self.params)    
+        return img,bimg,ids,detections,ppmm
+
 
     def get_picture(self,cam,predict=False,project=None,calibrate=True,):
         cam = self.get_cam(cam)
@@ -240,12 +330,12 @@ class Cameras:
                     #cv2.line(frame, (int(oX), int(oY)), (int(mX), int(mY)),(255, 0, 255), 2)
                     #np_image_data = np.asarray(frame)
 
-                    ret,img = cv2.imencode(self.data["image_type"],frame, self.params)
+                    
                 
                     
                     ids.append(d)
             
-        
+        ret,img = cv2.imencode(self.data["image_type"],frame, self.params)
         return img,ids,detections,ppmm
 
     def load_image_into_numpy_array(self,img):

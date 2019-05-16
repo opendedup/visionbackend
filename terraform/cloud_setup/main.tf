@@ -242,6 +242,12 @@ resource "google_storage_bucket_object" "upload_models" {
   bucket = "${google_storage_bucket.project-bucket.name}"
 }
 
+resource "google_storage_bucket_object" "upload_models" {
+  name   = "trained_models/gsmodel.config"
+  source = "${path.module}/resources/gsmodel.config"
+  bucket = "${google_storage_bucket.project-bucket.name}"
+}
+
 resource "google_storage_bucket_object" "upload_projects" {
   name   = "projects/projects.json"
   source = "${path.module}/resources/projects.json"

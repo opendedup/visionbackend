@@ -177,9 +177,9 @@ ENV FLASK_APP=webapp
 ENV FLASK_ENV=production
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH=//webapp/://models/research/://models/research/slim/
+ENV PYTHONPATH=/fvbackend/webapp/:/fvbackend/models/research/:/fvbackend/models/research/slim/
 
 EXPOSE 5000
 
-WORKDIR "/"
+WORKDIR "/fvbackend"
 CMD ["flask","run","--host=0.0.0.0"]

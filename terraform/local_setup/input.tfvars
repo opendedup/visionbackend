@@ -1,7 +1,0 @@
-bucket_name = "svision-ee0b6cf2acd6fb9fd39664a471264921"
-cloud_password = "9NLuStmzwcsf#GMj"
-instance_ip = "35.247.29.138"
-project_id = "svision-66e362593e8e5eea"
-project_number = "87931041261"
-service_account_email = "svision@svision-66e362593e8e5eea.iam.gserviceaccount.com"
-service_account_name = "projects/svision-66e362593e8e5eea/serviceAccounts/svision@svision-66e362593e8e5eea.iam.gserviceaccount.com"

@@ -29,6 +29,10 @@ import settings
 
 from werkzeug import secure_filename
 
+from PIL import Image
+import io
+import base64
+
 
 log = logging.getLogger(__name__)
 
@@ -93,23 +97,45 @@ class Upload(Resource):
         """
         Predicts results based on uploaded file.
         """
+        print('uploading')
         if not project in projects:
             pr = get_project(project)
             projects[project] = Project(project,pr)
             if pr is None:
                 return 'Project not found.',404
         p = projects[project]
-        f = request.files['image']
-        fn = secure_filename(p.tempdir + f.filename)
-        f.save(fn)
-        image_name = uuid.uuid4()
-        img,tags,detections = settings.camera.read_picture(fn,predict=True,project=p)
-        ofn = "projects/{}/predictions/images/{}{}".format(p.id,image_name,settings.data["image_type"])
-        p.s3.put_object(Body=img, Bucket=p.bucket, Key=ofn)
-        ofn = "{}/predictions/data/{}.{}".format(project,image_name,'json')
-        resp_obj= {"image":str(image_name) +settings.data["image_type"],"path":ofn,'tags':tags,'detections' : detections}
-        p.s3.put_object(Body=json.dumps(resp_obj), Bucket=p.bucket, Key=ofn,ContentType='application/json')
-        os.remove(fn)
+        f = request.files['images']
+        p = projects[project]
+        fl = request.files['images']
+        image_name = fl.filename
+        fn = secure_filename(p.tempdir + image_name)
+        try:
+            fl.save(fn)
+            im=Image.open(fn)
+            if not im.format == 'JPEG':
+                im = im.convert("RGB")
+                im.save(fn + '.jpg')
+                os.remove(fn)
+                fn = fn + '.jpg'
+            
+            image_name = str(uuid.uuid4()) + '.jpg'
+            img,bimg,tags,detections,ppmm = settings.camera.read_picture(fn,predict=True,project=p)
+            with open(fn, 'rb') as file_t:
+                blob_data = bytearray(file_t.read())
+                ofn = "projects/{}/predictions/images/{}{}".format(p.id,image_name,settings.data["image_type"])
+                settings.storage.upload_data(blob_data,ofn,contentType='image/jpeg')
+            ofn = "{}/predictions/data/{}.{}".format(project,image_name,'json')
+            image = Image.open(io.BytesIO(bimg.tobytes()))
+            image.thumbnail((640, 640), Image.ANTIALIAS)
+            imgByteArr = io.BytesIO()
+            image.save(imgByteArr, format='JPEG')
+            imgByteArr = imgByteArr.getvalue()
+            ncoded_string = base64.b64encode(imgByteArr).decode("utf-8")
+            resp_obj= {"image":str(image_name) +settings.data["image_type"],"path":ofn,'tags':tags,'detections' : detections,'ppmm':ppmm,
+            'model':p.model, 'model_version':p.version,'base64':ncoded_string}
+            settings.storage.upload_data(json.dumps(resp_obj), ofn ,contentType='application/json')
+        finally:
+            os.remove(fn)
         return jsonify(resp_obj)
 
 @ns.route('/snap/<string:project>/<string:image>')

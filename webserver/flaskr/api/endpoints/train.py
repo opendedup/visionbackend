@@ -538,24 +538,24 @@ class UploadTrain(Resource):
                 return 'Project not found.',404
         p = projects[project]
         fl = request.files['images']
-        for f in fl:
-            image_name = str(uuid.uuid4())
-            fn = secure_filename(p.tempdir + image_name)
-            try:
-                f.save(fn)
-                im=Image.open(fn)
-                if not im.format == 'JPEG':
-                    im = im.convert("RGB")
-                    f.save(fn + '.jpg')
-                    fn = fn + 'jpg'
-                
-                ofn = "projects/{}/{}{}".format(p.id,image_name,settings.data["image_type"])
-                with open(fn, 'rb') as file_t:
-                    blob_data = bytearray(file_t.read())
-                    settings.storage.upload_data(blob_data,ofn,contentType='image/jpeg')
-                    logging.info("uploaded {}".format(ofn))
-            finally:
+        image_name = fl.filename
+        fn = secure_filename(p.tempdir + image_name)
+        try:
+            fl.save(fn)
+            im=Image.open(fn)
+            if not im.format == 'JPEG':
+                im = im.convert("RGB")
+                im.save(fn + '.jpg')
                 os.remove(fn)
+                fn = fn + '.jpg'
+            
+            ofn = "projects/{}/{}{}".format(p.id,image_name,settings.data["image_type"])
+            with open(fn, 'rb') as file_t:
+                blob_data = bytearray(file_t.read())
+                settings.storage.upload_data(blob_data,ofn,contentType='image/jpeg')
+                logging.info("uploaded {}".format(ofn))
+        finally:
+            os.remove(fn)
         return {'msg': 'Image uploaded'}, 200
 
 

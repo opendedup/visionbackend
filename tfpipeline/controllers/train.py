@@ -105,7 +105,7 @@ def updateFile(job):
 
 
 def updateFileML(job):
-    fl = '//tfpipeline/tmodels/'+job.model+'.config'
+    fl = '/fvbackend/tfpipeline/tmodels/'+job.model+'.config'
     with open(fl, 'r') as file:
         filedata = file.read()
     filedata = filedata.replace('@NUM_CLASS', str(len(job.categories)))
@@ -151,7 +151,7 @@ def upload_model(job):
         if 'Contents' in resp and len(resp['Contents']) > 0:
             logger.error("model exists in bucket " + key)
             return
-    local_directory = '//tfpipeline/tmodels/'+job.model+'/'
+    local_directory = '/fvbackend/tfpipeline/tmodels/'+job.model+'/'
     # enumerate local files recursively
     for root, dirs, files in os.walk(local_directory):
 
@@ -184,7 +184,7 @@ def upload_packages(job):
         if 'Contents' in resp and len(resp['Contents']) > 0:
             logger.debug("packages exists in bucket " + key)
             return
-    local_directory = '//mlpackages/'
+    local_directory = '/fvbackend/mlpackages/'
     # enumerate local files recursively
     for root, dirs, files in os.walk(local_directory):
 
@@ -202,7 +202,6 @@ def upload_packages(job):
             job.upload_file(local_path, s3_path)
             logger.debug("Done Uploading {} to {}...".format(
                 local_path, s3_path))
-
 
 def start_ml_engine(job):
     ml_job_path = "gs://" + job.bucket + "/training_jobs/" + job.name + "/"
@@ -250,9 +249,11 @@ def start_ml_engine(job):
                                'pythonVersion': '3.5'}
         else:
             training_inputs = {'scaleTier': 'CUSTOM',
-                               'masterType': 'complex_model_l_gpu',
-                               'workerType': 'standard_p100',
-                               'parameterServerType': 'standard',
+                               'masterType': 'n1-highmem-32',
+                               'masterConfig': {'acceleratorConfig': {'count': 4, 'type': 'NVIDIA_TESLA_K80'}},
+                               'workerType': 'n1-highmem-16',
+                               'workerConfig': {'acceleratorConfig': {'count': 1, 'type': 'NVIDIA_TESLA_P100'}},
+                               'parameterServerType': 'n1-highmem-16',
                                'workerCount': job.ml_workers,
                                'parameterServerCount': job.parameter_servers,
                                'packageUris': mlpackages,
@@ -343,6 +344,20 @@ def create_model_pbtxt(job):
         ptxt += '\t}\n'
     ptxt += "}"
     job.upload_data(ptxt, out_file, contentType='text/plain')
+    ptxt = 'model_config_list {\n'
+    for s in flr_lst:
+        s = s[len('trained_models/'):]
+        ptxt += "\tconfig {\n"
+        ptxt += "\t\tname: '{}'\n".format(s[:len(s)-1])
+        ptxt += "\t\tbase_path: 'gs://{}/trained_models/{}'\n".format(
+            job.bucket, s)
+        ptxt += "\t\tmodel_platform: \'tensorflow\'\n"
+        ptxt += "\t\tmodel_version_policy: {all: {}}\n"
+        ptxt += '\t}\n'
+    ptxt += "}"
+    out_file = 'trained_models/gsmodel.config'
+    job.upload_data(ptxt, out_file, contentType='text/plain')
+
 
 
 def deploy_ml_engine(job):
