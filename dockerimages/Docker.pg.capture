@@ -1,4 +1,4 @@
-FROM flexiblevision/capture
+FROM flexiblevision/capture:0.1
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 
