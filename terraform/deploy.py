@@ -6,8 +6,8 @@ import os
 
 terraform = os.environ["TERRAFORM_PATH"]
 
-options = ['Deploy Cloud Components','Setup Local Camera Server',
-    'Remove Cloud Components','Remove Local Camera Server','View Cloud Configuration','Login to Google Cloud',
+options = ['Deploy Cloud Components','Setup Local Camera Server','Setup Cloud Prediction',
+    'Remove Cloud Components','Remove Local Camera Server','Remove Cloud Prediction','View Cloud Configuration','Login to Google Cloud',
     'Logout to Google Cloud','Exit']
 
 def query_yes_no(question, default="yes"):
@@ -56,6 +56,25 @@ def remove_cloud_instance():
             subprocess.call([terraform,"output","-state=cloud_config/terraform.tfstate"],stdout=f)
             f.close()
             os.remove("cloud_config/output.tfvars")
+
+def remove_cloud_predict():
+    check_gcp_login()
+    p = query_yes_no("Remove the CLOUD PREDICTION for Flexible Vision ? ",default="no")
+    if p:
+        sys.stdout.write("######################      Warning     ########################\n")
+        sys.stdout.write("THIS WILL REMOVE THE CLOUD PREDICTION SERVER AND ALL CONFIG DATA ON IT.\n")
+        sys.stdout.write("IT WILL NOT REMOVE CLOUD DATA.\n")
+        p = query_yes_no("ARE YOU SURE YOU WANT TO DO THIS ? ",default="no")
+        if p:
+            with open ("cloud_config/output.tfvars", "r") as varfile:
+                config = varfile.read()
+            with open ("/tmp/input.tfvars", "w") as varfile:
+                varfile.write(config)
+            subprocess.call([terraform,"init","cloud_setup_predict/"])
+            subprocess.call([terraform,"destroy","-var-file=/tmp/input.tfvars","-state=cloud_predict_config/terraform.tfstate","cloud_setup_predict/"])
+            subprocess.call([terraform,"output","-state=cloud_predict_config/terraform.tfstate"],stdout=f)
+            os.remove("/tmp/input.tfvars")
+
 
 def remove_local_instance():
     check_gcp_login()
@@ -141,6 +160,22 @@ def deploy_local_cam():
             subprocess.call([terraform,"apply","-var-file=/tmp/input.tfvars","-auto-approve","-state=local_config_{}/terraform.tfstate".format(ip),"local_setup/"])
             os.remove("/tmp/input.tfvars")
 
+def deploy_cloud_predict():
+    check_gcp_login()
+    exists = os.path.isfile('cloud_config/input.tfvars')
+    if not exists:
+        sys.stdout.write("File cloud_config/output.tfvars does not exist.\n")
+        sys.stdout.write("Deploy Cloud Components before continuing.\n")
+    p = query_yes_no("Deploy a Flexible Vision Prediction in the Cloud?")
+    if p:
+        with open ("cloud_config/output.tfvars", "r") as varfile:
+            config = varfile.read()
+        with open ("/tmp/input.tfvars", "w") as varfile:
+            varfile.write(config)
+        subprocess.call([terraform,"init","cloud_setup_predict/"])
+        subprocess.call([terraform,"apply","-var-file=/tmp/input.tfvars","-auto-approve","-state=cloud_predict_config/terraform.tfstate","cloud_setup_predict/"])
+        os.remove("/tmp/input.tfvars")
+
 def output_cloud_setup():
     subprocess.call([terraform,"output","-state=cloud_config/terraform.tfstate"])
 
@@ -166,7 +201,7 @@ def main():
         sys.stdout.write("Select a setup option : ")
         try:
             option = int(input())
-            if option == 7:
+            if option == 9:
                 sys.stdout.write("Exiting\n")
                 break
             if option == 0:
@@ -174,14 +209,18 @@ def main():
             if option == 1:
                 deploy_local_cam()
             if option == 2:
-                remove_cloud_instance()
+                deploy_cloud_predict()
             if option == 3:
-                remove_local_instance()
+                remove_cloud_instance()
             if option == 4:
-                output_cloud_setup()
+                remove_local_instance()
             if option == 5:
-                check_gcp_login()
+                remove_cloud_predict()
             if option == 6:
+                output_cloud_setup()
+            if option == 7:
+                check_gcp_login()
+            if option == 8:
                 revoke_gcp_login()
         except ValueError:
             pass

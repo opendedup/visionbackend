@@ -1,4 +1,4 @@
-FROM flexiblevision/base:0.1
+FROM flexiblevision/base:latest
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 ARG GCP_PROJECT
@@ -6,7 +6,7 @@ WORKDIR "/fvbackend"
 RUN rm -rf models
 RUN git clone https://github.com/flexiblevision/models.git && \
 	cd models/ && \
-	git checkout v/0.1 && \
+	git checkout master && \
 	cd research/ && \
 	protoc object_detection/protos/*.proto --python_out=.
 

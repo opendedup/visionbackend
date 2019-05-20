@@ -58,7 +58,7 @@ cameras = {}
 from PIL import Image
 
 import settings
-
+import utils.aug_txt as aug_txt
 import pytesseract
 from pyzbar import pyzbar
 
@@ -308,7 +308,7 @@ class Cameras:
                         fl = '/tmp/{}.jpg'.format(str(uuid.uuid4()))
                         cv2.imwrite(fl,ci)
                         logging.debug('writing ' +fl)
-                        ocr = pytesseract.image_to_string(ci)
+                        ocr = aug_txt.detect_text(fl)
                         d['ocr'] = ocr
                         print(ocr)
                     elif catt[2] == 'tagBarcode':

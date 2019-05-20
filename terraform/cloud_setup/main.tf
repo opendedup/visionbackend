@@ -242,7 +242,7 @@ resource "google_storage_bucket_object" "upload_models" {
   bucket = "${google_storage_bucket.project-bucket.name}"
 }
 
-resource "google_storage_bucket_object" "upload_models" {
+resource "google_storage_bucket_object" "upload_models_gs" {
   name   = "trained_models/gsmodel.config"
   source = "${path.module}/resources/gsmodel.config"
   bucket = "${google_storage_bucket.project-bucket.name}"
@@ -327,4 +327,8 @@ output "service_account_name" {
 
 output "service_account_email" {
   value = "\"${google_service_account.fvision_service_acct.email}\""
+}
+
+output "location" {
+  value = "\"${var.location}-a\""
 }

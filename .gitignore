@@ -185,4 +185,5 @@ terraform/cloud_setup/config/svision_creds.json
 terraform/cloud_config/input.tfvars
 /extra_drivers
 youtube.py
-terraform/cloud_setup_predict/.terraform/*
+terraform/*/.terraform/*
+terraform/.terraform*

@@ -538,7 +538,7 @@ class UploadTrain(Resource):
                 return 'Project not found.',404
         p = projects[project]
         fl = request.files['images']
-        image_name = fl.filename
+        image_name = fl.filename.replace(',', '_')
         fn = secure_filename(p.tempdir + image_name)
         try:
             fl.save(fn)

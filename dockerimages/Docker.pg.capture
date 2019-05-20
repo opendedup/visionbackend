@@ -1,4 +1,4 @@
-FROM flexiblevision/capture:0.1
+FROM flexiblevision/capture:latest
 
 MAINTAINER Sam Silverberg sam.silverberg@gmail.com
 
@@ -29,7 +29,7 @@ RUN tar -xzvf spinnaker-1.20.0.14-amd64-bionic-pkg.tar.gz && \
 
 WORKDIR /tmp
 RUN pip install readerwriterlock spinnaker_python-1.20.0.14-cp36-cp36m-linux_x86_64.whl &&\
-	pip install -U numpy && \
+	pip install -U numpy google-cloud-vision && \
 	rm -rf spinnaker_python-1.20.0.14-cp36-cp36m-linux_x86_64.whl
 
 ENV FLASK_APP=webapp

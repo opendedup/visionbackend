@@ -1,19 +1,3 @@
-variable "camera_server" {
-  type = "string"
-  description = "the host name or ip address of the server where the cameras are attached"
-}
-
-variable "ssh_username" {
-  type = "string"
-  description = "the ssh username of the server where the cameras are attached"
-}
-
-variable "ssh_password" {
-  type = "string"
-  description = "the ssh password of the server where the cameras are attached"
-}
-
-
 variable "project_id" {
   type = "string"
   description = "The project id"
@@ -60,34 +44,106 @@ variable "cloud_password" {
   description = "The cloud authentication password"
 }
 
+variable "location" {
+  type = "string"
+  description = "The region for the GCP project (Defaults to us-west1)"
+  default = "us-west1"
+}
+
+resource "random_id" "instance_id" {
+ byte_length = 8
+}
 
 
 resource "google_service_account_key" "fvision_key" {
   service_account_id = "${var.service_account_name}"
 }
 
-resource "null_resource" "local_server" {
+resource "google_compute_disk" "data_disk" {
+  project = "${var.project_id}"
+  name  = "fv-data-disk-${random_id.instance_id.hex}"
+  type  = "pd-ssd"
+  size = 50
+  zone  = "${var.location}"
+  labels = {
+    environment = "flexiblevision"
+  }
+  physical_block_size_bytes = 4096
+}
+
+resource "google_compute_instance" "default" {
+  project = "${var.project_id}"
+  name         = "fvpredict-${random_id.instance_id.hex}"
+  machine_type = "n1-standard-8"
+  zone         = "${var.location}"
+  allow_stopping_for_update = true
+  tags = ["predict", "fvision-frontend"]
+
+  scheduling {
+    automatic_restart   = true
+    on_host_maintenance = "terminate"
+  }
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-os-cloud/ubuntu-1804-lts"
+      size = 50
+      type  = "pd-ssd"
+    }
+  }
+
+  guest_accelerator {
+    type = "nvidia-tesla-t4"
+    count = 1
+  }
+
+  
+
+  network_interface {
+    network = "default"
+
+    access_config {
+      // Ephemeral IP
+    }
+  }
+
+  attached_disk {
+        source      = "${google_compute_disk.data_disk.self_link}"
+        device_name = "data"
+        mode = "READ_WRITE"
+  }
+
+  metadata = {
+    sshKeys = "ubuntu:${file("${path.module}/id_rsa.pub")}"
+  }
+
+  
+
+  
+
+  
+
+
+
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir -p ${var.ssh_username == "root" ? "/root/fv_do_not_delete/" : "/home/${var.ssh_username}/fv_do_not_delete/"}"
+      "mkdir -p  /home/ubuntu/fv_do_not_delete/"
       ]
     connection {
       type= "ssh"
-      user="${var.ssh_username}"
-      password="${var.ssh_password}"
-      host="${var.camera_server}"
+      user="ubuntu"
+      private_key="${file("${path.module}/id_rsa")}"
     }
     
   }
   provisioner "file" {
     content = "${base64decode(google_service_account_key.fvision_key.private_key)}"
-    destination = "${var.ssh_username == "root" ? "/root/fv_do_not_delete/fvision_creds.json" : "/home/${var.ssh_username}/fv_do_not_delete/fvision_creds.json"}"
+    destination = "/home/ubuntu/fv_do_not_delete/fvision_creds.json"
     connection {
       type= "ssh"
-      user="${var.ssh_username}"
-      password="${var.ssh_password}"
-      host="${var.camera_server}"
+      user="ubuntu"
+      private_key="${file("${path.module}/id_rsa")}"
     }
   }
 
@@ -96,9 +152,8 @@ resource "null_resource" "local_server" {
     destination = "/tmp/local_setup.sh"
     connection {
       type= "ssh"
-      user="${var.ssh_username}"
-      password="${var.ssh_password}"
-      host="${var.camera_server}"
+      user="ubuntu"
+      private_key="${file("${path.module}/id_rsa")}"
     }
   }
 
@@ -107,46 +162,50 @@ resource "null_resource" "local_server" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/local_setup.sh",
-      "echo ${var.ssh_password} | sudo -S /tmp/local_setup.sh ${var.ssh_password} ${var.project_id} ${var.instance_name} ${var.instance_zone} ${var.bucket_name} ${var.jwt_token} ${var.cloud_password}",
+      " sudo /tmp/local_setup.sh ubuntu ${var.project_id} ${var.instance_name} ${var.instance_zone} ${var.bucket_name} ${var.jwt_token} ${var.cloud_password} latest" ,
       "rm /tmp/local_setup.sh"
       ]
     connection {
       type= "ssh"
-      user="${var.ssh_username}"
-      password="${var.ssh_password}"
-      host="${var.camera_server}"
+      user="ubuntu"
+      private_key="${file("${path.module}/id_rsa")}"
     }
   }
-
-  provisioner "file" {
-    source      = "${path.module}/resources/local_destroy.sh"
-    destination = "/tmp/local_destroy.sh"
-    when = "destroy"
-    connection {
-      type= "ssh"
-      user="${var.ssh_username}"
-      password="${var.ssh_password}"
-      host="${var.camera_server}"
-    }
-  }
-
-  provisioner "remote-exec" {
-    when = "destroy"
-    inline = [
-      "chmod +x /tmp/local_destroy.sh",
-      "echo ${var.ssh_password} | sudo -S /tmp/local_destroy.sh",
-      "rm /tmp/local_destroy.sh"
-      ]
-    connection {
-      type= "ssh"
-      user="${var.ssh_username}"
-      password="${var.ssh_password}"
-      host="${var.camera_server}"
-    }
-  }
+  
 
   
 
+  
+
+  service_account {
+    scopes = ["userinfo-email", "compute-rw", "cloud-platform","monitoring-write","logging-write","pubsub","service-control","service-management","https://www.googleapis.com/auth/trace.append"]
+  }
+}
+
+resource "google_compute_firewall" "fvision_firewall" {
+  project = "${var.project_id}"
+  name = "fvision-firewall-predict"
+  network = "default"
+  allow {
+    protocol = "tcp"
+    ports = ["80"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+  target_tags = ["fvision-frontend"]
+}
+
+
+output "instance_ip" {
+ value = "\"${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}\""
+}
+
+output "instance_url" {
+ value = "\"http://${google_compute_instance.default.network_interface.0.access_config.0.nat_ip}\""
+}
+
+output "instance_name" {
+ value = "\"${google_compute_instance.default.name}\""
 }
 
 

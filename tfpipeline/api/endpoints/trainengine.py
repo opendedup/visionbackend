@@ -163,7 +163,7 @@ class RunTraining(Resource):
         storage.upload_data(json_str,'jobs/running/{}_0_train_r_{}.json'.format(str(job.start_time),jb.id),contentType='application/json')
         storage.upload_data(json_str,'jobs/all/{}_0_train_r_{}.json'.format(str(job.start_time),jb.id),contentType='application/json')
         return {
-            "status": jb.status,
+            "status": jb.get_status(),
             'job_id': jb.id,
             'meta':jb.meta},201
         
@@ -200,7 +200,7 @@ class ExportTraining(Resource):
         storage.upload_data(json_str,'jobs/all/{}_0_export_r_{}.json'.format(str(job.start_time),jb.id),contentType='application/json')
 
         return {
-            "status": jb.status,
+            "status": jb.get_status(),
             'job_id': jb.id,
             'meta':jb.meta},201
 
@@ -216,7 +216,7 @@ class TrainQJob(Resource):
             return resp, 404
         else:
             return {
-            "status": jb.status,
+            "status": jb.get_status(),
             'job_id': jb.id,
             'meta':jb.meta},200
 
@@ -236,7 +236,7 @@ class TrainRunningJobs(Resource):
             job =train_queue.fetch_job(id)
             if job is not None:
                 jb = {
-                    "status": job.status,
+                    "status": job.get_status(),
                     'job_id': job.id,
                     'meta':job.meta}
                 ar.append(jb)

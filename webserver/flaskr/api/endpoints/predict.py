@@ -83,7 +83,7 @@ class Snap(Resource):
         image_name = uuid.uuid4()
         img,tags,detections,ppmm = settings.camera.get_picture(cam,predict=True,project=p)
         ofn = "projects/{}/predictions/images/{}{}".format(p.id,image_name,settings.data["image_type"])
-        dfn = "projects/{}/predictions/data/{}{}".format(p.id,image_name,settings.data["image_type"])
+        dfn = "projects/{}/predictions/data/{}{}".format(p.id,image_name,'json')
         p.s3.put_object(Body=img.tobytes(), Bucket=p.bucket, Key=ofn,ContentType='image/jpeg')
         resp_obj= {"image":str(image_name) +settings.data["image_type"],"path":ofn,'tags':tags,'detections' : detections,'ppmm':ppmm,
             'model':p.model, 'model_version':p.version}
@@ -118,15 +118,15 @@ class Upload(Resource):
                 os.remove(fn)
                 fn = fn + '.jpg'
             
-            image_name = str(uuid.uuid4()) + '.jpg'
+            image_name = str(uuid.uuid4())
             img,bimg,tags,detections,ppmm = settings.camera.read_picture(fn,predict=True,project=p)
             with open(fn, 'rb') as file_t:
                 blob_data = bytearray(file_t.read())
                 ofn = "projects/{}/predictions/images/{}{}".format(p.id,image_name,settings.data["image_type"])
                 settings.storage.upload_data(blob_data,ofn,contentType='image/jpeg')
-            ofn = "{}/predictions/data/{}.{}".format(project,image_name,'json')
+            ofn = "projects/{}/predictions/data/{}.{}".format(project,image_name,'json')
             image = Image.open(io.BytesIO(bimg.tobytes()))
-            image.thumbnail((640, 640), Image.ANTIALIAS)
+            image.thumbnail((800, 800), Image.ANTIALIAS)
             imgByteArr = io.BytesIO()
             image.save(imgByteArr, format='JPEG')
             imgByteArr = imgByteArr.getvalue()
