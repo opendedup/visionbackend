@@ -187,3 +187,7 @@ terraform/cloud_config/input.tfvars
 youtube.py
 terraform/*/.terraform/*
 terraform/.terraform*
+*fvision_creds.json
+*id_rsa.pub
+*id_rsa
+terraform/cloud_setup/config/fvision_creds.json

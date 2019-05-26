@@ -189,37 +189,56 @@ class Cameras:
                     d['midpoint_px']=[oX,oY]
                     d['midpoint_mm']=[oX/cam.ppmm,oY/cam.ppmm]
                 if catt[2] == 'tagOCR':
-                    ci = frame[int(tbox[0]):int(tbox[2]),int(tbox[1]):int(tbox[3])]
-                    cheight, cwidth = ci.shape[:2]
-                    dim = [cwidth,cheight]
-                    if max(dim) < 400:
-                        scalef = 400/max(dim)
-                        swidth = int(ci.shape[1] * scalef)
-                        sheight = int(ci.shape[0] * scalef)
-                        sdim = (swidth, sheight)
-                        ci = cv2.resize(ci, sdim, interpolation = cv2.INTER_CUBIC)
-                    ci = ci[:,:,:3]
-                    fl = '/tmp/{}.jpg'.format(str(uuid.uuid4()))
-                    cv2.imwrite(fl,ci)
-                    logging.debug('writing ' +fl)
-                    ocr = pytesseract.image_to_string(ci)
-                    d['ocr'] = ocr
-                    print(ocr)
-                elif catt[2] == 'tagBarcode':
-                    bar_ar = []
-                    ci = frame[int(tbox[0]):int(tbox[2]),int(tbox[1]):int(tbox[3])]
-                    zimg = cv2.cvtColor(ci, cv2.COLOR_BGR2GRAY)
-                    barcodes = pyzbar.decode(zimg)
-                    # loop over the detected barcodes
-                    for barcode in barcodes:
-                        barcodeData = barcode.data.decode("utf-8")
-                        barcodeType = barcode.type
-                        bc = {'data':barcodeData,'type':barcodeType}
-                        bar_ar.append(bc)
+                    fl = '/tmp/{}.png'.format(str(uuid.uuid4()))
+                    try:
+                        ci = frame[int(tbox[0]-3):int(tbox[2]+3),int(tbox[1]-3):int(tbox[3]+3)]
+                        cheight, cwidth = ci.shape[:2]
+                        dim = [cwidth,cheight]
+                        if max(dim) < 400:
+                            scalef = 400/max(dim)
+                            swidth = int(ci.shape[1] * scalef)
+                            sheight = int(ci.shape[0] * scalef)
+                            sdim = (swidth, sheight)
+                            ci = cv2.resize(ci, sdim, interpolation = cv2.INTER_CUBIC)
+                        ci = ci[:,:,:3]
+                        
+                        cv2.imwrite(fl,ci)
+                        ocr = aug_txt.detect_text(fl)
+                        d['ocr'] = ocr
+                    except:
+                        var = traceback.format_exc()
+                        d['ocr'] = ''
+                        d['ocr-error']=var
+                    finally:
+                        if os.path.exists(fl):
+                            os.remove(fl)
 
-                        # print the barcode type and data to the terminal
-                        print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))
-                    d['barcode']=bar_ar
+                elif catt[2] == 'tagBarcode':
+                    try:
+                        bar_ar = []
+                        ci = frame[int(tbox[0]-3):int(tbox[2]+3),int(tbox[1]-3):int(tbox[3]+3)]
+                        ci = cv2.cvtColor(ci, cv2.COLOR_BGR2GRAY)
+                        if min(dim) < 300:
+                            scalef = 300/min(dim)
+                            swidth = int(ci.shape[1] * scalef)
+                            sheight = int(ci.shape[0] * scalef)
+                            sdim = (swidth, sheight)
+                            ci = cv2.resize(ci, sdim, interpolation = cv2.INTER_CUBIC)
+                        barcodes = pyzbar.decode(ci)
+                        # loop over the detected barcodes
+                        for barcode in barcodes:
+                            barcodeData = barcode.data.decode("utf-8")
+                            barcodeType = barcode.type
+                            bc = {'data':barcodeData,'type':barcodeType}
+                            bar_ar.append(bc)
+
+                            # print the barcode type and data to the terminal
+                            print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))
+                        d['barcode']=bar_ar
+                    except:
+                        var = traceback.format_exc()
+                        d['barcode'] = []
+                        d['barcode-error']=var
                 
             
                 #cv2.line(frame, (int(oX), int(oY)), (int(mX), int(mY)),(255, 0, 255), 2)
@@ -239,7 +258,7 @@ class Cameras:
         return img,bimg,ids,detections,ppmm
 
 
-    def get_picture(self,cam,predict=False,project=None,calibrate=True,):
+    def get_picture(self,cam,predict=False,project=None,calibrate=True):
         cam = self.get_cam(cam)
         print(cam)
         ppmm = -1
@@ -295,37 +314,57 @@ class Cameras:
                         d['midpoint_px']=[oX,oY]
                         d['midpoint_mm']=[oX/cam.ppmm,oY/cam.ppmm]
                     if catt[2] == 'tagOCR':
-                        ci = frame[int(tbox[0]):int(tbox[2]),int(tbox[1]):int(tbox[3])]
-                        cheight, cwidth = ci.shape[:2]
-                        dim = [cwidth,cheight]
-                        if max(dim) < 400:
-                            scalef = 400/max(dim)
-                            swidth = int(ci.shape[1] * scalef)
-                            sheight = int(ci.shape[0] * scalef)
-                            sdim = (swidth, sheight)
-                            ci = cv2.resize(ci, sdim, interpolation = cv2.INTER_CUBIC)
-                        ci = ci[:,:,:3]
-                        fl = '/tmp/{}.jpg'.format(str(uuid.uuid4()))
-                        cv2.imwrite(fl,ci)
-                        logging.debug('writing ' +fl)
-                        ocr = aug_txt.detect_text(fl)
-                        d['ocr'] = ocr
-                        print(ocr)
-                    elif catt[2] == 'tagBarcode':
-                        bar_ar = []
-                        ci = frame[int(tbox[0]):int(tbox[2]),int(tbox[1]):int(tbox[3])]
-                        zimg = cv2.cvtColor(ci, cv2.COLOR_BGR2GRAY)
-                        barcodes = pyzbar.decode(zimg)
-                        # loop over the detected barcodes
-                        for barcode in barcodes:
-                            barcodeData = barcode.data.decode("utf-8")
-                            barcodeType = barcode.type
-                            bc = {'data':barcodeData,'type':barcodeType}
-                            bar_ar.append(bc)
+                        fl = '/tmp/{}.png'.format(str(uuid.uuid4()))
+                        try:
+                            ci = frame[int(tbox[0]-3):int(tbox[2]+3),int(tbox[1]-3):int(tbox[3]+3)]
+                            cheight, cwidth = ci.shape[:2]
+                            dim = [cwidth,cheight]
+                            if max(dim) < 400:
+                                scalef = 400/max(dim)
+                                swidth = int(ci.shape[1] * scalef)
+                                sheight = int(ci.shape[0] * scalef)
+                                sdim = (swidth, sheight)
+                                ci = cv2.resize(ci, sdim, interpolation = cv2.INTER_CUBIC)
+                            ci = ci[:,:,:3]
+                            
+                            cv2.imwrite(fl,ci)
+                            logging.debug('writing ' +fl)
+                            ocr = aug_txt.detect_text(fl)
+                            d['ocr'] = ocr
+                        except:
+                            var = traceback.format_exc()
+                            d['ocr'] = ''
+                            d['ocr-error']=var
+                        finally:
+                            if os.path.exists(fl):
+                                os.remove(fl)
 
-                            # print the barcode type and data to the terminal
-                            print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))
-                        d['barcode']=bar_ar
+                    elif catt[2] == 'tagBarcode':
+                        try:
+                            bar_ar = []
+                            ci = frame[int(tbox[0]-3):int(tbox[2]+3),int(tbox[1]-3):int(tbox[3]+3)]
+                            ci = cv2.cvtColor(ci, cv2.COLOR_BGR2GRAY)
+                            if min(dim) < 300:
+                                scalef = 300/min(dim)
+                                swidth = int(ci.shape[1] * scalef)
+                                sheight = int(ci.shape[0] * scalef)
+                                sdim = (swidth, sheight)
+                                ci = cv2.resize(ci, sdim, interpolation = cv2.INTER_CUBIC)
+                            barcodes = pyzbar.decode(ci)
+                            # loop over the detected barcodes
+                            for barcode in barcodes:
+                                barcodeData = barcode.data.decode("utf-8")
+                                barcodeType = barcode.type
+                                bc = {'data':barcodeData,'type':barcodeType}
+                                bar_ar.append(bc)
+
+                                # print the barcode type and data to the terminal
+                                print("[INFO] Found {} barcode: {}".format(barcodeType, barcodeData))
+                            d['barcode']=bar_ar
+                        except:
+                            var = traceback.format_exc()
+                            d['barcode'] = []
+                            d['barcode-error']=var
                 
                     #cv2.line(frame, (int(oX), int(oY)), (int(mX), int(mY)),(255, 0, 255), 2)
                     #np_image_data = np.asarray(frame)
