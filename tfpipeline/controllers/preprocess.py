@@ -325,13 +325,6 @@ def process_children(parent, ar):
 
 def process_json(job):
     train_csv_file = job.tempdir + '/train.csv'
-    test_csv_file = job.tempdir + '/test.csv'
-    fout = open(train_csv_file, "w")
-    fout.write('filename,width,height,class,xmin,ymin,xmax,ymax\n')
-    fout.close()
-    fout = open(test_csv_file, "w")
-    fout.write('filename,width,height,class,xmin,ymin,xmax,ymax\n')
-    fout.close()
     statefile = 'projects/'+job.project['id'] + '/state.json'
     jsonbody = job.download_to_string(statefile)
     state = json.loads(jsonbody)
@@ -385,10 +378,10 @@ def process_json(job):
                 bbox.append(ia.BoundingBox(x1=xmin, y1=ymin,
                                            x2=xmax, y2=ymax, label=name))
             bbs = ia.BoundingBoxesOnImage(bbox, shape=im.shape)
-            if ct <= trn_sz:
-                fout = open(train_csv_file, "a")
-            else:
-                fout = open(test_csv_file, "a")
+            fout = open(train_csv_file, "w")
+            img_type = 'TRAIN'
+            if ct > trn_sz:
+                img_type = 'UNASSIGNED'
             tfile = fotopath.split('.')[0] + '.tcapture'
             timages = []
             if job.exists(tfile):
@@ -396,15 +389,16 @@ def process_json(job):
                 timages = tcapture['images']
             for i in range(len(bbox)):
                 after = bbox[i]
-                fout.write(fotopath + ',' + str(im.shape[0]) + ',' + str(im.shape[1]) +
-                           ','+after.label + ',' + str(after.x1) + ',' + str(after.y1) + ',' + str(after.x2) + ',' + str(after.y2) + '\n')
+                fout.write(img_type + ',gs://{}/{}'.format(job.bucket,fotopath) +','+after.label + ',' + str(ch['xmin']) + ',' + str(ch['ymin']) +
+                           ',,,' + str(ch['xmax']) + ',' + str(ch['ymax']) + ',,' + '\n')
                 for tim in timages:
-                    fout.write(tim['path'] + ',' + str(im.shape[0]) + ',' + str(im.shape[1]) +
-                               ','+after.label + ',' + str(after.x1) + ',' + str(after.y1) + ',' + str(after.x2) + ',' + str(after.y2) + '\n')
+                    fout.write(img_type + ',gs://{}/{}'.format(job.bucket,tim['path']) +','+after.label + ',' + str(ch['xmin'])
+                             + ',' + str(ch['ymin']) +
+                            ',,,' + str(ch['xmax']) + ',' + str(ch['ymax']) + ',,' + '\n')
             if hasattr(job, 'aug') and job.aug:
                 with concurrent.futures.ThreadPoolExecutor(max_workers=multiprocessing.cpu_count()) as executor:
                     future_img = {executor.submit(
-                        create_image, im, job, bbs, fout): i for i in range(job.train_samples)}
+                        create_image, im, job, bbs, fout,img_type): i for i in range(job.train_samples)}
                     for future in concurrent.futures.as_completed(future_img):
                         img = future_img[future]
                         try:
@@ -416,7 +410,7 @@ def process_json(job):
                     fout.close()
                     fout = open(test_csv_file,"a")
                     with concurrent.futures.ThreadPoolExecutor(max_workers=multiprocessing.cpu_count()) as executor:
-                        future_img = {executor.submit(create_image,im, job,bbs, fout): i for i in range(job.test_samples)}
+                        future_img = {executor.submit(create_image,im, job,bbs, fout,img_type): i for i in range(job.test_samples)}
                         for future in concurrent.futures.as_completed(future_img):
                             img = future_img[future]
                             try:
@@ -432,104 +426,12 @@ def process_json(job):
     print(job.labelmap_dict)
     job.upload_file(train_csv_file, 'corpus/' + job.name +
                     "/" + os.path.basename(train_csv_file))
-    job.upload_file(test_csv_file, 'corpus/' + job.name +
-                    "/" + os.path.basename(test_csv_file))
+    
     job.train_csv_file = 'corpus/' + job.name + \
         "/" + os.path.basename(train_csv_file)
-    job.test_csv_file = 'corpus/' + job.name + \
-        "/" + os.path.basename(test_csv_file)
 
 
-def process_pascal_voc_aug(job):
-    kwargs = {'Bucket': job.bucket,
-              'Prefix': job.class_folder}
 
-    train_csv_file = job.tempdir + '/train.csv'
-    test_csv_file = job.tempdir + '/test.csv'
-    if not os.path.isfile(train_csv_file):
-        print("creating training csv file")
-        fout = open(train_csv_file, "w")
-        fout.write('filename,width,height,class,xmin,ymin,xmax,ymax\n')
-        fout.close()
-    if not os.path.isfile(test_csv_file):
-        print("creating test csv file")
-        fout = open(test_csv_file, "w")
-        fout.write('filename,width,height,class,xmin,ymin,xmax,ymax\n')
-        fout.close()
-    while True:
-        resp = job.s3.list_objects_v2(**kwargs)
-
-        try:
-            for obj in resp['Contents']:
-                _key = obj['Key']
-                _obj = job.s3.get_object(Bucket=job.bucket, Key=_key)
-                e = ET.fromstring(_obj['Body'].read().decode('utf-8'))
-                fname = os.path.basename(e.find('./filename').text)
-                folder = job.project['id'] + '/train'
-                bbox = []
-                params = {'Bucket': job.bucket, 'Key': folder + '/' + fname}
-                url = job.s3.generate_presigned_url(
-                    ClientMethod='get_object', Params=params)
-                url_response = http.request('GET', url)
-                img_array = np.array(
-                    bytearray(url_response.data), dtype=np.uint8)
-                im = cv2.imdecode(img_array, -1)
-                for node in e.iter('object'):
-                    xmin = int(node.find('./bndbox/xmin').text)
-                    ymin = int(node.find('./bndbox/ymin').text)
-                    xmax = int(node.find('./bndbox/xmax').text)
-                    ymax = int(node.find('./bndbox/ymax').text)
-                    name = node.find('./name').text
-                    if name not in job.labelmap_dict:
-                        job.labelmap_dict[name] = len(job.labelmap_dict)+1
-                    bbox.append(ia.BoundingBox(x1=xmin, y1=ymin, x2=xmax,
-                                               y2=ymax, label=node.find('./name').text))
-                bbs = ia.BoundingBoxesOnImage(bbox, shape=im.shape)
-
-                fout = open(train_csv_file, "a")
-                with concurrent.futures.ThreadPoolExecutor(max_workers=multiprocessing.cpu_count()) as executor:
-                    future_img = {executor.submit(
-                        create_image, im, job, bbs, fout): i for i in range(job.train_samples)}
-                    for future in concurrent.futures.as_completed(future_img):
-                        img = future_img[future]
-                        try:
-                            data = future.result()
-                        except Exception as exc:
-                            print('%r generated an exception: %s' %
-                                  (str(i), exc))
-
-                fout.close()
-                fout = open(test_csv_file, "a")
-                with concurrent.futures.ThreadPoolExecutor(max_workers=multiprocessing.cpu_count()) as executor:
-                    future_img = {executor.submit(
-                        create_image, im, job, bbs, fout): i for i in range(job.test_samples)}
-                    for future in concurrent.futures.as_completed(future_img):
-                        img = future_img[future]
-                        try:
-                            data = future.result()
-                        except Exception as exc:
-                            print('generated an exception: %s' %
-                                  (exc))
-
-                fout.close()
-                if hasattr(job, 'jb'):
-                    job.jb.meta['current_step_processed'] += 1
-                    job.jb.save_meta()
-
-        except KeyError:
-            break
-        try:
-            kwargs['ContinuationToken'] = resp['NextContinuationToken']
-        except KeyError:
-            break
-    job.s3.upload_file(train_csv_file, job.bucket, 'corpus/' +
-                       job.name + "/" + os.path.basename(train_csv_file))
-    job.s3.upload_file(test_csv_file, job.bucket, 'corpus/' +
-                       job.name + "/" + os.path.basename(test_csv_file))
-    job.train_csv_file = 'corpus/' + job.name + \
-        "/" + os.path.basename(train_csv_file)
-    job.test_csv_file = 'corpus/' + job.name + \
-        "/" + os.path.basename(test_csv_file)
 
 
 def delete_staged(job):
@@ -573,9 +475,6 @@ def delete_staged(job):
 
     job.delete_cloud_file(job.train_csv_file)
     job.train_csv_file = None
-    job.delete_cloud_file(job.test_csv_file)
-    job.test_csv_file = None
-
 
 def project_exists(job):
     key = 'corpus/'+job.name + '/'
@@ -593,7 +492,7 @@ def project_exists(job):
     return False
 
 
-def create_image(im, job, bbs, fout):
+def create_image(im, job, bbs, fout,img_type):
     image_name = "{}/{}/stage/{}{}".format('corpus',
                                            job.name, uuid.uuid4(), '.jpg')
     aug_rules = {}
@@ -665,8 +564,12 @@ def create_image(im, job, bbs, fout):
     with global_lock:
         for i in range(len(bbs_aug.bounding_boxes)):
             after = bbs_aug.bounding_boxes[i]
-            fout.write(image_name + ',' + str(images_aug.shape[0]) + ',' + str(images_aug.shape[1]) +
-                       ','+after.label + ',' + str(after.x1) + ',' + str(after.y1) + ',' + str(after.x2) + ',' + str(after.y2) + '\n')
+            xmin = float(after.x1/images_aug.shape[1])
+            ymin = float(after.y1/images_aug.shape[0])
+            xmax = float(after.x2/images_aug.shape[1])
+            ymax = float(after.y2/images_aug.shape[0])
+            fout.write(img_type+ ',gs://{}{}'.format(job.bucket,image_name) + ',' +
+                       ','+after.label + ',' + str(xmin) + ',' + str(ymin) + ',,,' + str(xmax) + ',' + str(ymax) + ',,\n')
     return image_name
 
 
